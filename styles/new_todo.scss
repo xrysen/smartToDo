@@ -1,0 +1,51 @@
+/*
+ * Styling for displayed tweets
+ */
+
+ .new-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%
+}
+
+textarea {
+  background-color: #f4f1ec;
+  font-weight: 600;
+  border-bottom: 3px solid;
+  border-color: black;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  margin-bottom: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  font-weight: 600
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+form div.footer button {
+  color: #FFFF;
+  background-color: #B82601;
+  box-shadow: 5px 5px 5px #c1c1c1;
+}
+
+form div.footer button:active {
+  background: #e5e5e5;
+  box-shadow: inset 10px 10px 5px #c1c1c1;
+}
+
+section > h2 {
+  font-size: 45px;
+}
+
+
