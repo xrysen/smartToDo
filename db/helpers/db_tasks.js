@@ -58,9 +58,26 @@ const updateTaskCategory = (db, newCatId, taskId) => {
   ,[newCatId, taskId]);
 };
 
+/**
+ * createNewTask(db, name, userId, categoryId)
+ * Input:
+ *  database, name, userId, categoryId
+ * Output:
+ *  Inserts new row into table 'tasks' set name, user_id and category_id to provided values, and rest to defaults
+ */
+
+const createNewTask = (db, name, userId, categoryId) => {
+  return db.query(
+    `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
+     VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL);
+    `
+  , [name, userId, categoryId]);
+};
+
 module.exports = {
   getAllTasks,
   getAllTasksForUser,
   getAllTasksByCategory,
-  updateTaskCategory
+  updateTaskCategory,
+  createNewTask
 };
