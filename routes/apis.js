@@ -7,15 +7,18 @@
 
 const express = require('express');
 const router  = express.Router();
+// const dbHelper = require('')
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM widgets`;
+    const userId = req.session.userId;
+    // TODO:: import helper function
+    let query = `SELECT * FROM tasks WHERE user_id=${userId}`;
     console.log(query);
     db.query(query)
       .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
+        const tasks = data.rows;
+        res.json({ tasks });
       })
       .catch(err => {
         res
@@ -23,5 +26,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
   return router;
 };
