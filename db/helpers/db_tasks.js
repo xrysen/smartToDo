@@ -39,7 +39,7 @@ const getAllTasksByCategory = (db, userId, catId) => {
      JOIN users ON tasks.user_id = users.id
      JOIN categories ON tasks.category_id = categories.id
      WHERE users.id = $1 AND categories.id = $2`
-  , [userId, catId]);
+    , [userId, catId]);
 };
 
 /**
@@ -55,7 +55,7 @@ const updateTaskCategory = (db, newCatId, taskId) => {
     `UPDATE tasks
      SET category_id = $1
      WHERE id = $2;`
-  ,[newCatId, taskId]);
+    ,[newCatId, taskId]);
 };
 
 /**
@@ -71,7 +71,7 @@ const createNewTask = (db, name, userId, categoryId) => {
     `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
      VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL);
     `
-  , [name, userId, categoryId]);
+    , [name, userId, categoryId]);
 };
 
 module.exports = {

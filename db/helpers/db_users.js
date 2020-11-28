@@ -4,7 +4,7 @@ const getAllUsers = (db) => {
 
 const getUserByEmail = (db, email) => {
   return db.query(
-    `SELECT id, name, email FROM users
+    `SELECT id, name, email, password FROM users
      WHERE email = $1;`, [email]);
 };
 
@@ -13,4 +13,4 @@ const getUserByEmail = (db, email) => {
 module.exports = {
   getUserByEmail,
   getAllUsers
-}
+};
