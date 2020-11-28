@@ -74,10 +74,36 @@ const createNewTask = (db, name, userId, categoryId) => {
     , [name, userId, categoryId]);
 };
 
+const setTaskComplete = (db, taskId) => {
+  return db.query(
+    `UPDATE tasks
+     SET is_active = FALSE, date_finished = NOW()
+     WHERE id = $1;
+     `, [taskId]);
+};
+
+const setTaskRating = (db, rating, taskId) => {
+  return db.query(
+    `UPDATE tasks
+     SET rating = $1
+     WHERE id = $2;
+    `, [rating, taskId]);
+};
+
+const setTaskUrgency = (db, urgency, taskId) => {
+  return db.query (
+    `UPDATE tasks
+     SET urgency = $1
+     WHERE id = $2;`, [urgency, taskId]);
+};
+
 module.exports = {
   getAllTasks,
   getAllTasksForUser,
   getAllTasksByCategory,
   updateTaskCategory,
-  createNewTask
+  createNewTask,
+  setTaskComplete,
+  setTaskRating,
+  setTaskUrgency
 };
