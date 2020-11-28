@@ -7,17 +7,18 @@
 
 const express = require('express');
 const router  = express.Router();
-// const dbHelper = require('')
+const dbHelper = require('../db/helpers/db_tasks')
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId;
     // TODO:: import helper function
     let query = `SELECT * FROM tasks WHERE user_id=${userId}`;
-    console.log(query);
+    console.log('----------------------userId is:', userId);
     db.query(query)
       .then(data => {
         const tasks = data.rows;
+        console.log('-------- data.rows', data.rows);
         res.json({ tasks });
       })
       .catch(err => {
