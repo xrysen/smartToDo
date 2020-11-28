@@ -6,16 +6,14 @@ main article {
   border-style: solid;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 main article header {
   width: 100%;
-  height: 30%;
+  height: 40px;
   border-bottom: 2px solid black;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 main article header span { /* user's name*/
@@ -27,10 +25,15 @@ article:hover { /* styling variants for mouseover tweet effect */
   font-weight: 600;
 }
 
-ol li span {
-  display: flex;
-  padding-left:30px;
+li {
+  margin-bottom: 20px;
 }
+
+ol {
+  margin-bottom: 0px;
+}
+
+
 
 #rating {
   margin-left: auto;
