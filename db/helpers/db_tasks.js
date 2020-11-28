@@ -82,6 +82,15 @@ const setTaskComplete = (db, taskId) => {
      `, [taskId]);
 };
 
+const setTaskActive = (db, taskId) => {
+  return db.query(
+    `UPDATE tasks
+     SET is_active = TRUE, date_finished = NULL
+     WHERE id = $1;
+     `, [taskId]);
+};
+
+
 const setTaskRating = (db, rating, taskId) => {
   return db.query(
     `UPDATE tasks
@@ -105,5 +114,6 @@ module.exports = {
   createNewTask,
   setTaskComplete,
   setTaskRating,
-  setTaskUrgency
+  setTaskUrgency,
+  setTaskActive
 };
