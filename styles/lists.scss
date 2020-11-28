@@ -1,0 +1,44 @@
+main article {
+  margin-top: 25px;
+  margin-bottom: 17px;
+  height: 250px;
+  width: 100%;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+main article header {
+  width: 100%;
+  height: 30%;
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+main article header span { /* user's name*/
+  margin-left: 20px;
+}
+
+article:hover { /* styling variants for mouseover tweet effect */
+  box-shadow: 10px 10px 7px 0px rgba(161,161,161,1);
+  font-weight: 600;
+}
+
+ol li span {
+  display: flex;
+  padding-left:30px;
+}
+
+#rating {
+  margin-left: auto;
+  margin-right: 500px;
+}
+
+.temp {
+  border-bottom: 1px dotted black;
+  padding-bottom: 10px;
+}
+

@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -32,6 +35,62 @@
         <span id="current">Current</span>
         <span id="archived">Archived</span>
       </div>
-  </nav>
+    </nav>
+
+    <header id="main-header">
+      <div>
+          <h2 class="shadow">Some User</h2>
+      </div>
+      <div>
+        <img class="shadow" src="/images/profile-user.png" />
+    </div>
+    </header>
+
+    <main class="container">
+
+      <section class="new-item">
+        <h2>Enter New To-Do</h2>
+        <form id="form">
+          <textarea name="text"></textarea>
+          <div class="footer">
+            <button >Submit</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- jQuery appends new tweets here, see client.js createTweetElement function) -->
+      <section id="tweets-container">
+        <h2 class="temp">To Read</h2>
+        <h2>To Watch</h2>
+        <article class="tweet">
+          <header>
+            <span>To-Do</span>
+            <span id="rating">Rating</span>
+          </header>
+          <ol>
+            <li>
+              <input type="checkbox" id="cb1" name="op1">
+              <label for="cb1">Cowboy Bebop</label>
+            </li>
+            <li>
+              <input type="checkbox" id="cb1" name="op1">
+              <label for="cb1">Jurrasic Park</label>
+            </li>
+            <li>
+              <input type="checkbox" id="cb1" name="op1">
+              <label for="cb1">Flubber</label>
+            </li>
+            <li>
+              <input type="checkbox" id="cb1" name="op1">
+              <label for="cb1">Spiderman: Into the Spider-Verse</label>
+            </li>
+          </ol>
+        </article>
+        <h2 class="temp">To Eat</h2>
+        <h2 class="temp">To Buy</h2>
+      </section>
+
+    </main>
+
   </body>
 </html>

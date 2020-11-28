@@ -2,7 +2,7 @@ body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Righteous', cursive
 }
 
 main {
@@ -10,8 +10,19 @@ main {
   justify-content: center;
   background-color: #f4f1ec;
   flex-direction: column;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.small-text {
+  font-family: 'Roboto', sans-serif;
 }
 
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
+ colorscheme:
+ black: #000000
+ ink: #062F4F
+ posy: #813772
+ embers: #B82601
  */
