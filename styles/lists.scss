@@ -1,44 +1,95 @@
 main article {
   margin-top: 25px;
   margin-bottom: 17px;
-  height: 250px;
+  height: auto;
   width: 100%;
   border-style: solid;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 main article header {
   width: 100%;
-  height: 30%;
+  height: 40px;
   border-bottom: 2px solid black;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
 }
 
-main article header span { /* user's name*/
+main article header span {
   margin-left: 20px;
 }
 
-article:hover { /* styling variants for mouseover tweet effect */
+article:hover {
   box-shadow: 10px 10px 7px 0px rgba(161,161,161,1);
   font-weight: 600;
 }
 
-ol li span {
-  display: flex;
-  padding-left:30px;
+li {
+  margin-bottom: 20px;
 }
 
-#rating {
-  margin-left: auto;
-  margin-right: 500px;
+ol {
+  margin-bottom: 0px;
 }
 
-.temp {
+ul {
+  list-style-type: none;
+  margin-bottom: 0px;
+}
+
+.ratings {
+  margin-left: 100px;
+}
+
+.delete-buttons {
+  margin-left: 25px;
+}
+
+#rating-header {
+  margin-left: 255px;
+}
+
+.list-header {
   border-bottom: 1px dotted black;
   padding-bottom: 10px;
+  font-size: 40px;
 }
+
+.todo-body {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  color: #FFFF;
+  background-color: #B82601;
+  box-shadow: 5px 5px 5px #c1c1c1;
+}
+
+.move {
+  background-color: #813772;
+}
+
+.button:active {
+  background: #e5e5e5;
+  box-shadow: inset 10px 10px 5px #c1c1c1;
+}
+
+//all css below is for the rating stars
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
 
