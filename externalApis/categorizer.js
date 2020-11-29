@@ -48,7 +48,6 @@ const searchForRestaurant = (name, location) => {
 module.exports = (taskText) => {
   // TODO:: replace random category with one from api calls
   const category = Math.floor(Math.random()*4);
-  console.log('Task category is:::::', category);
 
   return category;
 
