@@ -13,7 +13,63 @@ const categorizeTask = require('../externalApis/categorizer');
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getTasksByUserId(db, userId)
+    dbHelper.getTasksByUserId(db, 1) //CHANGE THIS BACK TO userId
+      .then(data => {
+        const tasks = data.rows;
+        res.json({ tasks });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/1", (req, res) => {
+    const userId = req.session.userId;
+    dbHelper.getUserTasksByCategory(db, 1, 1) //replace first 1 with userID
+      .then(data => {
+        const tasks = data.rows;
+        res.json({ tasks });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/2", (req, res) => {
+    const userId = req.session.userId;
+    dbHelper.getUserTasksByCategory(db, 1, 2) //replace first 1 with userID
+      .then(data => {
+        const tasks = data.rows;
+        res.json({ tasks });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/3", (req, res) => {
+    const userId = req.session.userId;
+    dbHelper.getUserTasksByCategory(db, 1, 3) //replace first 1 with userID
+      .then(data => {
+        const tasks = data.rows;
+        res.json({ tasks });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/4", (req, res) => {
+    const userId = req.session.userId;
+    dbHelper.getUserTasksByCategory(db, 1, 4) //replace first 1 with userID
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -35,7 +91,7 @@ module.exports = (db) => {
       })
       .then(data => {
         const newTask = data.rows[0];
-        console.log(':::newTask created:::', data.rows[0]);
+        console.log(':::newTask created:::', data.rows[0]); //// here
         res.json({ newTask });
       })
       .catch(err => {

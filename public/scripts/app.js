@@ -1,4 +1,4 @@
-$(() => {
+/* $(() => {
   $.ajax({
     method: "GET",
     url: "/api/users"
@@ -14,5 +14,5 @@ $(() => {
   }).done((newTask) => {
     // TODO:: add new task to list of tasks
   });;
-});
+}); */
 
