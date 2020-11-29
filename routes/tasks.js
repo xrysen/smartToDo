@@ -12,13 +12,9 @@ const dbHelper = require('../db/helpers/db_tasks')
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId;
-    // TODO:: import helper function
-    let query = `SELECT * FROM tasks WHERE user_id=${userId}`;
-    console.log('----------------------userId is:', userId);
-    db.query(query)
+    dbHelper.getAllTasksForUser(db, userId)
       .then(data => {
         const tasks = data.rows;
-        console.log('-------- data.rows', data.rows);
         res.json({ tasks });
       })
       .catch(err => {
