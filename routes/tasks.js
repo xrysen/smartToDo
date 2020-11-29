@@ -13,7 +13,7 @@ const categorizeTask = require('../externalApis/categorizer');
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getTasksByUserId(db, 1) //CHANGE 1 BACK TO userId
+    dbHelper.getTasksByUserId(db, userId)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -27,7 +27,7 @@ module.exports = (db) => {
 // CODE BELOW SHOULD BE DRIED UP, FOR DEV PURPOSES
   router.get("/1", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, 1, 1) //replace first 1 with userID
+    dbHelper.getUserTasksByCategory(db, userId, 1)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -41,7 +41,7 @@ module.exports = (db) => {
 
   router.get("/2", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, 1, 2) //replace first 1 with userID
+    dbHelper.getUserTasksByCategory(db, userId, 2)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -55,7 +55,7 @@ module.exports = (db) => {
 
   router.get("/3", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, 1, 3) //replace first 1 with userID
+    dbHelper.getUserTasksByCategory(db, userId, 3)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -69,7 +69,7 @@ module.exports = (db) => {
 
   router.get("/4", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, 1, 4) //replace first 1 with userID
+    dbHelper.getUserTasksByCategory(db, userId, 4)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -86,7 +86,7 @@ module.exports = (db) => {
     const task = req.body.text // important change tasks -> text
     categorizeTask(task)
       .then(categoryId => {
-        return dbHelper.createNewTask(db, task, 1, categoryId) // CHANGE 1 WITH userID
+        return dbHelper.createNewTask(db, task, userId, categoryId)
       })
       .then(data => {
         const newTask = data.rows[0];

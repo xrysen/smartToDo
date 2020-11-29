@@ -25,7 +25,7 @@ app.use(morgan('dev'));
 // Use cookie session
 app.use(cookieSession({
   name: 'session',
-  keys: ['key1']
+  keys: ['key1'],
 }));
 
 app.set("view engine", "ejs");
@@ -55,6 +55,7 @@ app.use( express.static( "public" ) ); // had to put this here to get images to 
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
+  req.session['userId'] = 1;
   res.render("index");
 });
 
