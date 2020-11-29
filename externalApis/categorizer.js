@@ -110,7 +110,7 @@ const requestAll = (name, location) => {
   });
 };
 
-requestAll("harry potter","vancouver");
+//requestAll("harry potter","vancouver");
 
 // 3. Set up call-sequence and promise-handling inside categorizeTask
 module.exports = (taskText) => {
