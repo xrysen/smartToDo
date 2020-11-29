@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -18,6 +19,7 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/list_collapse.js"></script>
 
     <!-- disable viewport zoom-->
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
@@ -27,8 +29,9 @@
     <nav>
       <span id="left-nav" class="title">Smart-To-Do</span>
       <div id="right-nav" class="title">
-        <span id="current">Current</span>
-        <span id="archived">Archived</span>
+        <span class="nav-buttons" id="new">New</span>
+        <span class="nav-buttons" id="current">Current</span>
+        <span class="nav-buttons" id="archived">Archived</span>
       </div>
     </nav>
 
@@ -48,7 +51,7 @@
         <form id="form">
           <textarea name="text"></textarea>
           <div class="footer">
-            <button >Submit</button>
+            <button id="submit-button">Submit</button>
           </div>
         </form>
       </section>
@@ -56,13 +59,17 @@
 
       <section id="list-section">
 
-        <div id="to-read" class= "list-container">
-          <h2>To Read</h2>
+        <h2 class="list-header to-read">To Read</h2>
+        <div class="list-container" id="to-read">
           <article class="list">
+
             <header>
               <span>To-Do</span>
-              <span id="rating">Rating</span>
+              <span id="rating-header">Rating</span>
            </header>
+
+           <div class="todo-body">
+
             <ol>
               <li>
                 <input type="checkbox">
@@ -76,16 +83,44 @@
                 <input type="checkbox">
                 <label>Cat's Cradle</label>
               </li>
-              <li>
-                <input type="checkbox">
-                <label>Watchmen</label>
-              </li>
             </ol>
+
+            <ul class='ratings'>
+              <li>
+                <div class="rating">
+                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                  </div>
+              </li>
+              <li>
+                <div class="rating">
+                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                  </div>
+              </li>
+              <li>
+                <div class="rating">
+                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                  </div>
+              </li>
+            </ul>
+
+            <ul class='delete-buttons'>
+              <li><button class='button'>Delete</button></li>
+              <li><button class='button'>Delete</button></li>
+              <li><button class='button'>Delete</button></li>
+            </ul>
+            <ul class='move-buttons'>
+              <li><button class='button move'>Move</button></li>
+              <li><button class='button move'>Move</button></li>
+              <li><button class='button move'>Move</button></li>
+            </ul>
+
+           </div>
+
           </article>
         </div>
 
-        <div id="to-watch" class= "list-container">
-          <h2>To Watch</h2>
+        <h2 class="list-header to-watch">To Watch</h2>
+        <div class="list-container" id="to-watch">
           <article class="list">
             <header>
               <span>To-Do</span>
@@ -108,12 +143,16 @@
                 <input type="checkbox">
                 <label>Spiderman: Into the Spider-Verse</label>
               </li>
+              <li>
+                <input type="checkbox">
+                <label>Watchmen<label>
+              </li>
             </ol>
           </article>
         </div>
 
-        <div id="to-eat" class= "list-container">
-          <h2>To Eat</h2>
+        <h2 class="list-header to-eat">To Eat</h2>
+        <div class="list-container" id="to-eat">
           <article class="list">
             <header>
               <span>To-Do</span>
@@ -128,20 +167,12 @@
                 <input type="checkbox" >
                 <label>Marutama Ramen</label>
               </li>
-              <li>
-                <input type="checkbox">
-                <label>McDonald's</label>
-              </li>
-              <li>
-                <input type="checkbox">
-                <label>That new place</label>
-              </li>
             </ol>
           </article>
         </div>
 
-        <div id="to-buy" class= "list-container">
-          <h2>To Buy</h2>
+        <h2 class="list-header to-buy">To Buy</h2>
+        <div class="list-container" id="to-buy">
           <article class="list">
             <header>
               <span>To-Do</span>
