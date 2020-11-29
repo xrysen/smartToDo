@@ -46,10 +46,12 @@ $(document).ready(function () {
         result = "4";
         break;
     }
+    return result;
   }
 
   const loadListItems = function (initial, category) {
-    $.ajax(`/api/tasks`, { method: "GET" })
+    const categoryId = categoryNameToId(category)
+    $.ajax(`/api/tasks/${categoryId}`, { method: "GET" })
       .then((res) => {
         if (initial) {
           renderListElements(res, category);
@@ -94,7 +96,11 @@ $(document).ready(function () {
         .fail((err) => console.log(err));
     }
   }); */
+
+  loadListItems(true, 'watch');
   loadListItems(true, 'read');
+  loadListItems(true, 'eat');
+  loadListItems(true, 'buy');
 });
 
 
