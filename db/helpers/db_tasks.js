@@ -18,7 +18,7 @@ const getAllTasks = (db) => {
  *  Returns a Promise containing all properties of table 'tasks' for the user id specified
  */
 
-const getAllTasksForUser = (db, userId) => {
+const getTasksByUserId = (db, userId) => {
   return db.query(
     `SELECT tasks.* FROM tasks
      JOIN users ON tasks.user_id = users.id
@@ -33,7 +33,7 @@ const getAllTasksForUser = (db, userId) => {
  *  Returns a Promise containing all properties of table 'tasks' for a specific user and category
  */
 
-const getAllTasksByCategory = (db, userId, catId) => {
+const getUserTasksByCategory = (db, userId, catId) => {
   return db.query(
     `SELECT tasks.* FROM tasks
      JOIN users ON tasks.user_id = users.id
@@ -69,7 +69,8 @@ const updateTaskCategory = (db, newCatId, taskId) => {
 const createNewTask = (db, name, userId, categoryId) => {
   return db.query(
     `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
-     VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL);
+    VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL)
+    RETURNING *;
     `
     , [name, userId, categoryId]);
 };
@@ -138,8 +139,8 @@ const setTaskUrgency = (db, urgency, taskId) => {
 
 module.exports = {
   getAllTasks,
-  getAllTasksForUser,
-  getAllTasksByCategory,
+  getTasksByUserId,
+  getUserTasksByCategory,
   updateTaskCategory,
   createNewTask,
   setTaskComplete,
