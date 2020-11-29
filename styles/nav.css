@@ -1,0 +1,47 @@
+/*
+ * Styling for nav bar
+ */
+nav {
+  height: 90px;
+  background-color: #000000;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  font-family: 'Righteous', cursive;
+}
+
+#right-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: auto;
+  font-size: 27px;
+}
+
+#left-nav {
+  font-size: xx-large;
+}
+
+.nav-buttons {
+  margin-left: 20px;
+}
+
+/* #up-toggle {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 14px;
+  margin-left: 90%;
+} */
+/*# sourceMappingURL=nav.css.map */
