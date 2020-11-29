@@ -57,17 +57,9 @@ $(document).ready(function () {
           renderListElements(res, category);
         }
         if (!initial) {
-          renderSingleListElement([res.pop()], category);
+          renderSingleListElement(res['tasks'].pop(), category);
         }
       });
-  };
-
-  const renderSingleListElement = function (listItem, category) {
-      const $items = createListElements(listItem);
-      $(`#${category}-items`).append($items.items);
-      $(`#${category}-ratings`).append($items.ratings);
-      $(`#${category}-delete`).append($items.delete);
-      $(`#${category}-move`).append($items.move);
   };
 
   const renderListElements = function (listItems, category) {
@@ -81,21 +73,27 @@ $(document).ready(function () {
     }
   };
 
-  /* $('#form').submit((event) => { // form completion handler, sends user inputs to database
+  const renderSingleListElement = function (listItem, category) {
+    const $items = createListElements(listItem);
+    $(`#${category}-items`).append($items.items);
+    $(`#${category}-ratings`).append($items.ratings);
+    $(`#${category}-delete`).append($items.delete);
+    $(`#${category}-move`).append($items.move);
+};
+
+  $('#form').submit((event) => { // form completion handler, sends user inputs to database
     event.preventDefault();
     let error = false;
     const $input = $('#todo-text');
-    renderListElements($input.val(), 'read');
-    $input.val('');
     if (error === false) {
-      $.ajax(`/PLACEHOLDER`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
-        .then(() => { // clears text box, resets char counter
+      $.ajax(`/api/tasks`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
+        .then(() => { // clears text box
           $input.val('');
         })
-        .then(() => loadListItems(false, read)) // loads new list item HERE is a good point to add JQUERY to make addition really noticable
+        .then(() => loadListItems(false, 'watch')) // CHANGE WATCH loads new list item HERE is a good point to add JQUERY to make addition really noticable
         .fail((err) => console.log(err));
     }
-  }); */
+  });
 
   loadListItems(true, 'watch');
   loadListItems(true, 'read');

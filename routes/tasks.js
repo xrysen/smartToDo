@@ -83,15 +83,14 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const userId = req.session.userId;
-    const task = req.body.task
-
+    const task = req.body.text
     categorizeTask(task)
       .then(categoryId => {
-        return dbHelper.createNewTask(db, task, userId, categoryId)
+        return dbHelper.createNewTask(db, task, 1, categoryId) // CHANGE 1 WITH userID
       })
       .then(data => {
         const newTask = data.rows[0];
-        console.log(':::newTask created:::', data.rows[0]); //// here
+        console.log(':::newTask created:::', data.rows[0]);
         res.json({ newTask });
       })
       .catch(err => {

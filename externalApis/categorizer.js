@@ -102,7 +102,7 @@ module.exports = (taskText) => {
             break;
 
           default:
-            return 4;
+            return 1;
         }
       });
 };
