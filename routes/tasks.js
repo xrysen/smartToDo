@@ -29,7 +29,6 @@ module.exports = (db) => {
     const userId = req.session.userId;
     const task = req.body.task
 
-    // TODO: learn how to handle promises, noob
     categorizeTask(task)
       .then(categoryId => {
         return dbHelper.createNewTask(db, task, userId, categoryId)
