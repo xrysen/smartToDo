@@ -85,6 +85,15 @@ const requestRestaurantByNameAndLoc = (name, location) => {
   });
 };
 
+/**
+ * requestAll (name, location)
+ * Input:
+ *  string text to search, location of user searching
+ * Output:
+ *  Sends a request to Yelp, openMovieDatbase and Google books returning an array of values for each category if any of the api's get a hit
+ * [yelpResponse, movieResponse, booksResponse] Will either show as "eat/watch/read" or NULL if the api couldn't provide a result
+ */
+
 const requestAll = (name, location) => {
   Promise.all([
     //isTextBookOrMovieTitle(name),
