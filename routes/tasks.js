@@ -13,7 +13,7 @@ const categorizeTask = require('../externalApis/categorizer');
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getTasksByUserId(db, 1) //CHANGE THIS BACK TO userId
+    dbHelper.getTasksByUserId(db, 1) //CHANGE 1 BACK TO userId
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
@@ -24,7 +24,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-
+// CODE BELOW SHOULD BE DRIED UP, FOR DEV PURPOSES
   router.get("/1", (req, res) => {
     const userId = req.session.userId;
     dbHelper.getUserTasksByCategory(db, 1, 1) //replace first 1 with userID
@@ -83,7 +83,7 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const userId = req.session.userId;
-    const task = req.body.text
+    const task = req.body.text // important change tasks -> text
     categorizeTask(task)
       .then(categoryId => {
         return dbHelper.createNewTask(db, task, 1, categoryId) // CHANGE 1 WITH userID

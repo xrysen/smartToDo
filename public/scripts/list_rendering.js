@@ -50,8 +50,7 @@ $(document).ready(function () {
   }
 
   const loadListItems = function (initial, category) {
-    const categoryId = categoryNameToId(category)
-    $.ajax(`/api/tasks/${categoryId}`, { method: "GET" })
+    $.ajax(`/api/tasks/${category}`, { method: "GET" })
       .then((res) => {
         if (initial) {
           renderListElements(res, category);
@@ -90,15 +89,22 @@ $(document).ready(function () {
         .then(() => { // clears text box
           $input.val('');
         })
-        .then(() => loadListItems(false, 'watch')) // CHANGE WATCH loads new list item HERE is a good point to add JQUERY to make addition really noticable
+        .then(() => {
+          $.ajax(`/api/tasks/`, { method: "GET" })
+            .then((res) => {
+              const task = res['tasks'].pop();
+              return task['category_id']
+            })
+            .then((id) => loadListItems(false, id));
+        }) // CHANGE WATCH loads new list item HERE is a good point to add JQUERY to make addition really noticable
         .fail((err) => console.log(err));
     }
   });
 
-  loadListItems(true, 'watch');
-  loadListItems(true, 'read');
-  loadListItems(true, 'eat');
-  loadListItems(true, 'buy');
+  loadListItems(true, 1);
+  loadListItems(true, 2);
+  loadListItems(true, 3);
+  loadListItems(true, 4);
 });
 
 

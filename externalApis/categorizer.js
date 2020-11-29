@@ -102,7 +102,7 @@ module.exports = (taskText) => {
             break;
 
           default:
-            return 1;
+            return 1; // MADE DEFAULT 1 FOR MOVIES
         }
       });
 };
