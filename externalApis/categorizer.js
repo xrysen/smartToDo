@@ -61,13 +61,16 @@ const requestRestaurantByNameAndLoc = (name, location) => {
   console.log('--------called requestRestaurantByNameAndLoc()-----');
 
   return request({
-    url: `https://api.yelp.com/v3/businesses/search?term=${name}&location=${location}`,
+    url: `https://api.yelp.com/v3/businesses/search?term=${name}&location=${location}&categories=restaurants&limit=1`,
     headers: { Authorization: `Bearer ${process.env.API_KEY_YELP}` }
   })
   .then(res => {
     res = JSON.parse(res);
     console.log('yelp response res= --------------\n', res);
-    return 'eat';
+    if (!res.businesses.length)
+      return 'null';
+    else
+      return 'eat';
     // return res.businesses[0].name;
   });
 };
