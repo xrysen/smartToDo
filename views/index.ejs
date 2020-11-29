@@ -22,6 +22,7 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/list_rendering.js"></script>
   <script type="text/javascript" src="/scripts/list_collapse.js"></script>
 
   <!-- disable viewport zoom-->
@@ -52,7 +53,7 @@
     <section class="new-item">
       <h2>Enter New To-Do</h2>
       <form id="form">
-        <textarea name="text"></textarea>
+        <textarea id="todo-text" name="text"></textarea>
         <div class="footer">
           <button id="submit-button">Submit</button>
         </div>
@@ -61,6 +62,7 @@
 
 
     <section id="list-section">
+
       <!-- Read -->
       <h2 class="list-header to-read">To Read</h2>
       <div class="list-container" id="to-read">
@@ -68,7 +70,7 @@
 
           <header>
             <span>To-Do</span>
-            <span id="rating-header">Rating</span>
+            <span id="rating-header">Urgency</span>
           </header>
 
           <div id="read-body" class="todo-body">
@@ -129,12 +131,12 @@
         <article class="list">
           <header>
             <span>To-Do</span>
-            <span id="rating-header">Rating</span>
+            <span id="rating-header">Urgency</span>
           </header>
 
           <div id="watch-body" class="todo-body">
 
-            <ol id="watch-item" class="todo-items"></ol>
+            <ol id="watch-items" class="todo-items"></ol>
 
             <ul id="watch-ratings"class='ratings'></ul>
 
@@ -153,7 +155,7 @@
         <article class="list">
           <header>
             <span>To-Do</span>
-            <span id="rating-header">Rating</span>
+            <span id="rating-header">Urgency</span>
           </header>
 
           <div id="eat-body" class="todo-body">
@@ -177,7 +179,7 @@
         <article class="list">
           <header>
             <span>To-Do</span>
-            <span id="rating-header">Rating</span>
+            <span id="rating-header">Urgency</span>
           </header>
 
           <div id="buy-body" class="todo-body">
