@@ -27,12 +27,11 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const userId = req.session.userId;
-    const task = req.body // TODO:: check 'task' is the query text
-    console.log('Task req.body:::::::::::\n', req.body);
+    const task = req.body.task
 
     const categoryId = categorizeTask(task);
 
-    dbHelper.createNewTask = (db, task, userId, categoryId)
+    dbHelper.createNewTask(db, task, userId, categoryId)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });
