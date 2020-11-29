@@ -30,25 +30,6 @@ $(document).ready(function () {
     return $listElements;
   };
 
-  const categoryNameToId = function (category) {
-    let result;
-    switch (category) {
-      case 'watch':
-        result = "1";
-        break;
-      case 'read':
-        result = "2";
-        break;
-      case 'eat':
-        result = "3";
-        break;
-      case 'buy':
-        result = "4";
-        break;
-    }
-    return result;
-  }
-
   const loadListItems = function (initial, category) {
     $.ajax(`/api/tasks/${category}`, { method: "GET" })
       .then((res) => {
