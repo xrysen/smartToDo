@@ -35,7 +35,7 @@ const requestBookByTitle = (title) => {
     //   }
     // }
     if (res.items[0].volumeInfo.title.toLowerCase().includes(title.toLowerCase())) {
-      return 'read';
+      return true;
     } else {
       return null;
     }
@@ -56,9 +56,9 @@ const requestMovieByTitle = (title) => {
     //   }
     // }
     if (res.Response === "False") {
-      return null
+      return null;
     } else {
-      return 'watch';
+      return true;
     }
   })
 };
@@ -74,12 +74,12 @@ const requestRestaurantByNameAndLoc = (name, location) => {
   })
   .then(res => {
     res = JSON.parse(res);
-    console.log('yelp response res= --------------\n', res);
+    //console.log('yelp response res= --------------\n', res);
     if (!res.businesses.length || !res.businesses[0].name.toLowerCase().includes(name.toLowerCase())) {
       return null;
     }
     else {
-      return 'eat';
+      return true;
     }
     // return res.businesses[0].name;
   });
@@ -91,7 +91,7 @@ const requestRestaurantByNameAndLoc = (name, location) => {
  *  string text to search, location of user searching
  * Output:
  *  Sends a request to Yelp, openMovieDatbase and Google books returning an array of values for each category if any of the api's get a hit
- * [yelpResponse, movieResponse, booksResponse] Will either show as "eat/watch/read" or NULL if the api couldn't provide a result
+ * [yelpResponse, movieResponse, booksResponse] Will either show as either TRUE or NULL if the api couldn't provide a result
  */
 
 const requestAll = (name, location) => {
@@ -102,15 +102,15 @@ const requestAll = (name, location) => {
     requestBookByTitle(name)
   ])
   .then(res => {
-    return Promise.all(res.map(data => data));
+    return res.map(data => data);
   })
   .then(data => {
-    console.log(data);
+    console.log(`Eat: ${data[0]} Watch: ${data[1]} Read ${data[2]}`);
     //return data;
   });
 };
 
-// requestAll("IT","vancouver");
+requestAll("harry potter","vancouver");
 
 // 3. Set up call-sequence and promise-handling inside categorizeTask
 module.exports = (taskText) => {
