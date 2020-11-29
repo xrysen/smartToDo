@@ -18,7 +18,7 @@ const getAllTasks = (db) => {
  *  Returns a Promise containing all properties of table 'tasks' for the user id specified
  */
 
-const getAllTasksForUser = (db, userId) => {
+const getTasksByUserId = (db, userId) => {
   return db.query(
     `SELECT tasks.* FROM tasks
      JOIN users ON tasks.user_id = users.id
@@ -33,7 +33,7 @@ const getAllTasksForUser = (db, userId) => {
  *  Returns a Promise containing all properties of table 'tasks' for a specific user and category
  */
 
-const getAllTasksByCategory = (db, userId, catId) => {
+const getUserTasksByCategory = (db, userId, catId) => {
   return db.query(
     `SELECT tasks.* FROM tasks
      JOIN users ON tasks.user_id = users.id
@@ -69,10 +69,19 @@ const updateTaskCategory = (db, newCatId, taskId) => {
 const createNewTask = (db, name, userId, categoryId) => {
   return db.query(
     `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
-     VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL);
+    VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL)
+    RETURNING *;
     `
     , [name, userId, categoryId]);
 };
+
+/**
+ * setTaskComplete(db, taskId)
+ * Input:
+ *  database, taskId
+ * Output:
+ *  Sets column is_active for task with id of taskId to FALSE and adds a timestamp under date_finished column
+ */
 
 const setTaskComplete = (db, taskId) => {
   return db.query(
@@ -82,6 +91,14 @@ const setTaskComplete = (db, taskId) => {
      `, [taskId]);
 };
 
+/**
+ * setTaskActive(db, taskId)
+ * Input:
+ *   database, taskId
+ * Output:
+ *   Sets column is_active to TRUE for task with id of taskId and removes timestamp (if there is one) from column date_finished
+ */
+
 const setTaskActive = (db, taskId) => {
   return db.query(
     `UPDATE tasks
@@ -90,7 +107,13 @@ const setTaskActive = (db, taskId) => {
      `, [taskId]);
 };
 
-
+/**
+ * setTasking(db, rating, taskId)
+ * Input:
+ *  database, rating, taskId
+ * Output:
+ *  Sets column rating to specified value (rating) for task with id of taskId
+ */
 const setTaskRating = (db, rating, taskId) => {
   return db.query(
     `UPDATE tasks
@@ -98,6 +121,14 @@ const setTaskRating = (db, rating, taskId) => {
      WHERE id = $2;
     `, [rating, taskId]);
 };
+
+/**
+ * setTaskUrgency(db, urgency, taskId)
+ * Input:
+ *  database, urgency, taskId
+ * Output:
+ *  Sets column urgency to specified value (urgency) for task with id of taskId
+ */
 
 const setTaskUrgency = (db, urgency, taskId) => {
   return db.query (
@@ -108,8 +139,8 @@ const setTaskUrgency = (db, urgency, taskId) => {
 
 module.exports = {
   getAllTasks,
-  getAllTasksForUser,
-  getAllTasksByCategory,
+  getTasksByUserId,
+  getUserTasksByCategory,
   updateTaskCategory,
   createNewTask,
   setTaskComplete,
