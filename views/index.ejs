@@ -1,17 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Home Page</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
 
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/list_rendering.js"></script>
+  <script type="text/javascript" src="/scripts/list_collapse.js"></script>
+
+  <!-- disable viewport zoom-->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+</head>
+
+<body>
+  <nav>
+    <span id="left-nav" class="title">Smart-To-Do</span>
+    <div id="right-nav" class="title">
+      <span class="nav-buttons" id="new">New</span>
+      <span class="nav-buttons" id="current">Current</span>
+      <span class="nav-buttons" id="archived">Archived</span>
+    </div>
+  </nav>
+
+  <header id="main-header">
+    <div>
+      <h2 class="shadow">Some User</h2>
+    </div>
+    <div>
+      <img class="shadow" src="/images/profile-user.png" />
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="new-item">
+      <h2>Enter New To-Do</h2>
+      <form id="form">
+        <textarea id="todo-text" name="text"></textarea>
+        <div class="footer">
+          <button id="submit-button">Submit</button>
+        </div>
+      </form>
+    </section>
+
+
+    <section id="list-section">
+
+      <!-- Read -->
+      <h2 class="list-header to-read">To Read</h2>
+      <div class="list-container" id="to-read">
+        <article class="list">
+
+          <header>
+            <span>To-Do</span>
+            <span id="rating-header">Urgency</span>
+          </header>
+
+          <div id="read-body" class="todo-body">
+
+            <ol id="read-items" class="todo-items">
+              <li>
+                <input type="checkbox">
+                <label>Harry Potter</label>
+              </li>
+              <li>
+                <input type="checkbox">
+                <label>Dark Tower</label>
+              </li>
+              <li>
+                <input type="checkbox">
+                <label>Cat's Cradle</label>
+              </li>
+            </ol>
+
+            <ul id="read-ratings" class='ratings'>
+              <li>
+                <div class="rating">
+                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                </div>
+              </li>
+              <li>
+                <div class="rating">
+                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                </div>
+              </li>
+              <li>
+                <div class="rating">
+                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                </div>
+              </li>
+            </ul>
+
+            <ul id="read-delete" class='delete-buttons'>
+              <li><button class='button'>Delete</button></li>
+              <li><button class='button'>Delete</button></li>
+              <li><button class='button'>Delete</button></li>
+            </ul>
+
+            <ul id="read-move" class='move-buttons'>
+              <li><button class='button move'>Move</button></li>
+              <li><button class='button move'>Move</button></li>
+              <li><button class='button move'>Move</button></li>
+            </ul>
+
+          </div>
+
+        </article>
+      </div>
+
+      <!-- Watch -->
+      <h2 class="list-header to-watch">To Watch</h2>
+      <div class="list-container" id="to-watch">
+        <article class="list">
+          <header>
+            <span>To-Do</span>
+            <span id="rating-header">Urgency</span>
+          </header>
+
+          <div id="watch-body" class="todo-body">
+
+            <ol id="watch-items" class="todo-items"></ol>
+
+            <ul id="watch-ratings"class='ratings'></ul>
+
+            <ul id="watch-delete" class='delete-buttons'></ul>
+
+            <ul id="watch-move" class='move-buttons'></ul>
+
+          </div>
+
+        </article>
+      </div>
+
+      <!-- Eat -->
+      <h2 class="list-header to-eat">To Eat</h2>
+      <div class="list-container" id="to-eat">
+        <article class="list">
+          <header>
+            <span>To-Do</span>
+            <span id="rating-header">Urgency</span>
+          </header>
+
+          <div id="eat-body" class="todo-body">
+
+            <ol id="eat-items" class="todo-items"></ol>
+
+            <ul id="eat-ratings" class='ratings'></ul>
+
+            <ul id="eat-delete" class='delete-buttons'></ul>
+
+            <ul id="eat-move" class='move-buttons'></ul>
+
+          </div>
+
+        </article>
+      </div>
+
+      <!-- Buy -->
+      <h2 class="list-header to-buy">To Buy</h2>
+      <div class="list-container" id="to-buy">
+        <article class="list">
+          <header>
+            <span>To-Do</span>
+            <span id="rating-header">Urgency</span>
+          </header>
+
+          <div id="buy-body" class="todo-body">
+
+            <ol id="buy-items" class="todo-items"></ol>
+
+            <ul id="buy-ratings" class='ratings'></ul>
+
+            <ul id="buy-delete" class='delete-buttons'></ul>
+
+            <ul id="buy-move" class='move-buttons'></ul>
+
+          </div>
+
+        </article>
+      </div>
+
+    </section>
+
+  </main>
+
+</body>
+
 </html>
