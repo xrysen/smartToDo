@@ -7,19 +7,16 @@
 
 const express = require('express');
 const router  = express.Router();
+const dbHelper = require('../db/helpers/db_users')
+
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  // Login form is a single input: user_id
+  // which submits to GET /users/login/[user_id]
+  router.get('/login/:id', (req, res) => {
+    req.session.user_id = req.params.id;
+    res.redirect('/');
+  })
+
   return router;
 };

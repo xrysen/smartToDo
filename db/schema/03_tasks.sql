@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS tasks CASCADE;
+CREATE TABLE tasks (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  date_created TIMESTAMP NOT NULL,
+  date_finished TIMESTAMP,
+  rating INTEGER,
+  urgency INTEGER
+);
