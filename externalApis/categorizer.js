@@ -21,12 +21,13 @@ const request = require("request-promise-native");
 // TODO::
 // 1. Implement Woflman Alphadog API
 const isTextBookOrMovieTitle = (text) => {
+  console.log('--------called isbookormovie()-----');
 
   return request(`https://api.wolframalpha.com/v2/query?input=${text}&format=plaintext&output=json&appid=${process.env.API_KEY_WOLFRAMALPHA}`)
   .then(res => {
     res = JSON.parse(res);
-    console.log('wolfram alpha response array res.assumptions.values --------------\n', res.assumptions.values);
-    return 'book';
+    console.log('wolfram alpha response array res --------------\n', res);
+    return '4';
   })
 };
 
@@ -47,8 +48,14 @@ const searchForRestaurant = (name, location) => {
 // 3. Set up call-sequence and promise-handling inside categorizeTask
 module.exports = (taskText) => {
   // TODO:: replace random category with one from api calls
-  const category = Math.floor(Math.random()*4);
+  // const category = Math.floor(Math.random()*4);
 
-  return category;
-
+  console.log('task sent to categorizer is:::', taskText);
+  return (res, rej) => {
+    isTextBookOrMovieTitle(taskText)
+      .then(data => {
+        console.log('categorizer returns:::', data);
+        return data;
+      });
+    };
 };
