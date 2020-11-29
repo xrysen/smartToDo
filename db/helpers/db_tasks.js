@@ -142,7 +142,7 @@ const setTaskUrgency = (db, urgency, taskId) => {
  * Input:
  *   database, taskId
  * Output:
- *  returns true or false depending on what the column of row taskId is set to
+ *  returns true or false depending on what the column is_active of row taskId is set to
  */
 
 const isTaskActive = (db, taskId) => {
