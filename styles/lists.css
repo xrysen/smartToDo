@@ -93,6 +93,10 @@ ul {
           box-shadow: inset 10px 10px 5px #c1c1c1;
 }
 
+form .delete-btn {
+  width: 100%;
+}
+
 .rating {
   unicode-bidi: bidi-override;
   direction: rtl;

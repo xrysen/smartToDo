@@ -2,6 +2,7 @@ $(document).ready(function () {
 
   const createListElements = function (task) {
     const $task = task['name'];
+    const $taskId = task['id'];
     const $listElements = {
       items: $(`
       <li>
@@ -19,7 +20,7 @@ $(document).ready(function () {
     `),
 
       delete: $(`
-      <li><button class='button'>Delete</button></li>
+      <li><form class = "delete-btn" method = "GET" action = "/api/tasks/delete/${$taskId}"><button type = 'submit' class='button delete-btn'>Delete</button></form></li>
     `),
 
       move: $(`

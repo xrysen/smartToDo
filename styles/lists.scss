@@ -76,6 +76,10 @@ ul {
   box-shadow: inset 10px 10px 5px #c1c1c1;
 }
 
+form .delete-btn {
+  width: 100%;
+}
+
 //all css below is for the rating stars
 .rating {
   unicode-bidi: bidi-override;
