@@ -24,52 +24,11 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-// CODE BELOW SHOULD BE DRIED UP, FOR DEV PURPOSES
-  router.get("/1", (req, res) => {
-    const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, userId, 1)
-      .then(data => {
-        const tasks = data.rows;
-        res.json({ tasks });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
 
-  router.get("/2", (req, res) => {
+  router.get("/getByCategory/:category", (req, res) => {
     const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, userId, 2)
-      .then(data => {
-        const tasks = data.rows;
-        res.json({ tasks });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-  router.get("/3", (req, res) => {
-    const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, userId, 3)
-      .then(data => {
-        const tasks = data.rows;
-        res.json({ tasks });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-  router.get("/4", (req, res) => {
-    const userId = req.session.userId;
-    dbHelper.getUserTasksByCategory(db, userId, 4)
+    const category = req.params.category;
+    dbHelper.getUserTasksByCategory(db, userId, category)
       .then(data => {
         const tasks = data.rows;
         res.json({ tasks });

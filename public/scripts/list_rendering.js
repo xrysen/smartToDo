@@ -37,7 +37,7 @@ $(document).ready(function () {
   };
 
   const loadListItems = function (initial, category, isActive) {
-    $.ajax(`/api/tasks/${category}`, { method: 'GET' })
+    $.ajax(`/api/tasks/getByCategory/${category}`, { method: 'GET' })
       .then((res) => {
         if (initial) {
           renderListElements(res, category, isActive);
