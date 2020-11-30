@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+ /*  const isUserActive = function() {
+    $.ajax()
+  } */
+
   const createListElements = function (task) {
     const $task = task['name'];
     const $listElements = {
@@ -30,11 +34,11 @@ $(document).ready(function () {
     return $listElements;
   };
 
-  const loadListItems = function (initial, category) {
+  const loadListItems = function (initial, category, isActive) {
     $.ajax(`/api/tasks/${category}`, { method: "GET" })
       .then((res) => {
         if (initial) {
-          renderListElements(res, category);
+          renderListElements(res, category, isActive);
         }
         if (!initial) {
           renderSingleListElement(res['tasks'].pop(), category);
@@ -42,10 +46,10 @@ $(document).ready(function () {
       });
   };
 
-  const renderListElements = function (listItems, category) {
+  const renderListElements = function (listItems, category, isActive) {
     const tasks = listItems['tasks'];
     for (const task in tasks) {
-      if (tasks[task]['is_active']) {
+      if (tasks[task]['is_active'] === isActive) {
         const $items = createListElements(tasks[task]);
         $(`#${category}-items`).append($items.items);
         $(`#${category}-ratings`).append($items.ratings);
@@ -84,10 +88,35 @@ $(document).ready(function () {
     }
   });
 
-  loadListItems(true, 1);
-  loadListItems(true, 2);
-  loadListItems(true, 3);
-  loadListItems(true, 4);
+/*
+  $('#archived').on('click', () => {
+    active = false;
+    location.reload();
+  })
+
+  $('#current').on('click', () => {
+    active = true;
+    location.reload();
+  })
+
+  if(active === true) {
+    loadListItems(true, 1, true);
+    loadListItems(true, 2, true);
+    loadListItems(true, 3, true);
+    loadListItems(true, 4, true);
+  }
+
+  if (active === false) {
+    loadListItems(true, 1, false);
+    loadListItems(true, 2, false);
+    loadListItems(true, 3, false);
+    loadListItems(true, 4, false);
+  } */
+
+  loadListItems(true, 1, true);
+    loadListItems(true, 2, true);
+    loadListItems(true, 3, true);
+    loadListItems(true, 4, true);
 });
 
 

@@ -8,9 +8,15 @@ const getUserByEmail = (db, email) => {
      WHERE email = $1;`, [email]);
 };
 
+const getUserById = (db, userId) => {
+  return db.query(
+    `SELECT * FROM users
+     WHERE users.id = $1`, [userId]);
+};
 
 
 module.exports = {
   getUserByEmail,
-  getAllUsers
+  getAllUsers,
+  getUserById
 };

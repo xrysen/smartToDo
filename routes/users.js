@@ -18,5 +18,19 @@ module.exports = (db) => {
     res.redirect('/');
   })
 
+  router.get('/', (req, res) => {
+    const userId = req.session.userId;
+    dbHelper.getUserById(db, userId)
+      .then(data => {
+        const tasks = data.rows;
+        res.json({ tasks });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  })
+
   return router;
 };
