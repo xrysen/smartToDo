@@ -35,7 +35,6 @@ module.exports = (db) => {
       })
       .then(data => {
         const newTask = data.rows[0];
-        console.log(':::newTask created:::', data.rows[0]);
         res.json({ newTask });
       })
       .catch(err => {

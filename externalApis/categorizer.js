@@ -1,6 +1,6 @@
 const request = require("request-promise-native");
 
-const isWolframDatatype = (text) => {
+const requestWolframDatatype = (text) => {
   return request(`https://api.wolframalpha.com/v2/query?input=${text}&format=plaintext&output=json&appid=${process.env.API_KEY_WOLFRAMALPHA}`)
   .then(res => {
     res = JSON.parse(res);
@@ -71,33 +71,52 @@ const requestRestaurantByName = (name) => {
  *  string text to search
  * Output:
  *  sends a request to Wolfram Alpha, Yelp, openMovieDatbase and Google books APIs
- *  ...TODO...
+ *  returns an array of category names if API has returned a positive result
+ *  e.g. [ 'read', 'null', 'watch', 'read' ]
  */
 const requestAllApis = (str) => {
-  Promise.all([
+  return Promise.all([
     requestWolframDatatype(str),
     requestRestaurantByName(str),
     requestMovieByTitle(str),
     requestBookByTitle(str)
   ])
-  .then(res => {
-    console.log('res::', res)
-  });
 };
 
-// console.log(getCategoryNameFromApis('harry potter'));
+/**
+ * Input:
+ *  array of return values from all API calls
+ * Output:
+ *  category_id (from database) of
+ *   1. category name which occurs twice in array, if any do, or
+ *   2. category name which occurs first in array (Promise.all() order shows preference)
+ */
+const catIdFromApiResults = (arr, dbCatNames, countApiHits) => {
+  arr.forEach(apiHit => {
+    const i = dbCatNames.findIndex(dbName => dbName === apiHit);
+    if (i !== -1) {
+      countApiHits[i] ++;
+    }
+  })
+  const maxApiHits = Math.max(...countApiHits);
+  const categoryIdZeroIndex = countApiHits.findIndex(x => x === maxApiHits);
+  const category_id = categoryIdZeroIndex + 1
+  return category_id;
+}
 
-module.exports = (str) => {
-  const dbCatNames = ['dummy', 'watch', 'read', 'eat', 'buy'];
-  const countApiHits = ['dummy', 0, 0, 0, 0];
-  console.log('countApiHits was::', countApiHits);
 
-  return requestAllApis(str)
+module.exports = (text) => {
+  /*
+   * IMPORTANT
+   * 2 arrays defined below:
+   *  dbCatNames: category names which implicitly match db.category_name
+   *  countApiHits: count APIs that have returned the corresponding category name
+   * */
+  const dbCatNames = ['watch', 'read', 'eat', 'buy'];
+  const countApiHits = [0, 0, 0, 0];
+
+  return requestAllApis(text)
   .then(res => {
-    res.forEach(apiHit => {
-      countApiHits[dbCatNames.findIndex(apiHit)] ++;
-    })
-    console.log('countApiHits is now::', countApiHits);
-    return countApiHits.findIndex(Math.max(...countApiHits));
+    return catIdFromApiResults(res, dbCatNames, countApiHits)
   })
 };
