@@ -3,16 +3,17 @@ $(document).ready(function () {
   const createListElements = function (task) {
     const $task = task['name'];
     const $taskId = task['id'];
+    const $taskCatId = task['category_id'];
     const $listElements = {
       items: $(`
-      <li>
+      <li id = "item${$taskId}">
         <input type="checkbox">
         <label>${$task}</label>
       </li>
     `),
 
       ratings: $(`
-      <li>
+      <li id = "rating${$taskId}">
         <div class="rating">
           <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
         </div>
@@ -20,11 +21,11 @@ $(document).ready(function () {
     `),
 
       delete: $(`
-      <li><form class = "delete-btn" method = "GET" action = "/api/tasks/delete/${$taskId}"><button type = 'submit' class='button delete-btn'>Delete</button></form></li>
+      <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
     `),
 
       move: $(`
-      <li><button class='button move'>Move</button></li>
+      <li id = "move${$taskId}"><button class='button move'>Move</button></li>
     `),
 
     };
@@ -83,11 +84,25 @@ $(document).ready(function () {
     }
   });
 
+
   loadListItems(true, 1);
   loadListItems(true, 2);
   loadListItems(true, 3);
   loadListItems(true, 4);
+
+
+
 });
+
+const deleteTask = (taskId) => {
+  $.get(`/api/tasks/delete/${taskId}`, function() {
+    console.log("Deleting...");
+    $(`#item${taskId}`).remove();
+    $(`#delete${taskId}`).remove();
+    $(`#move${taskId}`).remove();
+    $(`#rating${taskId}`).remove();
+  });
+}
 
 
 

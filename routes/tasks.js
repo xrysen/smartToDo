@@ -104,6 +104,7 @@ module.exports = (db) => {
     return dbHelper.deleteTask(db, req.params.id)
     .then(() => {
       console.log("Deleted from database");
+      res.redirect("/");
     })
     .catch(err => {
       res
