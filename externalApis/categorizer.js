@@ -1,13 +1,5 @@
 const request = require("request-promise-native");
 
-// Global object to track number of times each category is found
-const categoriesFound = {
-  eat: 0,
-  watch: 0,
-  read: 0,
-  buy: 0,
-};
-
 const isWolframDatatype = (text) => {
   return request(`https://api.wolframalpha.com/v2/query?input=${text}&format=plaintext&output=json&appid=${process.env.API_KEY_WOLFRAMALPHA}`)
   .then(res => {
@@ -15,16 +7,13 @@ const isWolframDatatype = (text) => {
     if (res.queryresult.assumptions) {
       for (const obj of res.queryresult.assumptions.values) {
         if (['RetailLocationClass'].includes(obj.name)) {
-          categoriesFound.eat ++;
-          return;
+          return 'eat';
         }
         if (['Movie','MovieClass'].includes(obj.name)) {
-          categoriesFound.watch ++;
-          return;
+          return 'watch';
         }
         if (['Book','BookClass'].includes(obj.name)) {
-          categoriesFound.read ++;
-          return;
+          return 'read';
         }
       }
     }
@@ -37,8 +26,7 @@ const requestBookByTitle = (title) => {
   .then(res => {
     res = JSON.parse(res);
     if (res.items[0].volumeInfo.title.toLowerCase().includes(title.toLowerCase())) {
-      categoriesFound.read ++;
-      return categoriesFound;
+      return 'read';
     } else {
       return null;
     }
@@ -53,8 +41,7 @@ const requestMovieByTitle = (title) => {
     if (res.Response === "False") {
       return null;
     } else {
-      categoriesFound.watch ++;
-      return categoriesFound;
+      return 'watch';
 }
   })
 };
@@ -74,71 +61,43 @@ const requestRestaurantByName = (name) => {
       return null;
     }
     else {
-      categoriesFound.eat ++;
-      return categoriesFound;
+      return 'eat';
 }
   });
 };
 
 /**
- * Global: categoriesFound obj
- *  initializes object of category names (representative of categories in database) each with 'counter' of 0
  * Input: str
  *  string text to search
  * Output:
  *  sends a request to Wolfram Alpha, Yelp, openMovieDatbase and Google books APIs
- *  increments categoriesFound obj if API returns a hit for str from that API (e.g. Yelp increments 'eat' category)
+ *  ...TODO...
  */
-const getCategoryNameFromApis = (str) => {
+const requestAllApis = (str) => {
   Promise.all([
     requestWolframDatatype(str),
     requestRestaurantByName(str),
     requestMovieByTitle(str),
     requestBookByTitle(str)
   ])
-  .then(res => res)
   .then(res => {
     console.log('res::', res)
-    // Get highest counter value in categoriesFound
-    const categoriesFoundCounts = Object.values(categoriesFound);
-    const maxCategoryCount = Math.max(...categoriesFoundCounts);
-    console.log('categoriesFoundCounts::', categoriesFoundCounts);
-
-    // Get category name for 'most found' category count
-    const category = Object.keys(categoriesFound).find(key => {
-      return categoriesFound[key] === maxCategoryCount;
-    })
-    console.log('category::', category);
-    return category;
   });
 };
 
 // console.log(getCategoryNameFromApis('harry potter'));
 
 module.exports = (str) => {
-  return getCategoryNameFromApis(str)
-  .then(category => {
-    // Translate category name to category_id according to DB seeds order
-    console.log('categorizer will return:::', category);
-    switch (category) {
-      case 'watch':
-        return 1;
-        break;
+  const dbCatNames = ['dummy', 'watch', 'read', 'eat', 'buy'];
+  const countApiHits = ['dummy', 0, 0, 0, 0];
+  console.log('countApiHits was::', countApiHits);
 
-      case 'read':
-        return 2;
-        break;
-
-      case 'eat':
-        return 3;
-        break;
-
-      case 'buy':
-        return 4;
-        break;
-
-      default:
-        return 4;
-    }
+  return requestAllApis(str)
+  .then(res => {
+    res.forEach(apiHit => {
+      countApiHits[dbCatNames.findIndex(apiHit)] ++;
+    })
+    console.log('countApiHits is now::', countApiHits);
+    return countApiHits.findIndex(Math.max(...countApiHits));
   })
 };
