@@ -45,11 +45,13 @@ $(document).ready(function () {
   const renderListElements = function (listItems, category) {
     const tasks = listItems['tasks'];
     for (const task in tasks) {
-      const $items = createListElements(tasks[task]);
-      $(`#${category}-items`).append($items.items);
-      $(`#${category}-ratings`).append($items.ratings);
-      $(`#${category}-delete`).append($items.delete);
-      $(`#${category}-move`).append($items.move);
+      if (tasks[task]['is_active']) {
+        const $items = createListElements(tasks[task]);
+        $(`#${category}-items`).append($items.items);
+        $(`#${category}-ratings`).append($items.ratings);
+        $(`#${category}-delete`).append($items.delete);
+        $(`#${category}-move`).append($items.move);
+      }
     }
   };
 
@@ -71,7 +73,7 @@ $(document).ready(function () {
           $input.val('');
         })
         .then(() => {
-          $.ajax(`/api/tasks/`, { method: "GET" })
+          $.ajax(`/api/tasks/`, { method: "GET" }) // Refactor to use response from POST
             .then((res) => {
               const task = res['tasks'].pop();
               return task['category_id']
