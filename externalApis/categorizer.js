@@ -1,45 +1,47 @@
 const request = require("request-promise-native");
-// TODO 1. Refine Woflman Alphadog API call, this doesn't always return valuable info
-const isTextBookOrMovieTitle = (text) => {
-  console.log('--------called isbookormovie()-----');
 
+// Global object to track number of times each category is found
+const categoriesFound = {
+  eat: 0,
+  watch: 0,
+  read: 0,
+  buy: 0,
+};
+
+const isWolframDatatype = (text) => {
   return request(`https://api.wolframalpha.com/v2/query?input=${text}&format=plaintext&output=json&appid=${process.env.API_KEY_WOLFRAMALPHA}`)
   .then(res => {
     res = JSON.parse(res);
-    // console.log('wolfram alpha response res= --------------\n', res);
-    // console.log('wolfram alpha response array res.queryresult.assumptions.values= --------------\n', res.queryresult.assumptions.values);
-    const wolframCatOptionsArr = res.queryresult.assumptions.values;
-    for (const obj of wolframCatOptionsArr) {
-      if (obj.name === 'Movie' || 'MovieClass') {
-        return 'watch';
-      }
-      if (obj.name === 'Book' || 'BookClass') {
-        return 'read'
+    if (res.queryresult.assumptions) {
+      for (const obj of res.queryresult.assumptions.values) {
+        if (['RetailLocationClass'].includes(obj.name)) {
+          categoriesFound.eat ++;
+          return;
+        }
+        if (['Movie','MovieClass'].includes(obj.name)) {
+          categoriesFound.watch ++;
+          return;
+        }
+        if (['Book','BookClass'].includes(obj.name)) {
+          categoriesFound.read ++;
+          return;
+        }
       }
     }
     return null;
   })
 };
 
-// TODO 2. Implement bookFinder and movieFinder API calls
 const requestBookByTitle = (title) => {
   return request(`https://www.googleapis.com/books/v1/volumes?q=${title}`)
   .then(res => {
     res = JSON.parse(res);
-    console.log('-----googleapis/books response res.items[0].volumeInfo.title= --------------\n', res.items[0].volumeInfo.title);
-    //console.log('-----googleapis/books response res.items[1].volumeInfo.title= --------------\n', res.items[1].volumeInfo.title);
-    //const googleBooksOptionsArr = res.items;
-    // for (const obj of googleBooksOptionsArr) {
-    //   if (obj.volumeInfo.title === title) {
-    //     return 'read';
-    //   }
-    // }
     if (res.items[0].volumeInfo.title.toLowerCase().includes(title.toLowerCase())) {
-      return true;
+      categoriesFound.read ++;
+      return;
     } else {
       return null;
     }
-    // return res.items[0].volumeInfo.title;
   });
 };
 
@@ -48,25 +50,19 @@ const requestMovieByTitle = (title) => {
   return request(`http://www.omdbapi.com/?s=${title}&page=1&apikey=${process.env.API_KEY_OMDB}`)
   .then(res => {
     res = JSON.parse(res);
-    //console.log('omdbapi response res= --------------\n', res);
-    const omdbOptionsArr = res.Search;
-    // for (const obj of omdbOptionsArr) {
-    //   if (obj.Title === title) {
-    //     return 'watch';
-    //   }
-    // }
     if (res.Response === "False") {
       return null;
     } else {
-      return true;
-    }
+      categoriesFound.watch ++;
+      return;
+}
   })
 };
 
 
-// TODO 2. Implement location-finder function
-const requestRestaurantByNameAndLoc = (name, location) => {
-  console.log('--------called requestRestaurantByNameAndLoc()-----');
+const requestRestaurantByNameAndLoc = (name) => {
+  // Ideally detect user's location via IP address, in this case hardcode
+  const location = 'Vancouver, BC'
 
   return request({
     url: `https://api.yelp.com/v3/businesses/search?term=${name}&location=${location}&categories=restaurants&limit=1`,
@@ -74,14 +70,13 @@ const requestRestaurantByNameAndLoc = (name, location) => {
   })
   .then(res => {
     res = JSON.parse(res);
-    //console.log('yelp response res= --------------\n', res);
     if (!res.businesses.length || !res.businesses[0].name.toLowerCase().includes(name.toLowerCase())) {
       return null;
     }
     else {
-      return true;
-    }
-    // return res.businesses[0].name;
+      categoriesFound.eat ++;
+      return;
+}
   });
 };
 
@@ -94,34 +89,40 @@ const requestRestaurantByNameAndLoc = (name, location) => {
  * [yelpResponse, movieResponse, booksResponse] Will either show as either TRUE or NULL if the api couldn't provide a result
  */
 
-const requestAll = (name, location) => {
+const requestAll = (name) => {
+  // catArr *must* be in the same order as category_id in database
+  // CURRENT SETUP [eat, watch, read, buy];
+
+
   Promise.all([
-    //isTextBookOrMovieTitle(name),
-    requestRestaurantByNameAndLoc(name, location),
+    isWolframDatatype(name),
+    requestRestaurantByNameAndLoc(name),
     requestMovieByTitle(name),
     requestBookByTitle(name)
   ])
   .then(res => {
-    return res.map(data => data);
+    // Get 'most found' value in categoriesFound
+
+    // Get key for 'most found' value
+
+    // Translate key --> category_id according to DB seeds order
+
+
+    return category_id;
+    // return res.map(data => data);
   })
   .then(data => {
-    console.log(`Eat: ${data[0]} Watch: ${data[1]} Read ${data[2]}`);
+    // console.log(`Eat: ${data[0]} Watch: ${data[1]} Read ${data[2]}`);
+    console.log('categoriesFound::', categoriesFound);
     //return data;
   });
 };
 
-//requestAll("harry potter","vancouver");
+requestAll("harry potter","vancouver");
 
-// 3. Set up call-sequence and promise-handling inside categorizeTask
+
 module.exports = (taskText) => {
-  // TODO:: replace random category with one from api calls
-  // const category = Math.floor(Math.random()*4);
-
-  // console.log('task sent to categorizer is:::', taskText);
-
-  //
-
-  return requestMovieByTitle(taskText)
+  return requestAll(taskText)
       .then(data => {
         console.log('categorizer returns:::', data);
         switch (data) {
