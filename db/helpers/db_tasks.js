@@ -154,6 +154,12 @@ const isTaskActive = (db, taskId) => {
   .then(res => res.rows[0].is_active);
 }
 
+const deleteTask = (db, taskId) => {
+  return db.query (
+    `DELETE FROM tasks
+    WHERE id = $1`, [taskId]);
+};
+
 module.exports = {
   getAllTasks,
   getTasksByUserId,
@@ -164,5 +170,6 @@ module.exports = {
   setTaskRating,
   setTaskUrgency,
   setTaskActive,
-  isTaskActive
+  isTaskActive,
+  deleteTask
 };
