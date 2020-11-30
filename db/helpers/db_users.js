@@ -14,18 +14,9 @@ const getUserById = (db, userId) => {
      WHERE users.id = $1`, [userId]);
 };
 
-const setUserState = (db, userId, isActive) => {
-  return db.query(
-    `UPDATE users
-     SET is_active = $1
-     WHERE id = $2;`
-    ,[isActive, userId])
-};
-
 
 module.exports = {
   getUserByEmail,
   getAllUsers,
   getUserById,
-  setUserState
 };
