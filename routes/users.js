@@ -14,37 +14,23 @@ module.exports = (db) => {
   // Login form is a single input: user_id
   // which submits to GET /users/login/[user_id]
   router.get('/login/:id', (req, res) => {
-    req.session.user_id = req.params.id;
+    req.session.userId = req.params.id;
     res.redirect('/');
   })
 
-  router.get('/', (req, res) => {
-    const userId = req.session.userId;
-    dbHelper.getUserById(db, userId)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  })
+  router.get("/:active", (req, res) => {
+    if (req.params.active === "true") {
+      req.session.isActive = true;
+    } else if (req.params.active === "false") {
+      req.session.isActive = false;
+    }
+    const isActive = req.session.isActive;
+    res.json( isActive );
+  });
 
-  router.post("/active", (req, res) => {
-    const userId = req.session.userId;
-    const  isActive = req.body.isActive // important change tasks -> text
-    dbHelper.setUserState(db, userId, isActive)
-    .then(data => {
-      const user_state = data.rows[0];
-      res.json({ user_state });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+  router.get("/active", (req, res) => {
+    const isActive = req.session.isActive;
+    res.json( isActive );
   });
 
   return router;

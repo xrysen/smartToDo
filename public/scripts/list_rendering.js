@@ -8,7 +8,7 @@ $(document).ready(function () {
 
   const createListElements = function (task) {
     const $task = task['name'];
-    const $listElements = {
+    const $listElements = { // potential security flaw
       items: $(`
       <li>
         <input type="checkbox">
@@ -92,18 +92,19 @@ $(document).ready(function () {
 
 
   $('#archived').on('click', () => {
-    $.ajax(`/api/users/active`, { method: 'POST', data: {isActive: false}})
+    $.ajax(`/api/users/false`, { method: 'GET' })
       .then(() => location.reload());
   })
 
   $('#current').on('click', () => {
-    $.ajax(`/api/users/active`, { method: 'POST', data: {isActive: true}})
+    $.ajax(`/api/users/true`, { method: 'GET' })
       .then(() => location.reload());
   })
 
-  $.ajax(`/api/users`, { method: 'GET' })
+  $.ajax(`/api/users/active`, { method: 'GET' })
       .then((res) => {
-        isUserActive(res['users'][0]['is_active']);
+        console.log(res)
+        isUserActive(res);
       })
       .then(() => {
         if(active === true) {
