@@ -38,7 +38,7 @@ const requestBookByTitle = (title) => {
     res = JSON.parse(res);
     if (res.items[0].volumeInfo.title.toLowerCase().includes(title.toLowerCase())) {
       categoriesFound.read ++;
-      return;
+      return categoriesFound;
     } else {
       return null;
     }
@@ -54,13 +54,13 @@ const requestMovieByTitle = (title) => {
       return null;
     } else {
       categoriesFound.watch ++;
-      return;
+      return categoriesFound;
 }
   })
 };
 
 
-const requestRestaurantByNameAndLoc = (name) => {
+const requestRestaurantByName = (name) => {
   // Ideally detect user's location via IP address, in this case hardcode
   const location = 'Vancouver, BC'
 
@@ -75,75 +75,70 @@ const requestRestaurantByNameAndLoc = (name) => {
     }
     else {
       categoriesFound.eat ++;
-      return;
+      return categoriesFound;
 }
   });
 };
 
 /**
- * requestAll (name, location)
- * Input:
- *  string text to search, location of user searching
+ * Global: categoriesFound obj
+ *  initializes object of category names (representative of categories in database) each with 'counter' of 0
+ * Input: str
+ *  string text to search
  * Output:
- *  Sends a request to Yelp, openMovieDatbase and Google books returning an array of values for each category if any of the api's get a hit
- * [yelpResponse, movieResponse, booksResponse] Will either show as either TRUE or NULL if the api couldn't provide a result
+ *  sends a request to Wolfram Alpha, Yelp, openMovieDatbase and Google books APIs
+ *  increments categoriesFound obj if API returns a hit for str from that API (e.g. Yelp increments 'eat' category)
  */
-
-const requestAll = (name) => {
-  // catArr *must* be in the same order as category_id in database
-  // CURRENT SETUP [eat, watch, read, buy];
-
-
+const getCategoryNameFromApis = (str) => {
   Promise.all([
-    isWolframDatatype(name),
-    requestRestaurantByNameAndLoc(name),
-    requestMovieByTitle(name),
-    requestBookByTitle(name)
+    requestWolframDatatype(str),
+    requestRestaurantByName(str),
+    requestMovieByTitle(str),
+    requestBookByTitle(str)
   ])
+  .then(res => res)
   .then(res => {
-    // Get 'most found' value in categoriesFound
+    console.log('res::', res)
+    // Get highest counter value in categoriesFound
+    const categoriesFoundCounts = Object.values(categoriesFound);
+    const maxCategoryCount = Math.max(...categoriesFoundCounts);
+    console.log('categoriesFoundCounts::', categoriesFoundCounts);
 
-    // Get key for 'most found' value
-
-    // Translate key --> category_id according to DB seeds order
-
-
-    return category_id;
-    // return res.map(data => data);
-  })
-  .then(data => {
-    // console.log(`Eat: ${data[0]} Watch: ${data[1]} Read ${data[2]}`);
-    console.log('categoriesFound::', categoriesFound);
-    //return data;
+    // Get category name for 'most found' category count
+    const category = Object.keys(categoriesFound).find(key => {
+      return categoriesFound[key] === maxCategoryCount;
+    })
+    console.log('category::', category);
+    return category;
   });
 };
 
-requestAll("harry potter","vancouver");
+// console.log(getCategoryNameFromApis('harry potter'));
 
+module.exports = (str) => {
+  return getCategoryNameFromApis(str)
+  .then(category => {
+    // Translate category name to category_id according to DB seeds order
+    console.log('categorizer will return:::', category);
+    switch (category) {
+      case 'watch':
+        return 1;
+        break;
 
-module.exports = (taskText) => {
-  return requestAll(taskText)
-      .then(data => {
-        console.log('categorizer returns:::', data);
-        switch (data) {
-          case 'watch':
-            return 1;
-            break;
+      case 'read':
+        return 2;
+        break;
 
-          case 'read':
-            return 2;
-            break;
+      case 'eat':
+        return 3;
+        break;
 
-          case 'eat':
-            return 3;
-            break;
+      case 'buy':
+        return 4;
+        break;
 
-          case 'buy':
-            return 4;
-            break;
-
-          default:
-            return 4;
-        }
-      });
+      default:
+        return 4;
+    }
+  })
 };
