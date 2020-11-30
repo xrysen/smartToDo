@@ -22,8 +22,8 @@ module.exports = (db) => {
     const userId = req.session.userId;
     dbHelper.getUserById(db, userId)
       .then(data => {
-        const tasks = data.rows;
-        res.json({ tasks });
+        const users = data.rows;
+        res.json({ users });
       })
       .catch(err => {
         res
@@ -31,6 +31,21 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   })
+
+  router.post("/active", (req, res) => {
+    const userId = req.session.userId;
+    const  isActive = req.body.isActive // important change tasks -> text
+    dbHelper.setUserState(db, userId, isActive)
+    .then(data => {
+      const user_state = data.rows[0];
+      res.json({ user_state });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
   return router;
 };
