@@ -56,10 +56,35 @@ $(document).ready(function () {
       <div class="td td-checkbox" id="item${$taskId}">
         ${checkboxElement}
       </div>
-      <div class="td td-task" id="${$taskId}"><span>${$taskName}</span></div>
-      <div class="td td-urgency" id="rating${$taskId}">${$taskUrgency}</div>
-      <div class="td td-move" id="move${$taskId}">move</div>
-      <div class="td td-delete" id=delete"${$taskId}">delete</div>
+      <div class="td td-task" id="${$taskId}">
+        <span>${$taskName}</span>
+      </div>
+      <div class="td td-urgency" id="rating${$taskId}">
+        <span id = "rating-${$taskId}-1" onclick = "setTaskRating(${$taskId}, 1)">☆</span>
+        <span id = "rating-${$taskId}-2" onclick = "setTaskRating(${$taskId}, 2)">☆</span>
+        <span id = "rating-${$taskId}-3" onclick = "setTaskRating(${$taskId}, 3)">☆</span>
+        <span id = "rating-${$taskId}-4" onclick = "setTaskRating(${$taskId}, 4)">☆</span>
+        <span id = "rating-${$taskId}-5" onclick = "setTaskRating(${$taskId}, 5)">☆</span>
+      </div>
+      <div class="td td-move" id="move${$taskId}">
+        <form class = "move-button" name = "move" onsubmit = "return false">
+        <input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input>
+        </form>
+        <span id = "move-menu${$taskId}" style = "display:none;">Move To:
+          <button onclick = "moveTask(${$taskId}, 1)">Watch</button>
+          <button onclick = "moveTask(${$taskId}, 2)">Read</button>
+          <button onclick = "moveTask(${$taskId}, 3)">Eat</button>
+          <button onclick = "moveTask(${$taskId}, 4)">Buy</button>
+        </span>
+      </div>
+      <div class="td td-delete" id=delete"${$taskId}">
+        <li id = "delete${$taskId}">
+          <form name = "delete" onsubmit = "return false">
+            <input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})">
+            </input>
+          </form>
+        </li>
+      </div>
     `
     $(`#${category}-table`).append(listItemHtml)
   }
@@ -135,6 +160,19 @@ $(document).ready(function () {
 
     return $listElements;
   };
+
+  setTaskRating = (taskId, rating) => {
+    $.post(`/api/tasks/ratings/${taskId}/${rating}`)
+    .then(() => {
+      renderRatings(taskId, rating);
+    })
+  }
+
+  const renderRatings = (taskId, rating) => {
+    for (let i = 5; i >= rating; i--) {
+      $(`#rating-${taskId}-${i}`).text("★");
+    }
+  }
 
   const loadListItems = function (initial, category, isActive) {
     $.ajax(`/api/tasks/getByCategory/${category}`, { method: 'GET' })
