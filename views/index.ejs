@@ -28,6 +28,7 @@
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/list_rendering.js"></script>
   <script type="text/javascript" src="/scripts/list_collapse.js"></script>
+  <script type="text/javascript" src="/scripts/login.js"></script>
 </head>
 
 <body>
@@ -51,14 +52,14 @@
   <!-- Header (profile avatar and name) -->
   <header id="main-header">
     <% if (userId === '1') {%>
-      <h2 class="shadow">Jim Dumpling</h2>
-      <img class="shadow" src="/images/dumpling.png" />
+      <h2 class="username">Jim Dumpling</h2>
+      <img class="username"src="/images/dumpling.png" />
     <% } else if (userId === '2') {%>
-      <h2 class="shadow">Bob Mango</h2>
-      <img class="shadow" src="/images/mango.png" />
+      <h2 class="username">bob Mango</h2>
+      <img class="username"src="/images/mango.png" />
     <% } else {%>
-      <h2 class="shadow">welcome to tAdoo!</h2>
-      <img class="shadow" src="/images/computer.png" />
+      <h2 >welcome to tAdoo!</h2>
+      <img src="/images/computer.png" />
     <% };%>
   </header>
 
@@ -181,9 +182,9 @@
       <section id="login-container">
         <h2>please log in</h2>
         <form id="login-form">
-          <textarea class="login-text-area" id="username" name="username" placeholder="username"></textarea>
-          <textarea class="login-text-area" id="password" name="password" placeholder="password"></textarea>
-          <button class="button" id="login-button">Log in!</button>
+          <textarea class="login-text-area" id="username-text" name="username" placeholder="username"></textarea>
+          <textarea class="login-text-area" id="password-text" name="password" placeholder="password"></textarea>
+          <button class="button" class="login-button">Log in!</button>
         </form>
       </section>
     <% };%>
