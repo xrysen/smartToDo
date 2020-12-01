@@ -31,16 +31,21 @@
 
 <body>
   <!-- Top navbar (fixed) -->
-  <nav>
-    <span id="left-nav" class="title">tAdoo</span>
-    <div id="right-nav" class="title">
+    <nav>
+      <span id="left-nav" class="title">tAdoo</span>
       <% if (isActive === true) {%>
+      <div id="right-nav" class="title">
         <button class="nav-buttons nav-button" id="new">new</button>
+        <button class="nav-buttons nav-button selected" id="current">current</button>
+        <button class="nav-buttons nav-button" id="archived">archived</button>
+      </div>
+      <% } else if (isActive === false) {%>
+      <div id="right-nav" class="title">
+        <button class="nav-buttons nav-button" id="current">current</button>
+        <button class="nav-buttons nav-button selected" id="archived">archived</button>
+      </div>
       <% };%>
-      <button class="nav-buttons nav-button" id="current">active</button>
-      <button class="nav-buttons nav-button selected" id="archived">archive</button>
-    </div>
-  </nav>
+    </nav>
 
   <!-- Header (profile avatar and name) -->
   <header id="main-header">
