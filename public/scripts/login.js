@@ -21,11 +21,18 @@ $(document).ready(function() {
     <button id="logout-button" class="login-button nav-buttons nav-button">log out</button>
     `
     if (!$('#logout-button')[0]) {
-      console.log($('#logout-button'))
       $(`#right-nav`).prepend($logout);
-      console.log($('#logout-button'))
+
+      $('#logout-button').on('click', () => {
+        $.ajax(`/api/users/logout`, { method: 'GET' })
+        .then(() => location.reload());
+      });
     }
   });
+
+
+
+
 
 
 

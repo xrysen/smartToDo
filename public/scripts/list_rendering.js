@@ -113,7 +113,6 @@ $(document).ready(function() {
   const  populateTasksOnUserActive = function() {
     $.ajax(`/api/users/active`, { method: 'GET' })
       .then((res) => {
-        console.log(res);
         isUserActive(res);
       })
       .then(() => {
