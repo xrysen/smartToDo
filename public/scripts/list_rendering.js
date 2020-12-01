@@ -112,7 +112,7 @@ $(document).ready(function () {
       $(`#item${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>Move Task: </p>`).next().slideDown();
       $(`#rating${taskId}`).after(
         `<p class = "edit${taskId}" style = 'display: none; right: 50px;'>
-          <button id = "watch" onclick="moveTask(${taskId},1)">Watch</button>
+          <button id = "watch" onclick= "moveTask(${taskId},1)">Watch</button>
           <button id = "read" onclick = "moveTask(${taskId}, 2)">Read</button>
           <button id = "eat" onclick = "moveTask(${taskId}, 3)">Eat</button>
           <button id = "buy" onclick = "moveTask(${taskId}, 4)">Buy</button></p>`).next().slideDown();
@@ -128,7 +128,7 @@ $(document).ready(function () {
   moveTask = (taskId, newCatId) => {
     $.get(`/api/tasks/update/${taskId}/${newCatId}`)
     .then(() => {
-
+      editing = false;
       $(`#item${taskId}`).slideUp().next().remove();
       $(`#rating${taskId}`).slideUp().next().remove();
       $(`#delete${taskId}`).slideUp().next().remove();
