@@ -58,8 +58,8 @@ app.get("/", (req, res) => {
   if (req.session['isActive'] === undefined) {
     req.session['isActive'] = true;
   }
-  const templateVars = { isActive: req.session['isActive'] }
   req.session['userId'];
+  const templateVars = { isActive: req.session['isActive'], userId: req.session['userId']}
   res.render('index', templateVars);
 });
 

@@ -48,14 +48,26 @@
       </div>
     </nav>
     <% };%>
-  <header id="main-header">
-    <div>
-      <h2 class="shadow">Some User</h2>
-    </div>
-    <div>
-      <img class="shadow" src="/images/profile-user.png" />
-    </div>
-  </header>
+
+  <% if (userId === '1') {%>
+    <header id="main-header">
+      <div>
+        <h2 class="shadow">Jim Dumpling</h2>
+      </div>
+      <div>
+        <img class="shadow" src="/images/profile-user.png" />
+      </div>
+    </header>
+    <% } else {%>
+      <header id="main-header">
+        <div>
+          <h2 class="shadow">Bob Mango</h2>
+        </div>
+        <div>
+          <img class="shadow" src="/images/profile-user.png" />
+        </div>
+      </header>
+    <% };%>
 
   <main class="container">
 
@@ -64,7 +76,7 @@
       <form id="form" class = "form-new-to-do">
         <textarea id="todo-text" name="text"></textarea>
         <div class="footer">
-          <button id="submit-button">Submit</button>
+          <button class="button" id="submit-button">Submit</button>
         </div>
       </form>
     </section>

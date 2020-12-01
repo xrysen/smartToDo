@@ -65,6 +65,7 @@ ul {
   color: #FFFF;
   background-color: #B82601;
   box-shadow: 5px 5px 5px #c1c1c1;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .move {
@@ -100,5 +101,15 @@ form .delete-btn {
 .strike_out {
   text-decoration: line-through;
   color: grey;
+}
+
+span.move-buttons {
+  position: relative;
+  left: 100px;
+  bottom: 35px;
+}
+form.move-button {
+  display: inline;
+  margin-right: 20px;
 }
 
