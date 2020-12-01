@@ -8,18 +8,20 @@ $(document).ready(function () {
 
   const createListElements = function (task, isActive) {
     const $task = task['name'];
+    const $taskId = task['id'];
+    const $taskCatId = task['category_id'];
     let $listElements;
     if (isActive) {
       $listElements = { // potential security flaw
         items: $(`
-        <li>
+        <li id = "item${$taskId}">
           <input type="checkbox">
           <label>${$task}</label>
         </li>
       `),
 
         ratings: $(`
-        <li>
+        <li id = "rating${$taskId}">
           <div class="rating">
             <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
           </div>
@@ -27,11 +29,11 @@ $(document).ready(function () {
       `),
 
         delete: $(`
-        <li><button class='button'>Delete</button></li>
+        <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
       `),
 
         move: $(`
-        <li><button class='button move'>Move</button></li>
+        <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form></li>
       `),
 
       };
@@ -39,13 +41,13 @@ $(document).ready(function () {
     else {
       $listElements = { // potential security flaw
         items: $(`
-        <li>
+        <li id = "item${$taskId}">
           <label class="strike_out">${$task}</label>
         </li>
       `),
 
         ratings: $(`
-        <li>
+        <li id = "rating${$taskId}">
           <div class="rating">
             <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
           </div>
@@ -53,11 +55,11 @@ $(document).ready(function () {
       `),
 
         delete: $(`
-        <li><button class='button'>Delete</button></li>
+        <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
       `),
 
         move: $(`
-        <li><button class='button move'>Move</button></li>
+        <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form></li>
       `),
 
       };
@@ -151,6 +153,52 @@ $(document).ready(function () {
   })
 
   populateTasksOnUserActive();
+
+  deleteTask = (taskId) => {
+    $.get(`/api/tasks/delete/${taskId}`, function() {
+      console.log("Deleting...");
+      $(`#item${taskId}`).remove();
+      $(`#delete${taskId}`).remove();
+      $(`#move${taskId}`).remove();
+      $(`#rating${taskId}`).remove();
+    });
+  }
+
+  let editing = false;
+
+// Buggy needs to be fixed fix
+
+    moveTaskMenu = (taskId) => {
+    console.log(`Moving...${taskId}`);
+    if(!editing) {
+      $(`#item${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>Move Task: </p>`).next().slideDown();
+      $(`#rating${taskId}`).after(
+        `<p class = "edit${taskId}" style = 'display: none; right: 50px;'>
+          <button id = "watch" onclick= "moveTask(${taskId},1)">Watch</button>
+          <button id = "read" onclick = "moveTask(${taskId}, 2)">Read</button>
+          <button id = "eat" onclick = "moveTask(${taskId}, 3)">Eat</button>
+          <button id = "buy" onclick = "moveTask(${taskId}, 4)">Buy</button></p>`).next().slideDown();
+      $(`#delete${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
+      $(`#move${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
+      editing = true;
+    } else {
+      $(`.edit${taskId}`).slideUp();
+      editing = false;
+    }
+  }
+
+  moveTask = (taskId, newCatId) => {
+    $.get(`/api/tasks/update/${taskId}/${newCatId}`)
+    .then(() => {
+      editing = false;
+      $(`#item${taskId}`).slideUp().next().remove();
+      $(`#rating${taskId}`).slideUp().next().remove();
+      $(`#delete${taskId}`).slideUp().next().remove();
+      $(`#move${taskId}`).slideUp().next().remove();
+      $(`.edit${taskId}`).slideUp().next().remove();
+      loadListItems(false, newCatId);
+    });
+  }
 });
 
 
