@@ -6,6 +6,64 @@ $(document).ready(function () {
     active = isActive;
   }
 
+  // Escape function to prevent XSS injection
+  const escape = (str) => {
+    let div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
+
+  // Create list category
+  const createListCategory = function(category) {
+    let listCategoryHtml = `
+      <div>
+        <header>
+          <h2 class="list-header ${category}-header">${category}</h2>
+        </header>
+        <div class="table">
+          <div class="tr th">
+            <div class="td td-checkbox">?</div>
+            <div class="td td-task">item</div>
+            <div class="td td-urgency">urgency</div>
+            <div class="td td-move"></div>
+            <div class="td td-delete"></div>
+          </div>
+          <div class="tr" id="${category}-table">
+            <div class="td td-checkbox">X</div>
+            <div class="td td-task"><span>task task task task</span></div>
+            <div class="td td-urgency">5 stars</div>
+            <div class="td td-move">move</div>
+            <div class="td td-delete">delete</div>
+          </div>
+        </div>
+      </div>
+    `
+    return listCategoryHtml
+  }
+
+  const createListItem = function (task, category, isActive) {
+    let checkboxElement = '';
+    if (isActive) {
+      checkboxElement = '<input type="checkbox">'
+    }
+    const $taskName = escape(task['name']);
+    const $taskId = escape(task['id']);
+    const $taskCatId = escape(task['category_id']);
+    const $taskUrgency = escape(task['urgency'])
+
+
+    const listItemHtml = `
+      <div class="td td-checkbox" id="item${$taskId}">
+        ${checkboxElement}
+      </div>
+      <div class="td td-task" id="${$taskId}"><span>${$taskName}</span></div>
+      <div class="td td-urgency" id="rating${$taskId}">${$taskUrgency}</div>
+      <div class="td td-move" id="move${$taskId}">move</div>
+      <div class="td td-delete" id=delete"${$taskId}">delete</div>
+    `
+    $(`#${category}-table`).append(listItemHtml)
+  }
+
   const createListElements = function (task, isActive) {
     const $task = task['name'];
     const $taskId = task['id'];
