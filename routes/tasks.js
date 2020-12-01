@@ -29,12 +29,14 @@ module.exports = (db) => {
     const userId = req.session.userId;
     const task = req.body.task
 
-    const categoryId = categorizeTask(task);
-
-    dbHelper.createNewTask(db, task, userId, categoryId)
+    categorizeTask(task)
       .then(data => {
-        const tasks = data.rows;
-        res.json({ tasks });
+        const categoryId = data;
+        return dbHelper.createNewTask(db, task, userId, categoryId)
+      })
+      .then(data => {
+        const newTask = data.rows[0];
+        res.json({ newTask });
       })
       .catch(err => {
         res
