@@ -12,7 +12,7 @@ const requestBookByTitle = (bookTitle) => {
   .then(res => {
     res = JSON.parse(res);
     if (res.items.length) {
-      console.log('read: ', res.items[0].volumeInfo.title);
+      console.log('read:', res.items[0].volumeInfo.title);
       return compareStrings(res.items[0].volumeInfo.title.toLowerCase(), bookTitle.toLowerCase());
     }
     return 0;
@@ -26,7 +26,7 @@ const requestMovieByTitle = (movieTitle) => {
   .then(res => {
     res = JSON.parse(res);
     if (res.Response === "True" && res.Search.length) {
-      console.log('watch: ', res.Search[0].Title);
+      console.log('watch:', res.Search[0].Title);
       return compareStrings(res.Search[0].Title.toLowerCase(), movieTitle.toLowerCase());
     }
     return 0;
@@ -46,7 +46,7 @@ const requestRestaurantByName = (name) => {
   .then(res => {
     res = JSON.parse(res);
     if (res.businesses.length) {
-      console.log('eat: ', res.businesses[0].name);
+      console.log('eat:', res.businesses[0].name);
       return compareStrings(res.businesses[0].name.toLowerCase(), name.toLowerCase());
     }
     return 0;
@@ -59,8 +59,8 @@ const requestRestaurantByName = (name) => {
  * Output:
  *  gathers relevant data from requests to Yelp, openMovieDatbase and Google's books APIs
  *  returns category_id (matching database) of
- *   1. category name which occurs twice in array, if any do, or
- *   2. category name which occurs first in array (Promise.all() order shows preference)
+ *   1. category name for which API had exact match compared to input string
+ *   2. category name for which API had partial match compared to input string
  *   3. default value of 'buy' if no other categories are found
  */
 const requestAllApis = (str) => {
@@ -96,7 +96,7 @@ const calcCatIdFromApiResults = (apiHitsArr) => {
 }
 
 //---------------------------------------------------
-requestAllApis('new shoes')
+requestAllApis('macbook air')
 .then(res => {
   return calcCatIdFromApiResults(res);
 })
