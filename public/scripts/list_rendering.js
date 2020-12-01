@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         ratings: $(`
         <li id = "rating${$taskId}">
-          <div class="rating">
+          <div class="rating-stars">
             <input type="radio" id="${$taskId}-star-5" name="${$taskId}rate" value="5" onclick = "setTaskRating(${$taskId},5)" />
             <label for="${$taskId}-star-5" title="text">5 stars</label>
             <input type="radio" id="${$taskId}-star-4" name="${$taskId}rate" value="4" onclick = "setTaskRating(${$taskId},4)" />

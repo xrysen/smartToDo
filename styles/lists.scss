@@ -97,17 +97,21 @@ form .delete-btn {
 //    position: absolute;
 // }
 
-.rating {
+.rating-stars {
+  position: relative;
   display: inline-block;
+  margin-left: -100px;
+  height: 15px;
+  bottom: 15px;
 }
 
-.rating:not(:checked) > input {
+.rating-stars:not(:checked) > input {
   position:absolute;
   top: auto;
   left: -9999px;
 }
 
-.rating:not(:checked) > label {
+.rating-stars:not(:checked) > label {
   float:right;
   width:1em;
   overflow:hidden;
@@ -117,22 +121,22 @@ form .delete-btn {
   color:#ccc;
 }
 
-.rating:not(:checked) > label:before {
+.rating-stars:not(:checked) > label:before {
   content: '★ ';
 }
 
-.rating > input:checked ~ label {
+.rating-stars > input:checked ~ label {
   color: #ffc700;
 }
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
+.rating-stars:not(:checked) > label:hover,
+.rating-stars:not(:checked) > label:hover ~ label {
   color: #deb217;
 }
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
+.rating-stars > input:checked + label:hover,
+.rating-stars > input:checked + label:hover ~ label,
+.rating-stars > input:checked ~ label:hover,
+.rating-stars > input:checked ~ label:hover ~ label,
+.rating-stars > label:hover ~ input:checked ~ label {
   color: #c59b08;
 }
 
