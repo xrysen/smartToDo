@@ -100,12 +100,13 @@ form .delete-btn {
 }
 
 .rating {
-  float: left;
+  display: inline-block;
 }
 
 .rating:not(:checked) > input {
   position: absolute;
-  top: -9999px;
+  top: auto;
+  left: -9999px;
 }
 
 .rating:not(:checked) > label {

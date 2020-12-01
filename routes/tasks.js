@@ -102,7 +102,6 @@ module.exports = (db) => {
     return dbHelper.setTaskRating(db, req.params.rating, req.params.id)
     .then(() => {
       console.log("Setting rating");
-      res.redirect("/");
     })
     .catch(err => {
       res

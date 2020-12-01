@@ -129,10 +129,13 @@ $(document).ready(function () {
 
   const renderSingleListElement = function (listItem, category) {
     const $items = createListElements(listItem, true);
+    const task = listItem;
     $(`#${category}-items`).append($items.items);
     $(`#${category}-ratings`).append($items.ratings);
     $(`#${category}-delete`).append($items.delete);
     $(`#${category}-move`).append($items.move);
+    renderRatings(task.id, task.rating);
+
 };
 
   const  populateTasksOnUserActive = function () {
