@@ -85,5 +85,18 @@ module.exports = (db) => {
     });
   });
 
+  router.get("/archive/:id", (req, res) => {
+    return dbHelper.setTaskComplete(db, req.params.id)
+    .then(() => {
+      console.log("Task completed!");
+      res.redirect("/");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
   return router;
 };

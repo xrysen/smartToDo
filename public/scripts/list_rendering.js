@@ -15,7 +15,7 @@ $(document).ready(function () {
       $listElements = { // potential security flaw
         items: $(`
         <li id = "item${$taskId}">
-          <input type="checkbox">
+          <input type="checkbox" onclick = "completeTask(${$taskId})">
           <label>${$task}</label>
         </li>
       `),
@@ -163,6 +163,16 @@ $(document).ready(function () {
   })
 
   populateTasksOnUserActive();
+
+  completeTask = (taskId) => {
+    $.get(`/api/tasks/archive/${taskId}`, function() {
+      console.log("Completing task!");
+      $(`#item${taskId}`).fadeOut();
+      $(`#delete${taskId}`).fadeOut();
+      $(`#move${taskId}`).fadeOut();
+      $(`#rating${taskId}`).fadeOut();
+    });
+  }
 
   deleteTask = (taskId) => {
     if(confirm("Warning! This action cannot be reversed!")) {
