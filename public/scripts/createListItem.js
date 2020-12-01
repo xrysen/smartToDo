@@ -10,7 +10,7 @@ $(() => {
   // Render HTML for a list item
   const createListItem = function (task, isActive) {
     const checkboxElement = isActive ? '<input type="checkbox">' : '';
-    const $taskName = escape(task.name);
+    const $taskName = escape(task.name.toLowerCase());
     const $taskId = escape(task.id);
     const $taskCatId = escape(task.category_id);
 
