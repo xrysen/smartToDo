@@ -55,9 +55,12 @@ app.use( express.static( "public" ) ); // had to put this here to get images to 
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  req.session['isActive'];
+  if (req.session['isActive'] === undefined) {
+    req.session['isActive'] = true;
+  }
+  const templateVars = { isActive: req.session['isActive'] }
   req.session['userId'];
-  res.render("index");
+  res.render('index', templateVars);
 });
 
 app.listen(PORT, () => {

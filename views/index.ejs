@@ -30,15 +30,24 @@
 </head>
 
 <body>
-  <nav>
-    <span id="left-nav" class="title">Smart-To-Do</span>
-    <div id="right-nav" class="title">
-      <span class="nav-buttons" id="new">New</span>
-      <span class="nav-buttons" id="current">Current</span>
-      <span class="nav-buttons" id="archived">Archived</span>
-    </div>
-  </nav>
-
+  <% if (isActive === true) {%>
+    <nav>
+      <span id="left-nav" class="title">Smart-To-Do</span>
+      <div id="right-nav" class="title">
+        <span class="nav-buttons" id="new">New</span>
+        <span class="nav-buttons" id="current">Current</span>
+        <span class="nav-buttons" id="archived">Archived</span>
+      </div>
+    </nav>
+  <% } else if (isActive === false) {%>
+    <nav>
+      <span id="left-nav" class="title">Smart-To-Do</span>
+      <div id="right-nav" class="title">
+        <span class="nav-buttons" id="current">Current</span>
+        <span class="nav-buttons" id="archived">Archived</span>
+      </div>
+    </nav>
+    <% };%>
   <header id="main-header">
     <div>
       <h2 class="shadow">Some User</h2>

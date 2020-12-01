@@ -69,6 +69,28 @@ $(document).ready(function () {
     $(`#${category}-move`).append($items.move);
 };
 
+  const  populateTasksOnUserActive = function () {
+    $.ajax(`/api/users/active`, { method: 'GET' })
+      .then((res) => {
+        console.log(res)
+        isUserActive(res);
+      })
+      .then(() => {
+        if(active === true) {
+          loadListItems(true, 1, true); //make into a loop
+          loadListItems(true, 2, true);
+          loadListItems(true, 3, true);
+          loadListItems(true, 4, true);
+        }
+        if (active === false) {
+          loadListItems(true, 1, false);
+          loadListItems(true, 2, false);
+          loadListItems(true, 3, false);
+          loadListItems(true, 4, false);
+        }
+      })
+  };
+
   $('#form').submit((event) => { // form completion handler, sends user inputs to database
     event.preventDefault();
     let error = false;
@@ -90,37 +112,17 @@ $(document).ready(function () {
     }
   });
 
-
   $('#archived').on('click', () => {
     $.ajax(`/api/users/false`, { method: 'GET' })
-      .then(() => location.reload());
-  })
+      .then(() => location.reload())
+    })
 
   $('#current').on('click', () => {
     $.ajax(`/api/users/true`, { method: 'GET' })
-      .then(() => location.reload());
+      .then(() => location.reload())
   })
 
-  $.ajax(`/api/users/active`, { method: 'GET' })
-      .then((res) => {
-        console.log(res)
-        isUserActive(res);
-      })
-      .then(() => {
-        if(active === true) {
-          loadListItems(true, 1, true);
-          loadListItems(true, 2, true);
-          loadListItems(true, 3, true);
-          loadListItems(true, 4, true);
-        }
-        if (active === false) {
-          loadListItems(true, 1, false);
-          loadListItems(true, 2, false);
-          loadListItems(true, 3, false);
-          loadListItems(true, 4, false);
-        }
-      })
-
+  populateTasksOnUserActive();
 });
 
 
