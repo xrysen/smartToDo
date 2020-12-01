@@ -77,16 +77,14 @@ $(document).ready(function () {
       })
       .then(() => {
         if(active === true) {
-          loadListItems(true, 1, true); //make into a loop
-          loadListItems(true, 2, true);
-          loadListItems(true, 3, true);
-          loadListItems(true, 4, true);
+          for (let i = 1; i < 5; i++) {
+            loadListItems(true, i, true);
+          }
         }
         if (active === false) {
-          loadListItems(true, 1, false);
-          loadListItems(true, 2, false);
-          loadListItems(true, 3, false);
-          loadListItems(true, 4, false);
+          for (let i = 1; i < 5; i++) {
+            loadListItems(true, i, false);
+          }
         }
       })
   };
