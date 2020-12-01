@@ -7,7 +7,7 @@ const compareStrings = (str1, str2) => {
 }
 
 const requestBookByTitle = (bookTitle) => {
-  return null
+  // return null
   return request(`https://www.googleapis.com/books/v1/volumes?q=${bookTitle}`)
   .then(res => {
     res = JSON.parse(res);
@@ -21,7 +21,7 @@ const requestBookByTitle = (bookTitle) => {
 
 
 const requestMovieByTitle = (movieTitle) => {
-  return null
+  // return 1
   return request(`http://www.omdbapi.com/?s=${movieTitle}&page=1&apikey=${process.env.API_KEY_OMDB}`)
   .then(res => {
     res = JSON.parse(res);
@@ -35,7 +35,7 @@ const requestMovieByTitle = (movieTitle) => {
 
 
 const requestRestaurantByName = (name) => {
-  return null
+  // return 2
   // Ideally detect user's location via IP address, in this case hardcode
   const location = 'Vancouver, BC'
 
@@ -84,27 +84,19 @@ const calcCatIdFromApiResults = (apiHitsArr) => {
 
   // Set default categoryName of 'buy', overwritten if APIs return hits
   let categoryName = 'buy';
-  for (const word of apiHitsArr) {
-    if (word) {
-      categoryName = word;
-      break;
-    }
-  }
-  // Loop through again, overwrite if exact match exists
-  for (const word of apiHitsArr) {
-    if (Array.isArray(word)) {
-      categoryName = word[0];
-      break;
-    }
+  const maxApiHits = Math.max(...apiHitsArr);
+  if (maxApiHits) {
+    categoryName = localCategories[apiHitsArr.findIndex(x => x === maxApiHits)]
   }
 
   console.log('apiHitsArr::', apiHitsArr)
-  console.log(categoryName, ':', dbCategories[categoryName])
+  console.log('categoryName:', categoryName);
+  console.log('category_id:', dbCategories[categoryName])
   return dbCategories[categoryName]
 }
 
 //---------------------------------------------------
-requestAllApis('starbucks')
+requestAllApis('new shoes')
 .then(res => {
   return calcCatIdFromApiResults(res);
 })
