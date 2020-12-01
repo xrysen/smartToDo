@@ -19,10 +19,13 @@ const getAllTasks = (db) => {
  */
 
 const getTasksByUserId = (db, userId) => {
-  return db.query(
-    `SELECT tasks.* FROM tasks
-     JOIN users ON tasks.user_id = users.id
-     WHERE users.id = $1`, [userId]);
+  return db.query(`
+    SELECT tasks.*, categories.name AS category
+    FROM tasks
+    JOIN users ON tasks.user_id = users.id
+    JOIN categories ON category_id=categories.id
+    WHERE users.id = $1
+  `, [userId]);
 };
 
 /**
@@ -33,13 +36,10 @@ const getTasksByUserId = (db, userId) => {
  *  Returns a Promise containing all properties of table 'tasks' for a specific user and category
  */
 
-const getUserTasksByCategory = (db, userId, catId) => {
+const getTaskCategories = (db) => {
   return db.query(
-    `SELECT tasks.* FROM tasks
-     JOIN users ON tasks.user_id = users.id
-     JOIN categories ON tasks.category_id = categories.id
-     WHERE users.id = $1 AND categories.id = $2`
-    , [userId, catId]);
+    `select * from categories;`
+  );
 };
 
 /**
@@ -163,7 +163,7 @@ const deleteTask = (db, taskId) => {
 module.exports = {
   getAllTasks,
   getTasksByUserId,
-  getUserTasksByCategory,
+  // getUserTasksByCategory,
   updateTaskCategory,
   createNewTask,
   setTaskComplete,
