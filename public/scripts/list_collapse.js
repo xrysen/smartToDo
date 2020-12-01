@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  $(".list-container").hide();
   $(".new-item").hide();
 
   $("#new").on('click', () => {

@@ -62,15 +62,6 @@ $(document).ready(function() {
         <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
       `),
 
-        move: $(`
-        <li id = "move${$taskId}"><form class = "move-button" name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form>
-        <span id = "move-menu${$taskId}" style = "display:none;">Move To:
-        <button onclick = "moveTask(${$taskId}, 1)">Watch</button>
-        <button onclick = "moveTask(${$taskId}, 2)">Read</button>
-        <button onclick = "moveTask(${$taskId}, 3)">Eat</button>
-        <button onclick = "moveTask(${$taskId}, 4)">Buy</button></span> </li>
-      `),
-
       };
     }
 
