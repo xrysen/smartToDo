@@ -34,17 +34,17 @@
     <nav>
       <span id="left-nav" class="title">Smart-To-Do</span>
       <div id="right-nav" class="title">
-        <span class="nav-buttons" id="new">New</span>
-        <span class="nav-buttons" id="current">Current</span>
-        <span class="nav-buttons" id="archived">Archived</span>
+        <button class="nav-buttons nav-button" id="new">New</button>
+        <button class="nav-buttons nav-button selected" id="current">Current</button>
+        <button class="nav-buttons nav-button" id="archived">Archived</button>
       </div>
     </nav>
   <% } else if (isActive === false) {%>
     <nav>
       <span id="left-nav" class="title">Smart-To-Do</span>
       <div id="right-nav" class="title">
-        <span class="nav-buttons" id="current">Current</span>
-        <span class="nav-buttons" id="archived">Archived</span>
+        <button class="nav-buttons nav-button" id="current">Current</button>
+        <button class="nav-buttons nav-button selected" id="archived">Archived</button>
       </div>
     </nav>
     <% };%>

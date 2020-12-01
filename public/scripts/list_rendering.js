@@ -6,33 +6,63 @@ $(document).ready(function () {
     active = isActive;
   }
 
-  const createListElements = function (task) {
+  const createListElements = function (task, isActive) {
     const $task = task['name'];
-    const $listElements = { // potential security flaw
-      items: $(`
-      <li>
-        <input type="checkbox">
-        <label>${$task}</label>
-      </li>
-    `),
+    let $listElements;
+    if (isActive) {
+      $listElements = { // potential security flaw
+        items: $(`
+        <li>
+          <input type="checkbox">
+          <label>${$task}</label>
+        </li>
+      `),
 
-      ratings: $(`
-      <li>
-        <div class="rating">
-          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-        </div>
-      </li>
-    `),
+        ratings: $(`
+        <li>
+          <div class="rating">
+            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+          </div>
+        </li>
+      `),
 
-      delete: $(`
-      <li><button class='button'>Delete</button></li>
-    `),
+        delete: $(`
+        <li><button class='button'>Delete</button></li>
+      `),
 
-      move: $(`
-      <li><button class='button move'>Move</button></li>
-    `),
+        move: $(`
+        <li><button class='button move'>Move</button></li>
+      `),
 
-    };
+      };
+    }
+    else {
+      $listElements = { // potential security flaw
+        items: $(`
+        <li>
+          <label class="strike_out">${$task}</label>
+        </li>
+      `),
+
+        ratings: $(`
+        <li>
+          <div class="rating">
+            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+          </div>
+        </li>
+      `),
+
+        delete: $(`
+        <li><button class='button'>Delete</button></li>
+      `),
+
+        move: $(`
+        <li><button class='button move'>Move</button></li>
+      `),
+
+      };
+    }
+
     return $listElements;
   };
 
@@ -52,7 +82,7 @@ $(document).ready(function () {
     const tasks = listItems['tasks'];
     for (const task in tasks) {
       if (tasks[task]['is_active'] === isActive) {
-        const $items = createListElements(tasks[task]);
+        const $items = createListElements(tasks[task], isActive);
         $(`#${category}-items`).append($items.items);
         $(`#${category}-ratings`).append($items.ratings);
         $(`#${category}-delete`).append($items.delete);
