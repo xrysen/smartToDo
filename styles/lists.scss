@@ -3,7 +3,7 @@ main article {
   margin-bottom: 17px;
   height: auto;
   width: 100%;
-  border-style: solid;
+  border: 1px solid grey;
   display: flex;
   flex-direction: column;
 }
@@ -11,7 +11,7 @@ main article {
 main article header {
   width: 100%;
   height: 40px;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid grey;
   display: flex;
   align-items: center;
 }
@@ -51,7 +51,7 @@ ul {
 }
 
 .list-header {
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted lightgrey;
   padding-bottom: 10px;
   font-size: 40px;
 }

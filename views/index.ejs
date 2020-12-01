@@ -2,16 +2,18 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <!-- Disable Viewport Zoom-->
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
+  <title>Smart TODO</title>
 
+  <!-- Font families -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap"
-    rel="stylesheet">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <!-- Local stylesheets -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -20,57 +22,40 @@
   <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
   <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
 
+  <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/list_rendering.js"></script>
   <script type="text/javascript" src="/scripts/list_collapse.js"></script>
-
-  <!-- disable viewport zoom-->
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 </head>
 
 <body>
-  <% if (isActive === true) {%>
-    <nav>
-      <span id="left-nav" class="title">Smart-To-Do</span>
-      <div id="right-nav" class="title">
-        <button class="nav-buttons nav-button" id="new">New</button>
-        <button class="nav-buttons nav-button selected" id="current">Current</button>
-        <button class="nav-buttons nav-button" id="archived">Archived</button>
-      </div>
-    </nav>
-  <% } else if (isActive === false) {%>
-    <nav>
-      <span id="left-nav" class="title">Smart-To-Do</span>
-      <div id="right-nav" class="title">
-        <button class="nav-buttons nav-button" id="current">Current</button>
-        <button class="nav-buttons nav-button selected" id="archived">Archived</button>
-      </div>
-    </nav>
-    <% };%>
+  <!-- Top navbar (fixed) -->
+  <nav>
+    <span id="left-nav" class="title">tAdoo</span>
+    <div id="right-nav" class="title">
+      <% if (isActive === true) {%>
+        <button class="nav-buttons nav-button" id="new">new</button>
+      <% };%>
+      <button class="nav-buttons nav-button" id="current">active</button>
+      <button class="nav-buttons nav-button selected" id="archived">archive</button>
+    </div>
+  </nav>
 
-  <% if (userId === '1') {%>
-    <header id="main-header">
-      <div>
+  <!-- Header (profile avatar and name) -->
+  <header id="main-header">
+    <% if (userId === '1') {%>
         <h2 class="shadow">Jim Dumpling</h2>
-      </div>
-      <div>
         <img class="shadow" src="/images/dumpling.png" />
-      </div>
-    </header>
     <% } else {%>
-      <header id="main-header">
-        <div>
-          <h2 class="shadow">Bob Mango</h2>
-        </div>
-        <div>
-          <img class="shadow" src="/images/mango.png" />
-        </div>
-      </header>
-    <% };%>
+        <h2 class="shadow">Bob Mango</h2>
+        <img class="shadow" src="/images/mango.png" />
+      <% };%>
+  </header>
 
+  <!-- Main content -->
   <main class="container">
-
+    <!-- Compose new task -->
     <section class="new-item">
       <h2>Enter New To-Do</h2>
       <form id="form" class = "form-new-to-do">
@@ -81,11 +66,10 @@
       </form>
     </section>
 
-
+    <!-- Lists section -->
     <section id="list-section">
-
       <!-- Watch -->
-      <h2 class="list-header to-watch">To Watch</h2>
+      <h2 class="list-header to-watch">watch</h2>
       <div class="list-container" id="to-watch">
         <article class="list">
           <header>
@@ -109,7 +93,7 @@
       </div>
 
       <!-- Read -->
-      <h2 class="list-header to-read">To Read</h2>
+      <h2 class="list-header to-read">read</h2>
       <div class="list-container" id="to-read">
         <article class="list">
 
@@ -134,7 +118,7 @@
       </div>
 
       <!-- Eat -->
-      <h2 class="list-header to-eat">To Eat</h2>
+      <h2 class="list-header to-eat">eat</h2>
       <div class="list-container" id="to-eat">
         <article class="list">
           <header>
@@ -158,7 +142,7 @@
       </div>
 
       <!-- Buy -->
-      <h2 class="list-header to-buy">To Buy</h2>
+      <h2 class="list-header to-buy">buy</h2>
       <div class="list-container" id="to-buy">
         <article class="list">
           <header>
