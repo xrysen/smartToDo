@@ -30,7 +30,8 @@ module.exports = (db) => {
     const task = req.body.task
 
     categorizeTask(task)
-      .then(categoryId => {
+      .then(data => {
+        const categoryId = data;
         return dbHelper.createNewTask(db, task, userId, categoryId)
       })
       .then(data => {
