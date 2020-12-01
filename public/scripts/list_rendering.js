@@ -98,13 +98,15 @@ $(document).ready(function () {
 
 
   deleteTask = (taskId) => {
-    $.get(`/api/tasks/delete/${taskId}`, function() {
-      console.log("Deleting...");
-      $(`#item${taskId}`).fadeOut();
-      $(`#delete${taskId}`).fadeOut();
-      $(`#move${taskId}`).fadeOut();
-      $(`#rating${taskId}`).fadeOut();
-    });
+    if(confirm("Warning! This action cannot be reversed!")) {
+      $.get(`/api/tasks/delete/${taskId}`, function() {
+        console.log("Deleting...");
+        $(`#item${taskId}`).fadeOut();
+        $(`#delete${taskId}`).fadeOut();
+        $(`#move${taskId}`).fadeOut();
+        $(`#rating${taskId}`).fadeOut();
+      });
+    }
   }
 
   moveTaskMenu = (taskId) => {
