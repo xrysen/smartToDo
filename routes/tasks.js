@@ -44,12 +44,12 @@ module.exports = (db) => {
     const userId = req.session.userId;
     const task = req.body.text // important change tasks -> text
     categorizeTask(task)
-      .then(categoryId => {
+      .then(data => {
+        const categoryId = data;
         return dbHelper.createNewTask(db, task, userId, categoryId)
       })
       .then(data => {
         const newTask = data.rows[0];
-        console.log(':::newTask created:::', data.rows[0]);
         res.json({ newTask });
       })
       .catch(err => {
