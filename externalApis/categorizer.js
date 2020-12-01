@@ -150,6 +150,7 @@ module.exports = (query) => {
  * eat    donair dude
  * eat    cactus club
  * eat    McDonald's
+ * eat    tacofino
  *
  * buy    new water bottle
  * buy    bluetooth earpods
