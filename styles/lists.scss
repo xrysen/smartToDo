@@ -80,6 +80,17 @@ form .delete-btn {
   width: 100%;
 }
 
+span.move-buttons {
+  position: relative;
+  left: 100px;
+  bottom: 35px;
+}
+
+form.move-button {
+  display: inline;
+  margin-right: 20px;
+}
+
 //all css below is for the rating stars
 .rating {
   unicode-bidi: bidi-override;
