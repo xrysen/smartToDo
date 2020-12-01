@@ -137,6 +137,29 @@ const setTaskUrgency = (db, urgency, taskId) => {
      WHERE id = $2;`, [urgency, taskId]);
 };
 
+/**
+ * isTaskActive(db, taskId)
+ * Input:
+ *   database, taskId
+ * Output:
+ *  returns true or false depending on what the column is_active of row taskId is set to
+ */
+
+const isTaskActive = (db, taskId) => {
+  return db.query (
+    `SELECT is_active
+     FROM tasks
+     WHERE id = $1;`, [taskId]
+  )
+  .then(res => res.rows[0].is_active);
+}
+
+const deleteTask = (db, taskId) => {
+  return db.query (
+    `DELETE FROM tasks
+    WHERE id = $1`, [taskId]);
+};
+
 module.exports = {
   getAllTasks,
   getTasksByUserId,
@@ -146,5 +169,7 @@ module.exports = {
   setTaskComplete,
   setTaskRating,
   setTaskUrgency,
-  setTaskActive
+  setTaskActive,
+  isTaskActive,
+  deleteTask
 };

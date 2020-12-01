@@ -59,5 +59,31 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/delete/:id", (req, res) => {
+    return dbHelper.deleteTask(db, req.params.id)
+    .then(() => {
+      console.log("Deleted from database");
+      res.redirect("/");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
+
+  router.get("/update/:id/:newCatId", (req, res) => {
+    return dbHelper.updateTaskCategory(db, req.params.newCatId, req.params.id)
+    .then(() => {
+      console.log("Updated category");
+      res.redirect("/");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
   return router;
 };
