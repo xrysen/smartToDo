@@ -23,20 +23,20 @@ $(document).ready(function () {
         ratings: $(`
         <li id = "rating${$taskId}">
           <div class="rating">
-            <input type = "radio" id = "rating-${$taskId}-5" value = "rating-${$taskId}-5" name = "rating-${$taskId}-5" />
-            <label for="rating-${$taskId}-5" title="text">5 stars</label>
-            <input type = "radio" id = "rating-${$taskId}-4" value = "rating-${$taskId}-4" name = "rating-${$taskId}-4" />
-            <label for="rating-${$taskId}-4" title="text">5 stars</label>
-            <input type = "radio" id = "rating-${$taskId}-3" value = "rating-${$taskId}-3" name = "rating-${$taskId}-3" />
-            <label for="rating-${$taskId}-3" title="text">5 stars</label>
-            <input type = "radio" id = "rating-${$taskId}-2" value = "rating-${$taskId}-2" name = "rating-${$taskId}-2" />
-            <label for="rating-${$taskId}-2" title="text">5 stars</label>
-            <input type = "radio" id = "rating-${$taskId}-1" value = "rating-${$taskId}-1" name = "rating-${$taskId}-1" />
-            <label for="rating-${$taskId}-1" title="text">5 stars</label>
+            <input type="radio" id="${$taskId}-star-5" name="${$taskId}rate" value="5" onclick = "setTaskRating(${$taskId},5)" />
+            <label for="${$taskId}-star-5" title="text">5 stars</label>
+            <input type="radio" id="${$taskId}-star-4" name="${$taskId}rate" value="4" onclick = "setTaskRating(${$taskId},4)" />
+            <label for="${$taskId}-star-4" title="text">4 stars</label>
+            <input type="radio" id="${$taskId}-star-3" name="${$taskId}rate" value="3" onclick = "setTaskRating(${$taskId},3)" />
+            <label for="${$taskId}-star-3" title="text">3 stars</label>
+            <input type="radio" id="${$taskId}-star-2" name="${$taskId}rate" value="2" onclick = "setTaskRating(${$taskId},2)" />
+            <label for="${$taskId}-star-2" title="text">2 stars</label>
+            <input type="radio" id="${$taskId}-star-1" name="${$taskId}rate" value="1" onclick = "setTaskRating(${$taskId},1)" />
+            <label for="${$taskId}-star-1" title="text">1 star</label>
+            </div>
+          </li>
+        `),
 
-          </div>
-        </li>
-      `),
 
         delete: $(`
         <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
@@ -97,7 +97,7 @@ $(document).ready(function () {
 
   const renderRatings = (taskId, rating) => {
     for (let i = 5; i >= rating; i--) {
-      $(`#rating-${taskId}-${i}`).text("★");
+      $(`#${taskId}-star-${i}`).prop("checked", true);
     }
   }
 
