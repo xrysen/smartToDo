@@ -25,7 +25,7 @@ $(document).ready(function () {
     `),
 
       move: $(`
-      <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTask(${$taskId})"></input></form></li>
+      <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form></li>
     `),
 
     };
@@ -92,36 +92,55 @@ $(document).ready(function () {
 
 
 
-});
-
-const deleteTask = (taskId) => {
-  $.get(`/api/tasks/delete/${taskId}`, function() {
-    console.log("Deleting...");
-    $(`#item${taskId}`).remove();
-    $(`#delete${taskId}`).remove();
-    $(`#move${taskId}`).remove();
-    $(`#rating${taskId}`).remove();
-  });
-}
-
-let editing = false;
-
-// Buggy fix
-
-const moveTask = (taskId) => {
-  console.log(`Moving...${taskId}`);
-  if(!editing) {
-    $(`#item${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>Move Task: </p>`).next().slideDown();
-    $(`#rating${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'><button>Watch</button><button>Read</button><button>Eat</button><button>Buy</button></p>`).next().slideDown();
-    $(`#delete${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
-    $(`#move${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
-      editing = true;
-  } else {
-    $(`.edit${taskId}`).slideUp();
-    $(`#move-div-${taskId}`).remove();
-    editing = false;
+  deleteTask = (taskId) => {
+    $.get(`/api/tasks/delete/${taskId}`, function() {
+      console.log("Deleting...");
+      $(`#item${taskId}`).remove();
+      $(`#delete${taskId}`).remove();
+      $(`#move${taskId}`).remove();
+      $(`#rating${taskId}`).remove();
+    });
   }
 
-}
+  let editing = false;
+
+// Buggy needs to be fixed fix
+
+    moveTaskMenu = (taskId) => {
+    console.log(`Moving...${taskId}`);
+    if(!editing) {
+      $(`#item${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>Move Task: </p>`).next().slideDown();
+      $(`#rating${taskId}`).after(
+        `<p class = "edit${taskId}" style = 'display: none; right: 50px;'>
+          <button id = "watch" onclick="moveTask(${taskId},1)">Watch</button>
+          <button id = "read" onclick = "moveTask(${taskId}, 2)">Read</button>
+          <button id = "eat" onclick = "moveTask(${taskId}, 3)">Eat</button>
+          <button id = "buy" onclick = "moveTask(${taskId}, 4)">Buy</button></p>`).next().slideDown();
+      $(`#delete${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
+      $(`#move${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
+      editing = true;
+    } else {
+      $(`.edit${taskId}`).slideUp();
+      editing = false;
+    }
+  }
+
+  moveTask = (taskId, newCatId) => {
+    $.get(`/api/tasks/update/${taskId}/${newCatId}`)
+    .then(() => {
+
+      $(`#item${taskId}`).slideUp().next().remove();
+      $(`#rating${taskId}`).slideUp().next().remove();
+      $(`#delete${taskId}`).slideUp().next().remove();
+      $(`#move${taskId}`).slideUp().next().remove();
+      $(`.edit${taskId}`).slideUp().next().remove();
+      loadListItems(false, newCatId);
+    });
+  }
+
+});
+
+
+
 
 

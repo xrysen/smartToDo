@@ -116,7 +116,8 @@ module.exports = (db) => {
   router.get("/update/:id/:newCatId", (req, res) => {
     return dbHelper.updateTaskCategory(db, req.params.newCatId, req.params.id)
     .then(() => {
-      console.log("Updated category")
+      console.log("Updated category");
+      res.redirect("/");
     })
     .catch(err => {
       res
