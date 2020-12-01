@@ -33,7 +33,12 @@ $(document).ready(function () {
       `),
 
         move: $(`
-        <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form></li>
+        <li id = "move${$taskId}"><form class = "move-button" name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form>
+        <span id = "move-menu${$taskId}" style = "display:none;">Move To:
+        <button onclick = "moveTask(${$taskId}, 1)">Watch</button>
+        <button onclick = "moveTask(${$taskId}, 2)">Read</button>
+        <button onclick = "moveTask(${$taskId}, 3)">Eat</button>
+        <button onclick = "moveTask(${$taskId}, 4)">Buy</button></span> </li>
       `),
 
       };
@@ -59,7 +64,12 @@ $(document).ready(function () {
       `),
 
         move: $(`
-        <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form></li>
+        <li id = "move${$taskId}"><form class = "move-button" name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form>
+        <span id = "move-menu${$taskId}" style = "display:none;">Move To:
+        <button onclick = "moveTask(${$taskId}, 1)">Watch</button>
+        <button onclick = "moveTask(${$taskId}, 2)">Read</button>
+        <button onclick = "moveTask(${$taskId}, 3)">Eat</button>
+        <button onclick = "moveTask(${$taskId}, 4)">Buy</button></span> </li>
       `),
 
       };
@@ -155,51 +165,31 @@ $(document).ready(function () {
   populateTasksOnUserActive();
 
   deleteTask = (taskId) => {
-    $.get(`/api/tasks/delete/${taskId}`, function() {
-      console.log("Deleting...");
-      $(`#item${taskId}`).remove();
-      $(`#delete${taskId}`).remove();
-      $(`#move${taskId}`).remove();
-      $(`#rating${taskId}`).remove();
-    });
+    if(confirm("Warning! This action cannot be reversed!")) {
+      $.get(`/api/tasks/delete/${taskId}`, function() {
+        console.log("Deleting...");
+        $(`#item${taskId}`).fadeOut();
+        $(`#delete${taskId}`).fadeOut();
+        $(`#move${taskId}`).fadeOut();
+        $(`#rating${taskId}`).fadeOut();
+      });
+    }
   }
 
-  let editing = false;
-
-// Buggy needs to be fixed fix
-
-    moveTaskMenu = (taskId) => {
-    console.log(`Moving...${taskId}`);
-    if(!editing) {
-      $(`#item${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>Move Task: </p>`).next().slideDown();
-      $(`#rating${taskId}`).after(
-        `<p class = "edit${taskId}" style = 'display: none; right: 50px;'>
-          <button id = "watch" onclick= "moveTask(${taskId},1)">Watch</button>
-          <button id = "read" onclick = "moveTask(${taskId}, 2)">Read</button>
-          <button id = "eat" onclick = "moveTask(${taskId}, 3)">Eat</button>
-          <button id = "buy" onclick = "moveTask(${taskId}, 4)">Buy</button></p>`).next().slideDown();
-      $(`#delete${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
-      $(`#move${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
-      editing = true;
-    } else {
-      $(`.edit${taskId}`).slideUp();
-      editing = false;
-    }
+  moveTaskMenu = (taskId) => {
+    $(`#move-menu${taskId}`).fadeToggle();
   }
 
   moveTask = (taskId, newCatId) => {
     $.get(`/api/tasks/update/${taskId}/${newCatId}`)
     .then(() => {
-      editing = false;
-      $(`#item${taskId}`).slideUp().next().remove();
-      $(`#rating${taskId}`).slideUp().next().remove();
-      $(`#delete${taskId}`).slideUp().next().remove();
-      $(`#move${taskId}`).slideUp().next().remove();
-      $(`.edit${taskId}`).slideUp().next().remove();
+      $(`#item${taskId}`).fadeOut();
+      $(`#rating${taskId}`).fadeOut();
+      $(`#delete${taskId}`).fadeOut();
+      $(`#move${taskId}`).fadeOut();
       loadListItems(false, newCatId);
     });
-  }
-});
+  }});
 
 
 
