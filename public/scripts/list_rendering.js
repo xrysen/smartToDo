@@ -23,7 +23,11 @@ $(document).ready(function () {
         ratings: $(`
         <li id = "rating${$taskId}">
           <div class="rating">
-            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            <span id = "rating-${$taskId}-1" onclick = "setTaskRating(${$taskId}, 1)">☆</span>
+            <span id = "rating-${$taskId}-2" onclick = "setTaskRating(${$taskId}, 2)">☆</span>
+            <span id = "rating-${$taskId}-3" onclick = "setTaskRating(${$taskId}, 3)">☆</span>
+            <span id = "rating-${$taskId}-4" onclick = "setTaskRating(${$taskId}, 4)">☆</span>
+            <span id = "rating-${$taskId}-5" onclick = "setTaskRating(${$taskId}, 5)">☆</span>
           </div>
         </li>
       `),
@@ -78,6 +82,19 @@ $(document).ready(function () {
     return $listElements;
   };
 
+  setTaskRating = (taskId, rating) => {
+    $.post(`/api/tasks/ratings/${taskId}/${rating}`)
+    .then(() => {
+      renderRatings(taskId, rating);
+    })
+  }
+
+  const renderRatings = (taskId, rating) => {
+    for (let i = 5; i >= rating; i--) {
+      $(`#rating-${taskId}-${i}`).text("★");
+    }
+  }
+
   const loadListItems = function (initial, category, isActive) {
     $.ajax(`/api/tasks/getByCategory/${category}`, { method: 'GET' })
       .then((res) => {
@@ -99,6 +116,7 @@ $(document).ready(function () {
         $(`#${category}-ratings`).append($items.ratings);
         $(`#${category}-delete`).append($items.delete);
         $(`#${category}-move`).append($items.move);
+        renderRatings(tasks[task].id, tasks[task].rating);
       }
     }
   };

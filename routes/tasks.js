@@ -98,5 +98,18 @@ module.exports = (db) => {
     });
   });
 
+  router.post("/ratings/:id/:rating", (req, res) => {
+    return dbHelper.setTaskRating(db, req.params.rating, req.params.id)
+    .then(() => {
+      console.log("Setting rating");
+      res.redirect("/");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
   return router;
 };
