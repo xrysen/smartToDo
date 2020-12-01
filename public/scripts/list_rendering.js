@@ -25,7 +25,7 @@ $(document).ready(function () {
     `),
 
       move: $(`
-      <li id = "move${$taskId}"><button class='button move'>Move</button></li>
+      <li id = "move${$taskId}"><form name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTask(${$taskId})"></input></form></li>
     `),
 
     };
@@ -104,5 +104,24 @@ const deleteTask = (taskId) => {
   });
 }
 
+let editing = false;
+
+// Buggy fix
+
+const moveTask = (taskId) => {
+  console.log(`Moving...${taskId}`);
+  if(!editing) {
+    $(`#item${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>Move Task: </p>`).next().slideDown();
+    $(`#rating${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'><button>Watch</button><button>Read</button><button>Eat</button><button>Buy</button></p>`).next().slideDown();
+    $(`#delete${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
+    $(`#move${taskId}`).after(`<p class = "edit${taskId}" style = 'display: none'>&nbsp;</p>`).next().slideDown();
+      editing = true;
+  } else {
+    $(`.edit${taskId}`).slideUp();
+    $(`#move-div-${taskId}`).remove();
+    editing = false;
+  }
+
+}
 
 
