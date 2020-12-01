@@ -5,7 +5,7 @@
   <!-- Disable Viewport Zoom-->
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
-  <title>Smart TODO</title>
+  <title>Tadoo</title>
 
   <!-- Font families -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
   <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/login.css" type="text/css" />
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -33,40 +34,44 @@
   <!-- Top navbar (fixed) -->
     <nav>
       <span id="left-nav" class="title">tAdoo</span>
-      <% if (isActive === true) {%>
       <div id="right-nav" class="title">
-        <button class="nav-buttons nav-button" id="new">new</button>
-        <button class="nav-buttons nav-button selected" id="current">current</button>
-        <button class="nav-buttons nav-button" id="archived">archived</button>
+        <% if (isActive === true && userId !== undefined) {%>
+          <button class="nav-buttons nav-button" id="new">new</button>
+          <button class="nav-buttons nav-button selected" id="current">current</button>
+          <button class="nav-buttons nav-button" id="archived">archived</button>
+        <% } else if (isActive === false && userId !== undefined) {%>
+          <button class="nav-buttons nav-button" id="current">current</button>
+          <button class="nav-buttons nav-button selected" id="archived">archived</button>
+        <% } else {%>
+            <button class="nav-buttons nav-button" id="register">register</button>
+        <% };%>
       </div>
-      <% } else if (isActive === false) {%>
-      <div id="right-nav" class="title">
-        <button class="nav-buttons nav-button" id="current">current</button>
-        <button class="nav-buttons nav-button selected" id="archived">archived</button>
-      </div>
-      <% };%>
     </nav>
 
   <!-- Header (profile avatar and name) -->
   <header id="main-header">
     <% if (userId === '1') {%>
-        <h2 class="shadow">Jim Dumpling</h2>
-        <img class="shadow" src="/images/dumpling.png" />
+      <h2 class="shadow">Jim Dumpling</h2>
+      <img class="shadow" src="/images/dumpling.png" />
+    <% } else if (userId === '2') {%>
+      <h2 class="shadow">Bob Mango</h2>
+      <img class="shadow" src="/images/mango.png" />
     <% } else {%>
-        <h2 class="shadow">Bob Mango</h2>
-        <img class="shadow" src="/images/mango.png" />
-      <% };%>
+      <h2 class="shadow">welcome to tAdoo!</h2>
+      <img class="shadow" src="/images/computer.png" />
+    <% };%>
   </header>
 
   <!-- Main content -->
   <main class="container">
+    <% if (userId !== undefined) {%>
     <!-- Compose new task -->
     <section class="new-item">
-      <h2>Enter New To-Do</h2>
-      <form id="form" class = "form-new-to-do">
+      <h2>enter new to-do</h2>
+      <form id="form" class="form-new-to-do">
         <textarea id="todo-text" name="text"></textarea>
         <div class="footer">
-          <button class="button" id="submit-button">Submit</button>
+          <button class="button" id="submit-button">Tadoo!</button>
         </div>
       </form>
     </section>
@@ -171,6 +176,17 @@
       </div>
 
     </section>
+
+    <% } else {%>
+      <section id="login-container">
+        <h2>please log in</h2>
+        <form id="login-form">
+          <textarea class="login-text-area" id="username" name="username" placeholder="username"></textarea>
+          <textarea class="login-text-area" id="password" name="password" placeholder="password"></textarea>
+          <button class="button" id="login-button">Log in!</button>
+        </form>
+      </section>
+    <% };%>
 
   </main>
 

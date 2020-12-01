@@ -1,12 +1,12 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
   let active;
 
-  const isUserActive = function (isActive) {
+  const isUserActive = function(isActive) {
     active = isActive;
-  }
+  };
 
-  const createListElements = function (task, isActive) {
+  const createListElements = function(task, isActive) {
     const $task = task['name'];
     const $taskId = task['id'];
     const $taskCatId = task['category_id'];
@@ -42,8 +42,7 @@ $(document).ready(function () {
       `),
 
       };
-    }
-    else {
+    } else {
       $listElements = { // potential security flaw
         items: $(`
         <li id = "item${$taskId}">
@@ -78,7 +77,7 @@ $(document).ready(function () {
     return $listElements;
   };
 
-  const loadListItems = function (initial, category, isActive) {
+  const loadListItems = function(initial, category, isActive) {
     $.ajax(`/api/tasks/getByCategory/${category}`, { method: 'GET' })
       .then((res) => {
         if (initial) {
@@ -90,7 +89,7 @@ $(document).ready(function () {
       });
   };
 
-  const renderListElements = function (listItems, category, isActive) {
+  const renderListElements = function(listItems, category, isActive) {
     const tasks = listItems['tasks'];
     for (const task in tasks) {
       if (tasks[task]['is_active'] === isActive) {
@@ -103,22 +102,22 @@ $(document).ready(function () {
     }
   };
 
-  const renderSingleListElement = function (listItem, category) {
+  const renderSingleListElement = function(listItem, category) {
     const $items = createListElements(listItem, true);
     $(`#${category}-items`).append($items.items);
     $(`#${category}-ratings`).append($items.ratings);
     $(`#${category}-delete`).append($items.delete);
     $(`#${category}-move`).append($items.move);
-};
+  };
 
-  const  populateTasksOnUserActive = function () {
+  const  populateTasksOnUserActive = function() {
     $.ajax(`/api/users/active`, { method: 'GET' })
       .then((res) => {
-        console.log(res)
+        console.log(res);
         isUserActive(res);
       })
       .then(() => {
-        if(active === true) {
+        if (active === true) {
           for (let i = 1; i < 5; i++) {
             loadListItems(true, i, true);
           }
@@ -128,7 +127,7 @@ $(document).ready(function () {
             loadListItems(true, i, false);
           }
         }
-      })
+      });
   };
 
   $('#form').submit((event) => { // form completion handler, sends user inputs to database
@@ -144,9 +143,9 @@ $(document).ready(function () {
           $.ajax(`/api/tasks/`, { method: "GET" }) // Refactor to use response from POST
             .then((res) => {
               const task = res['tasks'].pop();
-              return task['category_id']
+              return task['category_id'];
             })
-            .then((id) => loadListItems(false, id, ));
+            .then((id) => loadListItems(false, id,));
         }) // CHANGE WATCH loads new list item HERE is a good point to add JQUERY to make addition really noticable
         .fail((err) => console.log(err));
     }
@@ -154,18 +153,18 @@ $(document).ready(function () {
 
   $('#archived').on('click', () => {
     $.ajax(`/api/users/false`, { method: 'GET' })
-      .then(() => location.reload())
-    })
+      .then(() => location.reload());
+  });
 
   $('#current').on('click', () => {
     $.ajax(`/api/users/true`, { method: 'GET' })
-      .then(() => location.reload())
-  })
+      .then(() => location.reload());
+  });
 
   populateTasksOnUserActive();
 
   deleteTask = (taskId) => {
-    if(confirm("Warning! This action cannot be reversed!")) {
+    if (confirm("Warning! This action cannot be reversed!")) {
       $.get(`/api/tasks/delete/${taskId}`, function() {
         console.log("Deleting...");
         $(`#item${taskId}`).fadeOut();
@@ -174,22 +173,23 @@ $(document).ready(function () {
         $(`#rating${taskId}`).fadeOut();
       });
     }
-  }
+  };
 
   moveTaskMenu = (taskId) => {
     $(`#move-menu${taskId}`).fadeToggle();
-  }
+  };
 
   moveTask = (taskId, newCatId) => {
     $.get(`/api/tasks/update/${taskId}/${newCatId}`)
-    .then(() => {
-      $(`#item${taskId}`).fadeOut();
-      $(`#rating${taskId}`).fadeOut();
-      $(`#delete${taskId}`).fadeOut();
-      $(`#move${taskId}`).fadeOut();
-      loadListItems(false, newCatId);
-    });
-  }});
+      .then(() => {
+        $(`#item${taskId}`).fadeOut();
+        $(`#rating${taskId}`).fadeOut();
+        $(`#delete${taskId}`).fadeOut();
+        $(`#move${taskId}`).fadeOut();
+        loadListItems(false, newCatId);
+      });
+  };
+});
 
 
 
