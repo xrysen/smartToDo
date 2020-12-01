@@ -92,7 +92,7 @@ $(document).ready(function () {
   };
 
   const renderSingleListElement = function (listItem, category) {
-    const $items = createListElements(listItem);
+    const $items = createListElements(listItem, true);
     $(`#${category}-items`).append($items.items);
     $(`#${category}-ratings`).append($items.ratings);
     $(`#${category}-delete`).append($items.delete);
@@ -134,7 +134,7 @@ $(document).ready(function () {
               const task = res['tasks'].pop();
               return task['category_id']
             })
-            .then((id) => loadListItems(false, id));
+            .then((id) => loadListItems(false, id, ));
         }) // CHANGE WATCH loads new list item HERE is a good point to add JQUERY to make addition really noticable
         .fail((err) => console.log(err));
     }
