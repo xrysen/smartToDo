@@ -38,6 +38,22 @@ nav {
   margin-left: 20px;
 }
 
+.nav-button {
+  color: #FFFF;
+  background-color: #813772;
+  border-radius: 10px 10px 10px 10px;
+}
+
+#new {
+  background-color: #062F4F;
+}
+
+div > button.selected {
+  background-color: #B82601;
+  -webkit-box-shadow: inset 10px 10px 5px #551202;
+          box-shadow: inset 10px 10px 5px #551202;
+}
+
 /* #up-toggle {
   position: fixed;
   bottom: 0;

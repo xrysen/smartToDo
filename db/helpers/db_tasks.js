@@ -69,7 +69,7 @@ const updateTaskCategory = (db, newCatId, taskId) => {
 const createNewTask = (db, name, userId, categoryId) => {
   return db.query(
     `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
-    VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL)
+    VALUES ($1, $2, $3, TRUE, NOW(), NULL, 5, NULL)
     RETURNING *;
     `
     , [name, userId, categoryId]);

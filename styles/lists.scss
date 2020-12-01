@@ -81,20 +81,58 @@ form .delete-btn {
   width: 100%;
 }
 
-//all css below is for the rating stars
+// //all css below is for the rating stars
+// .rating {
+//   unicode-bidi: bidi-override;
+//   direction: rtl;
+// }
+// .rating > span {
+//   display: inline-block;
+//   position: relative;
+//   width: 1.1em;
+// }
+// .rating > span:hover:before,
+// .rating > span:hover ~ span:before {
+//    content: "\2605";
+//    position: absolute;
+// }
+
 .rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
+  float: left;
 }
-.rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
+
+.rating:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
 }
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
+
+.rating:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.rating > input:checked ~ label {
+  color: #ffc700;
+}
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #c59b08;
 }
 
 //

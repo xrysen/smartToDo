@@ -23,11 +23,17 @@ $(document).ready(function () {
         ratings: $(`
         <li id = "rating${$taskId}">
           <div class="rating">
-            <span id = "rating-${$taskId}-1" onclick = "setTaskRating(${$taskId}, 1)">☆</span>
-            <span id = "rating-${$taskId}-2" onclick = "setTaskRating(${$taskId}, 2)">☆</span>
-            <span id = "rating-${$taskId}-3" onclick = "setTaskRating(${$taskId}, 3)">☆</span>
-            <span id = "rating-${$taskId}-4" onclick = "setTaskRating(${$taskId}, 4)">☆</span>
-            <span id = "rating-${$taskId}-5" onclick = "setTaskRating(${$taskId}, 5)">☆</span>
+            <input type = "radio" id = "rating-${$taskId}-5" value = "rating-${$taskId}-5" name = "rating-${$taskId}-5" />
+            <label for="rating-${$taskId}-5" title="text">5 stars</label>
+            <input type = "radio" id = "rating-${$taskId}-4" value = "rating-${$taskId}-4" name = "rating-${$taskId}-4" />
+            <label for="rating-${$taskId}-4" title="text">5 stars</label>
+            <input type = "radio" id = "rating-${$taskId}-3" value = "rating-${$taskId}-3" name = "rating-${$taskId}-3" />
+            <label for="rating-${$taskId}-3" title="text">5 stars</label>
+            <input type = "radio" id = "rating-${$taskId}-2" value = "rating-${$taskId}-2" name = "rating-${$taskId}-2" />
+            <label for="rating-${$taskId}-2" title="text">5 stars</label>
+            <input type = "radio" id = "rating-${$taskId}-1" value = "rating-${$taskId}-1" name = "rating-${$taskId}-1" />
+            <label for="rating-${$taskId}-1" title="text">5 stars</label>
+
           </div>
         </li>
       `),

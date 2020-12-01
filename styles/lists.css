@@ -1,3 +1,4 @@
+@charset "UTF-8";
 main article {
   margin-top: 25px;
   margin-bottom: 17px;
@@ -81,6 +82,7 @@ ul {
   background-color: #B82601;
   -webkit-box-shadow: 5px 5px 5px #c1c1c1;
           box-shadow: 5px 5px 5px #c1c1c1;
+  border-radius: 10px 10px 10px 10px;
 }
 
 .move {
@@ -98,19 +100,58 @@ form .delete-btn {
 }
 
 .rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
+  float: left;
 }
 
-.rating > span {
-  display: inline-block;
-  position: relative;
-  width: 1.1em;
-}
-
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-  content: "\2605";
+.rating:not(:checked) > input {
   position: absolute;
+  top: -9999px;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.rating > input:checked ~ label {
+  color: #ffc700;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.strike_out {
+  text-decoration: line-through;
+  color: grey;
+}
+
+span.move-buttons {
+  position: relative;
+  left: 100px;
+  bottom: 35px;
+}
+
+form.move-button {
+  display: inline;
+  margin-right: 20px;
 }
 /*# sourceMappingURL=lists.css.map */
