@@ -15,13 +15,35 @@ $(() => {
 
 
   deleteTask = (taskId, oldCatId) => {
-    if(confirm("Warning! This action cannot be reversed!")) {
+      closeDeletePrompt();
       $.get(`/api/tasks/delete/${taskId}`, function() {
         console.log("Deleting...");
         $(`#task-${taskId}`).remove();
         cleanCategoryIfEmpty(oldCatId)
       });
-    }
+  }
+
+  openDeletePrompt = (taskId, oldCatId) => {
+    $("body").append(
+      `<div class = "modal">
+        <div class = "modal-delete">
+          Are you sure you want to permanently delete this task?
+          <br />
+          This process cannot be reversed!
+          <br /><br />
+          <button onclick = "closeDeletePrompt()">Cancel</button>
+          <button onclick = "deleteTask(${taskId}, ${oldCatId})">Delete</button>
+        </div>
+      </div>
+      `);
+     $(".modal").fadeToggle();
+
+  }
+
+  closeDeletePrompt = () => {
+    $(".modal").fadeToggle(() => {
+      $(".modal").remove();
+    });
   }
 
   moveTaskMenu = (taskId) => {

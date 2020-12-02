@@ -55,7 +55,7 @@ $(() => {
 
         <div class="td td-delete" id=delete"${$taskId}">
           <form name="delete" onsubmit="return false">
-            <input type='submit' class='button delete-btn' value="Delete" onclick="deleteTask(${$taskId}, ${$taskCatId})">
+            <input type='submit' class='button delete-btn' value="Delete" onclick="openDeletePrompt(${$taskId}, ${$taskCatId})">
             </input>
           </form>
         </div>
