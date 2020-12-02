@@ -8,6 +8,7 @@ $(() => {
       $.ajax(`/api/tasks`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
         .then((res) => {
           renderListElements(res)
+          $input.val('')
         })
         .catch((err) => console.log(err));
     }

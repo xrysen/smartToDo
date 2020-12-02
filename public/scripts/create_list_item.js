@@ -15,7 +15,7 @@ $(() => {
     const $taskCatId = escape(task.category_id);
 
     const listItemHtml = `
-      <div class="tr" id="task-${$taskId}">
+      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}">
         <div class="td td-checkbox" id="item${$taskId}">
           ${checkboxElement}
         </div>
@@ -34,11 +34,10 @@ $(() => {
             <input type='submit' class='button move' value="Move" onclick="moveTaskMenu(${$taskId})"></input>
           </form>
           <span id="move-menu${$taskId}" style="display:none;">
-            Move To:
-            <button onclick="moveTask(${$taskId}, 1)">Watch</button>
-            <button onclick="moveTask(${$taskId}, 2)">Read</button>
-            <button onclick="moveTask(${$taskId}, 3)">Eat</button>
-            <button onclick="moveTask(${$taskId}, 4)">Buy</button>
+            <button onclick="moveTask(${$taskId}, ${$taskCatId}, 1)">watch</button>
+            <button onclick="moveTask(${$taskId}, ${$taskCatId}, 2)">read</button>
+            <button onclick="moveTask(${$taskId}, ${$taskCatId}, 3)">eat</button>
+            <button onclick="moveTask(${$taskId}, ${$taskCatId}, 4)">buy</button>
           </span>
         </div>
         <div class="td td-delete" id=delete"${$taskId}">

@@ -50,7 +50,7 @@ module.exports = (db) => {
       })
       .then(data => {
         const newTask = data.rows[0];
-        res.json({ newTask });
+        res.json(newTask);
       })
       .catch(err => {
         res
@@ -77,7 +77,7 @@ module.exports = (db) => {
     .then((data) => {
       console.log("Category updated to:", req.params.newCatId);
       movedTask = data.rows[0];
-      res.json({ movedTask });
+      res.json(movedTask);
     })
     .catch(err => {
       res

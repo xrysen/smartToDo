@@ -1,3 +1,6 @@
+// Set global reference for category_name --> category_id
+const categories = ['(dummy)', 'watch', 'read', 'eat', 'buy'];
+
 $(document).ready(function() {
 
   let active;
@@ -13,16 +16,13 @@ $(document).ready(function() {
   };
 
   const renderListElements = function(tasks, isActive) {
-    console.log('tasks:', tasks);
     // If 'tasks' is only one it will be an object, so wrap in array
     if (!Array.isArray(tasks)) {
       tasks = [tasks];
     }
-
     for (const task of tasks) {
-      console.log(`calling createListCategory(${task.category_id}):`, !$(`#cat-${task.category_id}`).length);
-      if (!$(`#cat-${task.category_id}`).length) {
-        createListCategory(task.category_id, task.category);
+      if (!$(`#cat-${task.category_id}`).html()) {
+        fillListCategory(task.category_id, categories[task.category_id]);
       }
       createListItem(task, isActive);
     }

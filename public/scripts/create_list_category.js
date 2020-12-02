@@ -1,8 +1,7 @@
 $(() => {
   // Render HTML for a list category
-  const createListCategory = function(catId, catName) {
+   const fillListCategory = function(catId, catName) {
     let listCategoryHtml = `
-      <div id="cat-${catId}">
         <header>
           <h2 class="list-header ${catId}-header">${catName}</h2>
         </header>
@@ -15,11 +14,10 @@ $(() => {
             <div class="td td-delete">remove task</div>
           </div>
         </div>
-      </div>
     `
-    return $('#list-section').append(listCategoryHtml);
+    return $(`#cat-${catId}`).append(listCategoryHtml);
   }
 
-  window.createListCategory = createListCategory;
+  window.fillListCategory = fillListCategory;
 })
 
