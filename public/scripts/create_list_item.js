@@ -33,7 +33,7 @@ $(() => {
           <span>${$taskName}</span>
         </div>
 
-        <div class="td td-urgency group-a" id="rating${$taskId}">
+        <div class="td td-urgency group-c" id="rating${$taskId}">
           <div class="rating-stars">
             <input type="radio" id="${$taskId}-star-5" name="${$taskId}rate" value="5" onclick = "setTaskRating(${$taskId},5)" />
               <label for="${$taskId}-star-5" title="text">5 stars</label>
@@ -62,7 +62,7 @@ $(() => {
 
         <div class="td td-delete group-b" id=delete"${$taskId}">
           <form name="delete" onsubmit="return false">
-            <input type='submit' class='button delete-btn' value="Delete" onclick="openDeletePrompt(${$taskId}, ${$taskCatId})">
+            <input type='submit' class='button delete-btn' value="delete" onclick="openDeletePrompt(${$taskId}, ${$taskCatId})">
             </input>
           </form>
         </div>
