@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(".list-container").hide();
+
   $(".new-item").hide();
 
   $("#new").on('click', () => {
@@ -28,5 +28,7 @@ $(document).ready(function() {
   $(".to-buy").on('click', () => {
     $("#to-buy").slideToggle();
   });
+
+
 });
 

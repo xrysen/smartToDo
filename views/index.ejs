@@ -4,7 +4,7 @@
     <!-- Disable Viewport Zoom-->
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
-    <title>Tadoo List</title>
+    <title>Tadoo</title>
 
     <!-- Font families -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -20,9 +20,11 @@
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
     <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
 
     <!-- App JS -->
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
     <script type="text/javascript" src="/scripts/create_list_category.js"></script>
     <script type="text/javascript" src="/scripts/create_list_item.js"></script>
     <script type="text/javascript" src="/scripts/list_collapse.js"></script>
@@ -37,41 +39,62 @@
     <nav>
       <span id="left-nav" class="title">tAdoo</span>
       <div id="right-nav" class="title">
-        <% if (isActive === true) {%>
+        <% if (isActive === true && userId !== undefined) {%>
           <button class="nav-buttons nav-button" id="new">new</button>
+          <button class="nav-buttons nav-button selected" id="current">current</button>
+          <button class="nav-buttons nav-button" id="archived">archived</button>
+        <% } else if (isActive === false && userId !== undefined) {%>
+          <button class="nav-buttons nav-button" id="current">current</button>
+          <button class="nav-buttons nav-button selected" id="archived">archived</button>
+        <% } else {%>
+            <button class="nav-buttons nav-button" id="register">register</button>
         <% };%>
-        <button class="nav-buttons nav-button" id="current">active</button>
-        <button class="nav-buttons nav-button selected" id="archived">archive</button>
       </div>
     </nav>
+
 
     <!-- Header (profile avatar and name) -->
     <header id="main-header">
       <% if (userId === '1') {%>
-        <h2 class="shadow">Jim Dumpling</h2>
-        <img class="shadow" src="/images/dumpling.png" />
+        <h2 class="username">Jim Dumpling</h2>
+        <img class="username"src="/images/dumpling.png" />
+      <% } else if (userId === '2') {%>
+        <h2 class="username">bob Mango</h2>
+        <img class="username"src="/images/mango.png" />
       <% } else {%>
-        <h2 class="shadow">Bob Mango</h2>
-        <img class="shadow" src="/images/mango.png" />
+        <h2 >welcome to tAdoo!</h2>
+        <img src="/images/computer.png" />
       <% };%>
     </header>
 
     <!-- Main content -->
     <main class="container">
-      <!-- Compose new task -->
-      <section class="new-item">
-        <h2>Enter New TAdoo</h2>
-        <form id="form" class = "form-new-to-do">
-          <textarea id="todo-text" name="text"></textarea>
-          <div class="footer">
-            <button class="button" id="submit-button">Submit</button>
-          </div>
-        </form>
+      <% if (userId !== undefined) {%>
+        <!-- Compose new task -->
+        <section class="new-item">
+          <h2>Enter New TAdoo</h2>
+          <form id="form" class = "form-new-to-do">
+            <textarea id="todo-text" name="text"></textarea>
+            <div class="footer">
+              <button class="button" id="submit-button">Submit</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Lists section -->
+        <section id="list-section">
       </section>
 
-      <!-- Lists section -->
-      <section id="list-section">
-      </section>
+      <% } else {%>
+        <section id="login-container">
+          <h2>please log in</h2>
+          <form id="login-form">
+            <input class="login-text-area" id="username-text" name="username" placeholder="username"></input>
+            <input type="password" class="login-text-area" id="password-text" name="password" placeholder="password"></input>
+            <button for="username" class="button" class="login-button">Log in!</button>
+          </form>
+        </section>
+      <% };%>
     </main>
   </body>
 </html>
