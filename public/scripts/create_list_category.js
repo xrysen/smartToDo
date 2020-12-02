@@ -3,7 +3,7 @@ $(() => {
    const fillListCategory = function(catId, catName) {
     let listCategoryHtml = `
         <header>
-          <h2 class="list-header ${catId}-header">${catName}</h2>
+          <h2 class="list-header ${catId}-header" >${catName}</h2>
         </header>
         <div class="table" id="${catId}-table">
           <div class="tr th">

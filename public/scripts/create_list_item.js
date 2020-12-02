@@ -16,14 +16,14 @@ $(() => {
     const checkboxElement = isActive ? `<input type="checkbox" onclick="completeTask(${$taskId})">` : '';
 
     const listItemHtml = `
-      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}">
+      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}" draggable = "true" ondragstart="dragMoveTask(event)"git >
 
         <div class="td td-checkbox" id="item${$taskId}">
           ${checkboxElement}
         </div>
 
         <div class="td td-task" id="${$taskId}">
-          <span>${$taskName}</span>
+          <span id = "${$taskId}-name">${$taskName}</span>
         </div>
 
         <div class="td td-urgency" id="rating${$taskId}">
