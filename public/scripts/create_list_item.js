@@ -10,12 +10,12 @@ $(() => {
   // Render HTML for a list item
   const createListItem = function (task, isActive) {
     const checkboxElement = isActive ? '<input type="checkbox">' : '';
-    const $taskName = escape(task.name.toLowerCase());
+    const $taskName = escape(task.name).toLowerCase();
     const $taskId = escape(task.id);
     const $taskCatId = escape(task.category_id);
 
     const listItemHtml = `
-      <div class="tr">
+      <div class="tr" id="task-${$taskId}">
         <div class="td td-checkbox" id="item${$taskId}">
           ${checkboxElement}
         </div>
@@ -43,7 +43,7 @@ $(() => {
         </div>
         <div class="td td-delete" id=delete"${$taskId}">
           <form name="delete" onsubmit="return false">
-            <input type='submit' class='button delete-btn' value="Delete" onclick="deleteTask(${$taskId}, ${$taskCatId})">
+            <input type='submit' class='button delete-btn' value="Delete" onclick="deleteTask(${$taskId})">
             </input>
           </form>
         </div>

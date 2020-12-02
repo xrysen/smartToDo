@@ -2,7 +2,7 @@ $(() => {
   // Render HTML for a list category
   const createListCategory = function(catId, catName) {
     let listCategoryHtml = `
-      <div>
+      <div id="cat-${catId}">
         <header>
           <h2 class="list-header ${catId}-header">${catName}</h2>
         </header>
