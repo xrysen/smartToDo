@@ -7,6 +7,7 @@ $(() => {
     return div.innerHTML;
   };
 
+
   // Render HTML for a list item
   const createListItem = function (task, isActive) {
     const checkboxElement = isActive ? '<input type="checkbox">' : '';
@@ -16,12 +17,15 @@ $(() => {
 
     const listItemHtml = `
       <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}">
+
         <div class="td td-checkbox" id="item${$taskId}">
           ${checkboxElement}
         </div>
+
         <div class="td td-task" id="${$taskId}">
           <span>${$taskName}</span>
         </div>
+
         <div class="td td-urgency" id="rating${$taskId}">
           <span id="rating-${$taskId}-1" onclick="setTaskRating(${$taskId}, 1)">☆</span>
           <span id="rating-${$taskId}-2" onclick="setTaskRating(${$taskId}, 2)">☆</span>
@@ -29,6 +33,7 @@ $(() => {
           <span id="rating-${$taskId}-4" onclick="setTaskRating(${$taskId}, 4)">☆</span>
           <span id="rating-${$taskId}-5" onclick="setTaskRating(${$taskId}, 5)">☆</span>
         </div>
+
         <div class="td td-move" id="move${$taskId}">
           <form class="move-button" name="move" onsubmit="return false">
             <input type='submit' class='button move' value="Move" onclick="moveTaskMenu(${$taskId})"></input>
@@ -40,12 +45,14 @@ $(() => {
             <button onclick="moveTask(${$taskId}, ${$taskCatId}, 4)">buy</button>
           </span>
         </div>
+
         <div class="td td-delete" id=delete"${$taskId}">
           <form name="delete" onsubmit="return false">
             <input type='submit' class='button delete-btn' value="Delete" onclick="deleteTask(${$taskId})">
             </input>
           </form>
         </div>
+
       </div>
     `
     return $(`#${$taskCatId}-table`).append(listItemHtml)
