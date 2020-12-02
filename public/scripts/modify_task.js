@@ -30,9 +30,10 @@ $(() => {
           Are you sure you want to permanently delete this task?
           <br />
           This process cannot be reversed!
-          <br /><br />
-          <button class = "button" onclick = "closeDeletePrompt()">Cancel</button>
-          <button class = "button" onclick = "deleteTask(${taskId}, ${oldCatId})">Delete</button>
+          <div class = "modal-btn">
+            <button class = "button modal-btn" onclick = "closeDeletePrompt()">Cancel</button>
+            <button class = "button modal-btn" onclick = "deleteTask(${taskId}, ${oldCatId})">Delete</button>
+          </div>
         </div>
       </div>
       `);
