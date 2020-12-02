@@ -56,11 +56,11 @@
     <!-- Header (profile avatar and name) -->
     <header id="main-header">
       <% if (userId === '1') {%>
-        <h2 class="username">Jim Dumpling</h2>
-        <img class="username"src="/images/dumpling.png" />
+        <h2 class="pointer">jim dumpling</h2>
+        <img class="pointer"src="/images/dumpling.png" />
       <% } else if (userId === '2') {%>
-        <h2 class="username">bob Mango</h2>
-        <img class="username"src="/images/mango.png" />
+        <h2 class="pointer">bob Mango</h2>
+        <img class="pointer"src="/images/mango.png" />
       <% } else {%>
         <h2 >welcome to tAdoo!</h2>
         <img src="/images/computer.png" />
@@ -72,11 +72,11 @@
       <% if (userId !== undefined) {%>
         <!-- Compose new task -->
         <section class="new-item">
-          <h2>Enter New TAdoo</h2>
+          <h2>enter new tAdoo</h2>
           <form id="form" class = "form-new-to-do">
             <input id="todo-text" name="text">
             <div class="footer">
-              <button class="button" id="submit-button">Submit</button>
+              <button class="button" id="submit-button">submit</button>
             </div>
           </form>
         </section>

@@ -3,7 +3,7 @@ $(() => {
    const fillListCategory = function(catId, catName) {
     let listCategoryHtml = `
         <header>
-          <h2 class="list-header ${catId}-header">${catName}</h2>
+          <h2 class="list-header ${catId}-header pointer">${catName}</h2>
         </header>
         <div class="table" id="${catId}-table">
           <div class="tr th">
@@ -15,7 +15,11 @@ $(() => {
           </div>
         </div>
     `
-    return $(`#cat-${catId}`).append(listCategoryHtml);
+    $(`#cat-${catId}`).append(listCategoryHtml);
+
+    return $(`.${catId}-header`).on('click', () => {
+      $(`#${catId}-table`).slideToggle();
+    });
   }
 
   window.fillListCategory = fillListCategory;
