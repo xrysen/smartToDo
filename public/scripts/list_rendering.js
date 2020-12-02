@@ -2,45 +2,45 @@
 const categories = ['(dummy)', 'watch', 'read', 'eat', 'buy'];
 
 $(document).ready(function() {
-
-  let active;
-  const isUserActive = function(isActive) {
-    active = isActive;
+  // Check which page user is viewing: Active or Archived
+  const readCookieActiveOrArhive = function() {
+    return $.ajax(`/api/users/active`)
   };
 
-  const loadListItems = function(isActive) {
+  // Render category and each task
+  const renderListElements = function(tasks) {
+    readCookieActiveOrArhive()
+      .then((res) => {
+        // If 'tasks' is only one it will be an object, so wrap in array
+        if (!Array.isArray(tasks)) {
+          tasks = [tasks];
+        }
+        for (const task of tasks) {
+          // Only render tasks that match the page the user is viewing: Active vs Archived
+          if (res === task.is_active) {
+            // Only fill out category headers if they don't already have content
+            if (!$(`#cat-${task.category_id}`).html()) {
+              fillListCategory(task.category_id, categories[task.category_id]);
+            }
+            // Append list item html to category
+            createListItem(task, res);
+          }
+        }
+      })
+  };
+
+  // Call tasks api and send tasks json response to render function
+  const loadListItems = function() {
     $.ajax(`/api/tasks/`)
       .then((res) => {
-        renderListElements(res.tasks, isActive);
+        renderListElements(res.tasks);
       });
   };
-
-  const renderListElements = function(tasks, isActive) {
-    // If 'tasks' is only one it will be an object, so wrap in array
-    if (!Array.isArray(tasks)) {
-      tasks = [tasks];
-    }
-    for (const task of tasks) {
-      if (!$(`#cat-${task.category_id}`).html()) {
-        fillListCategory(task.category_id, categories[task.category_id]);
-      }
-      createListItem(task, isActive);
-    }
-  };
-
-  const populateTasksOnUserActive = function() {
-    $.ajax(`/api/users/active`, { method: 'GET' })
-      .then((res) => {
-        console.log(res);
-        isUserActive(res);
-        loadListItems(res);
-      });
-  };
-
-  populateTasksOnUserActive();
+  loadListItems();
 
   window.renderListElements = renderListElements;
 
+  // Set cookie to remember which type of view user wants: Active todo's or Archived
   $('#archived').on('click', () => {
     $.ajax(`/api/users/false`, { method: 'GET' })
       .then(() => location.reload());
