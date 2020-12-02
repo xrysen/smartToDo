@@ -14,13 +14,14 @@ $(() => {
   }
 
 
-  deleteTask = (taskId) => {
-    // if(confirm("Warning! This action cannot be reversed!")) {
+  deleteTask = (taskId, oldCatId) => {
+    if(confirm("Warning! This action cannot be reversed!")) {
       $.get(`/api/tasks/delete/${taskId}`, function() {
         console.log("Deleting...");
         $(`#task-${taskId}`).remove();
+        cleanCategoryIfEmpty(oldCatId)
       });
-    // }
+    }
   }
 
   moveTaskMenu = (taskId) => {
@@ -31,12 +32,16 @@ $(() => {
     $.get(`/api/tasks/update/${taskId}/${newCatId}`)
       .then((res) => {
         $(`#task-${taskId}`).remove();
-        // Also remove the category if that item was the last task it contained
-        if(!$(`.taskdata-${oldCatId}`).html()) {
-          $(`#cat-${oldCatId}`).html('')
-        }
+        cleanCategoryIfEmpty(oldCatId)
         // Then render this item to its (now updated) category
         renderListElements(res, true)
       })
+  }
+
+  // Remove the category if that item was the last task it contained
+  cleanCategoryIfEmpty = (oldCatId) => {
+    if(!$(`.taskdata-${oldCatId}`).html()) {
+      $(`#cat-${oldCatId}`).html('')
+    }
   }
 })
