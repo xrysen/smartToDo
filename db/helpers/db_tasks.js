@@ -19,13 +19,10 @@ const getAllTasks = (db) => {
  */
 
 const getTasksByUserId = (db, userId) => {
-  return db.query(`
-    SELECT tasks.*, categories.name AS category
-    FROM tasks
-    JOIN users ON tasks.user_id = users.id
-    JOIN categories ON category_id=categories.id
-    WHERE users.id = $1
-  `, [userId]);
+  return db.query(
+    `SELECT tasks.* FROM tasks
+     JOIN users ON tasks.user_id = users.id
+     WHERE users.id = $1`, [userId]);
 };
 
 /**
@@ -36,10 +33,13 @@ const getTasksByUserId = (db, userId) => {
  *  Returns a Promise containing all properties of table 'tasks' for a specific user and category
  */
 
-const getTaskCategories = (db) => {
+const getUserTasksByCategory = (db, userId, catId) => {
   return db.query(
-    `select * from categories;`
-  );
+    `SELECT tasks.* FROM tasks
+     JOIN users ON tasks.user_id = users.id
+     JOIN categories ON tasks.category_id = categories.id
+     WHERE users.id = $1 AND categories.id = $2`
+    , [userId, catId]);
 };
 
 /**
@@ -70,7 +70,7 @@ const updateTaskCategory = (db, newCatId, taskId) => {
 const createNewTask = (db, name, userId, categoryId) => {
   return db.query(
     `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
-    VALUES ($1, $2, $3, TRUE, NOW(), NULL, 1, NULL)
+    VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL)
     RETURNING *;
     `
     , [name, userId, categoryId]);
@@ -153,15 +153,7 @@ const isTaskActive = (db, taskId) => {
      WHERE id = $1;`, [taskId]
   )
   .then(res => res.rows[0].is_active);
-};
-
-const getTaskRating = (db, taskId) => {
-  return db.query (
-    `SElECT rating
-     FROM tasks
-     WHERE id = $1`, [taskId]
-  );
-};
+}
 
 const deleteTask = (db, taskId) => {
   return db.query (
@@ -172,7 +164,7 @@ const deleteTask = (db, taskId) => {
 module.exports = {
   getAllTasks,
   getTasksByUserId,
-  // getUserTasksByCategory,
+  getUserTasksByCategory,
   updateTaskCategory,
   createNewTask,
   setTaskComplete,
@@ -180,6 +172,5 @@ module.exports = {
   setTaskUrgency,
   setTaskActive,
   isTaskActive,
-  deleteTask,
-  getTaskRating
+  deleteTask
 };
