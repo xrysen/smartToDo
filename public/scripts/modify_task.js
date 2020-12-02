@@ -7,9 +7,9 @@ $(() => {
     })
   }
 
-  const renderRatings = (taskId, rating) => {
+  renderRatings = (taskId, rating) => {
     for (let i = 5; i >= rating; i--) {
-      $(`#rating-${taskId}-${i}`).text("★");
+      $(`#${taskId}-star-${i}`).prop("checked", true);
     }
   }
 
