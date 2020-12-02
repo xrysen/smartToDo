@@ -22,17 +22,17 @@ $(() => {
     const $taskId = escape(task.id);
     const $taskCatId = escape(task.category_id);
     const listItemHtml = `
-      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}">
+      <div class="tr taskdata-${$taskCatId} task-row" id="task-${$taskId}">
 
-        <div class="td td-checkbox" id="item${$taskId}">
+        <div class="td td-checkbox group-a" id="item${$taskId}">
           ${checkboxElement}
         </div>
 
-        <div class="td td-task" id="${$taskId}">
+        <div class="td td-task group-a" id="${$taskId}">
           <span>${$taskName}</span>
         </div>
 
-        <div class="td td-urgency" id="rating${$taskId}">
+        <div class="td td-urgency group-a" id="rating${$taskId}">
           <span id="rating-${$taskId}-1" onclick="setTaskRating(${$taskId}, 1)">☆</span>
           <span id="rating-${$taskId}-2" onclick="setTaskRating(${$taskId}, 2)">☆</span>
           <span id="rating-${$taskId}-3" onclick="setTaskRating(${$taskId}, 3)">☆</span>
@@ -40,7 +40,7 @@ $(() => {
           <span id="rating-${$taskId}-5" onclick="setTaskRating(${$taskId}, 5)">☆</span>
         </div>
 
-        <div class="td td-move" id="move${$taskId}">
+        <div class="td td-move group-b" id="move${$taskId}">
           <form class="move-button" name="move" onsubmit="return false">
             <input type='submit' class='button move' value="move" onclick="moveTaskMenu(${$taskId})"></input>
           </form>
@@ -52,7 +52,7 @@ $(() => {
           </span>
         </div>
 
-        <div class="td td-delete" id=delete"${$taskId}">
+        <div class="td td-delete group-b" id=delete"${$taskId}">
           <form name="delete" onsubmit="return false">
             <input type='submit' class='button delete-btn' value="delete" onclick="deleteTask(${$taskId}, ${$taskCatId})">
             </input>

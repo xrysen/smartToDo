@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 
   })
-  $('.username').on('click', () => {
+  $('.logout').on('click', () => {
     const $logout = `
     <button id="logout-button" class="login-button nav-buttons nav-button">log out</button>
     `
