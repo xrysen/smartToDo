@@ -121,9 +121,7 @@ form .delete-btn {
 .rating-stars {
   position: relative;
   display: inline-block;
-  margin-left: -100px;
   height: 15px;
-  bottom: 15px;
 }
 
 .rating-stars:not(:checked) > input {
