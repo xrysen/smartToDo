@@ -86,5 +86,30 @@ module.exports = (db) => {
     });
   });
 
+  router.get("/archive/:id", (req, res) => {
+    return dbHelper.setTaskComplete(db, req.params.id)
+    .then(() => {
+      console.log("Task completed!");
+      res.redirect("/");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
+  router.post("/ratings/:id/:rating", (req, res) => {
+    return dbHelper.setTaskRating(db, req.params.rating, req.params.id)
+    .then(() => {
+      console.log("Setting rating");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
   return router;
 };
