@@ -5,31 +5,23 @@ $(document).ready(function () {
     active = isActive;
   }
 
-  setTaskRating = (taskId, rating) => {
-    $.post(`/api/tasks/ratings/${taskId}/${rating}`)
-    .then(() => {
-      renderRatings(taskId, rating);
-    })
-  }
-
-  const renderRatings = (taskId, rating) => {
-    for (let i = 5; i >= rating; i--) {
-      $(`#rating-${taskId}-${i}`).text("★");
-    }
-  }
-
   const loadListItems = function (isActive) {
     $.ajax(`/api/tasks/`)
       .then((res) => {
-        // res = a list of all users tasks (objects)
         renderListElements(res.tasks, isActive);
       });
   };
 
   const renderListElements = function (tasks, isActive) {
-    const renderedCats = [];
+    console.log('tasks:', tasks);
+    // If 'tasks' is only one it will be an object, so wrap in array
+    if (!Array.isArray(tasks)) {
+      tasks = [tasks];
+    }
+
     for (const task of tasks) {
-      if (!renderedCats.includes(task.category_id)) {
+      console.log(`calling createListCategory(${task.category_id}):`, !$(`#cat-${task.category_id}`).length);
+      if (!$(`#cat-${task.category_id}`).length) {
         createListCategory(task.category_id, task.category);
       }
       createListItem(task, isActive)
@@ -47,6 +39,8 @@ $(document).ready(function () {
 
   populateTasksOnUserActive();
 
+  window.renderListElements = renderListElements;
+
   $('#archived').on('click', () => {
     $.ajax(`/api/users/false`, { method: 'GET' })
       .then(() => location.reload())
@@ -57,32 +51,7 @@ $(document).ready(function () {
       .then(() => location.reload())
   })
 
-  deleteTask = (taskId) => {
-    if(confirm("Warning! This action cannot be reversed!")) {
-      $.get(`/api/tasks/delete/${taskId}`, function() {
-        console.log("Deleting...");
-        $(`#item${taskId}`).fadeOut();
-        $(`#delete${taskId}`).fadeOut();
-        $(`#move${taskId}`).fadeOut();
-        $(`#rating${taskId}`).fadeOut();
-      });
-    }
-  }
-
-  moveTaskMenu = (taskId) => {
-    $(`#move-menu${taskId}`).fadeToggle();
-  }
-
-  moveTask = (taskId, newCatId) => {
-    $.get(`/api/tasks/update/${taskId}/${newCatId}`)
-    .then(() => {
-      $(`#item${taskId}`).fadeOut();
-      $(`#rating${taskId}`).fadeOut();
-      $(`#delete${taskId}`).fadeOut();
-      $(`#move${taskId}`).fadeOut();
-      loadListItems(false, newCatId);
-    });
-  }});
+});
 
 
 
