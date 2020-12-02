@@ -20,7 +20,7 @@ $(() => {
     const $taskName = escape(task.name).toLowerCase();
     const $taskId = escape(task.id);
     const $taskCatId = escape(task.category_id);
-    const checkboxElement = isActive ? `<input type="checkbox" onclick="completeTask(${$taskId})">` : '';
+    const checkboxElement = isActive ? `<input type="checkbox" onclick="completeTask(${$taskId}, ${$taskCatId})">` : '';
 
     const listItemHtml = `
       <div class="tr taskdata-${$taskCatId} task-row" id="task-${$taskId}">
