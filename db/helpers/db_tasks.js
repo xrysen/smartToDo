@@ -54,7 +54,8 @@ const updateTaskCategory = (db, newCatId, taskId) => {
   return db.query(
     `UPDATE tasks
      SET category_id = $1
-     WHERE id = $2;`
+     WHERE id = $2
+     RETURNING *;`
     ,[newCatId, taskId]);
 };
 
@@ -69,7 +70,7 @@ const updateTaskCategory = (db, newCatId, taskId) => {
 const createNewTask = (db, name, userId, categoryId) => {
   return db.query(
     `INSERT INTO tasks(name, user_id, category_id, is_active, date_created, date_finished, rating, urgency)
-    VALUES ($1, $2, $3, TRUE, NOW(), NULL, 1, NULL)
+    VALUES ($1, $2, $3, TRUE, NOW(), NULL, NULL, NULL)
     RETURNING *;
     `
     , [name, userId, categoryId]);
@@ -152,15 +153,7 @@ const isTaskActive = (db, taskId) => {
      WHERE id = $1;`, [taskId]
   )
   .then(res => res.rows[0].is_active);
-};
-
-const getTaskRating = (db, taskId) => {
-  return db.query (
-    `SElECT rating
-     FROM tasks
-     WHERE id = $1`, [taskId]
-  );
-};
+}
 
 const deleteTask = (db, taskId) => {
   return db.query (
@@ -179,6 +172,5 @@ module.exports = {
   setTaskUrgency,
   setTaskActive,
   isTaskActive,
-  deleteTask,
-  getTaskRating
+  deleteTask
 };

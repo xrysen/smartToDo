@@ -12,39 +12,41 @@
   width: 100%;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  font-family: 'Righteous', cursive;
 }
 
 #right-nav {
   display: flex;
   align-items: center;
   margin-left: auto;
-
   font-size: 27px;
 }
 
 #left-nav {
-  font-size: xx-large;
-}
-
-.nav-buttons {
-  margin-left: 20px;
+  font-size: 2em;
 }
 
 .nav-button {
+  margin-left: 20px;
   color: #FFFF;
-  background-color: #813772;
-  border-radius: 10px 10px 10px 10px;
-
+  background-color: #d34b65;
+  border-radius: 1px;
+  border: double;
+  padding: 8px;
+  cursor: pointer;
 }
 
 #new {
+  background-color: #1699d3;
+}
+
+#register {
   background-color: #062F4F;
 }
 
 div > button.selected {
-  background-color: #B82601;
-  box-shadow: inset 10px 10px 5px #551202;
+  background-color: #fff;
+  color: #1699d3;
+  // box-shadow: inset 10px 10px 5px #551202;
 }
 
 

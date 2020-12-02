@@ -18,6 +18,11 @@ module.exports = (db) => {
     res.redirect('/');
   })
 
+  router.get('/logout', (req, res) => {
+    req.session.userId = undefined;
+    res.redirect('/');
+  })
+
   router.get("/:active", (req, res) => {
     if (req.params.active === "true") {
       req.session.isActive = true;

@@ -1,232 +1,57 @@
-$(document).ready(function () {
+// Set global reference for category_name --> category_id
+const categories = ['(dummy)', 'watch', 'read', 'eat', 'buy'];
 
-  let active;
-
-  const isUserActive = function (isActive) {
-    active = isActive;
-  }
-
-  const createListElements = function (task, isActive) {
-    const $task = task['name'];
-    const $taskId = task['id'];
-    const $taskCatId = task['category_id'];
-    let $listElements;
-    if (isActive) {
-      $listElements = { // potential security flaw
-        items: $(`
-        <li id = "item${$taskId}">
-          <input type="checkbox" onclick = "completeTask(${$taskId})">
-          <label>${$task}</label>
-        </li>
-      `),
-
-        ratings: $(`
-        <li id = "rating${$taskId}">
-          <div class="rating-stars">
-            <input type="radio" id="${$taskId}-star-5" name="${$taskId}rate" value="5" onclick = "setTaskRating(${$taskId},5)" />
-            <label for="${$taskId}-star-5" title="text">5 stars</label>
-            <input type="radio" id="${$taskId}-star-4" name="${$taskId}rate" value="4" onclick = "setTaskRating(${$taskId},4)" />
-            <label for="${$taskId}-star-4" title="text">4 stars</label>
-            <input type="radio" id="${$taskId}-star-3" name="${$taskId}rate" value="3" onclick = "setTaskRating(${$taskId},3)" />
-            <label for="${$taskId}-star-3" title="text">3 stars</label>
-            <input type="radio" id="${$taskId}-star-2" name="${$taskId}rate" value="2" onclick = "setTaskRating(${$taskId},2)" />
-            <label for="${$taskId}-star-2" title="text">2 stars</label>
-            <input type="radio" id="${$taskId}-star-1" name="${$taskId}rate" value="1" onclick = "setTaskRating(${$taskId},1)" />
-            <label for="${$taskId}-star-1" title="text">1 star</label>
-            </div>
-          </li>
-        `),
-
-
-        delete: $(`
-        <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
-      `),
-
-        move: $(`
-        <li id = "move${$taskId}"><form class = "move-button" name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form>
-        <span id = "move-menu${$taskId}" style = "display:none;">Move To:
-        <button onclick = "moveTask(${$taskId}, 1)">Watch</button>
-        <button onclick = "moveTask(${$taskId}, 2)">Read</button>
-        <button onclick = "moveTask(${$taskId}, 3)">Eat</button>
-        <button onclick = "moveTask(${$taskId}, 4)">Buy</button></span> </li>
-      `),
-
-      };
-    }
-    else {
-      $listElements = { // potential security flaw
-        items: $(`
-        <li id = "item${$taskId}">
-          <label class="strike_out">${$task}</label>
-        </li>
-      `),
-
-        ratings: $(`
-        <li id = "rating${$taskId}">
-          <div class="rating">
-            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-          </div>
-        </li>
-      `),
-
-        delete: $(`
-        <li id = "delete${$taskId}"><form name = "delete" onsubmit = "return false"><input type = 'submit' class='button delete-btn' value = "Delete" onclick = "deleteTask(${$taskId}, ${$taskCatId})"></input></form></li>
-      `),
-
-        move: $(`
-        <li id = "move${$taskId}"><form class = "move-button" name = "move" onsubmit = "return false"><input type = 'submit' class = 'button move' value = "Move" onclick = "moveTaskMenu(${$taskId})"></input></form>
-        <span id = "move-menu${$taskId}" style = "display:none;">Move To:
-        <button onclick = "moveTask(${$taskId}, 1)">Watch</button>
-        <button onclick = "moveTask(${$taskId}, 2)">Read</button>
-        <button onclick = "moveTask(${$taskId}, 3)">Eat</button>
-        <button onclick = "moveTask(${$taskId}, 4)">Buy</button></span> </li>
-      `),
-
-      };
-    }
-
-    return $listElements;
+$(document).ready(function() {
+  // Check which page user is viewing: Active or Archived
+  const readCookieActiveOrArhive = function() {
+    return $.ajax(`/api/users/active`)
   };
 
-  setTaskRating = (taskId, rating) => {
-    $.post(`/api/tasks/ratings/${taskId}/${rating}`)
-    .then(() => {
-      renderRatings(taskId, rating);
-    })
-  }
-
-  const renderRatings = (taskId, rating) => {
-    for (let i = 5; i >= rating; i--) {
-      $(`#${taskId}-star-${i}`).prop("checked", true);
-    }
-  }
-
-  const loadListItems = function (initial, category, isActive) {
-    $.ajax(`/api/tasks/getByCategory/${category}`, { method: 'GET' })
+  // Render category and each task
+  const renderListElements = function(tasks) {
+    readCookieActiveOrArhive()
       .then((res) => {
-        if (initial) {
-          renderListElements(res, category, isActive);
+        // If 'tasks' is only one it will be an object, so wrap in array
+        if (!Array.isArray(tasks)) {
+          tasks = [tasks];
         }
-        if (!initial) {
-          renderSingleListElement(res['tasks'].pop(), category);
+        for (const task of tasks) {
+          // Only render tasks that match the page the user is viewing: Active vs Archived
+          if (res === task.is_active) {
+            // Only fill out category headers if they don't already have content
+            if (!$(`#cat-${task.category_id}`).html()) {
+              fillListCategory(task.category_id, categories[task.category_id]);
+            }
+            // Append list item html to category
+            createListItem(task, res);
+          }
         }
+      })
+  };
+
+  // Call tasks api and send tasks json response to render function
+  const loadListItems = function() {
+    $.ajax(`/api/tasks/`)
+      .then((res) => {
+        renderListElements(res.tasks);
       });
   };
+  loadListItems();
 
-  const renderListElements = function (listItems, category, isActive) {
-    const tasks = listItems['tasks'];
-    for (const task in tasks) {
-      if (tasks[task]['is_active'] === isActive) {
-        const $items = createListElements(tasks[task], isActive);
-        $(`#${category}-items`).append($items.items);
-        $(`#${category}-ratings`).append($items.ratings);
-        $(`#${category}-delete`).append($items.delete);
-        $(`#${category}-move`).append($items.move);
-        renderRatings(tasks[task].id, tasks[task].rating);
-      }
-    }
-  };
+  window.renderListElements = renderListElements;
 
-  const renderSingleListElement = function (listItem, category) {
-    const $items = createListElements(listItem, true);
-    const task = listItem;
-    $(`#${category}-items`).append($items.items);
-    $(`#${category}-ratings`).append($items.ratings);
-    $(`#${category}-delete`).append($items.delete);
-    $(`#${category}-move`).append($items.move);
-    renderRatings(task.id, task.rating);
-
-};
-
-  const  populateTasksOnUserActive = function () {
-    $.ajax(`/api/users/active`, { method: 'GET' })
-      .then((res) => {
-        console.log(res)
-        isUserActive(res);
-      })
-      .then(() => {
-        if(active === true) {
-          for (let i = 1; i < 5; i++) {
-            loadListItems(true, i, true);
-          }
-        }
-        if (active === false) {
-          for (let i = 1; i < 5; i++) {
-            loadListItems(true, i, false);
-          }
-        }
-      })
-  };
-
-  $('#form').submit((event) => { // form completion handler, sends user inputs to database
-    event.preventDefault();
-    let error = false;
-    const $input = $('#todo-text');
-    if (error === false) {
-      $.ajax(`/api/tasks`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
-        .then(() => { // clears text box
-          $input.val('');
-        })
-        .then(() => {
-          $.ajax(`/api/tasks/`, { method: "GET" }) // Refactor to use response from POST
-            .then((res) => {
-              const task = res['tasks'].pop();
-              return task['category_id']
-            })
-            .then((id) => loadListItems(false, id, ));
-        }) // CHANGE WATCH loads new list item HERE is a good point to add JQUERY to make addition really noticable
-        .fail((err) => console.log(err));
-    }
-  });
-
+  // Set cookie to remember which type of view user wants: Active todo's or Archived
   $('#archived').on('click', () => {
     $.ajax(`/api/users/false`, { method: 'GET' })
-      .then(() => location.reload())
-    })
+      .then(() => location.reload());
+  });
 
   $('#current').on('click', () => {
     $.ajax(`/api/users/true`, { method: 'GET' })
-      .then(() => location.reload())
-  })
+      .then(() => location.reload());
+  });
 
-  populateTasksOnUserActive();
-
-  completeTask = (taskId) => {
-    $.get(`/api/tasks/archive/${taskId}`, function() {
-      console.log("Completing task!");
-      $(`#item${taskId}`).fadeOut();
-      $(`#delete${taskId}`).fadeOut();
-      $(`#move${taskId}`).fadeOut();
-      $(`#rating${taskId}`).fadeOut();
-    });
-  }
-
-  deleteTask = (taskId) => {
-    if(confirm("Warning! This action cannot be reversed!")) {
-      $.get(`/api/tasks/delete/${taskId}`, function() {
-        console.log("Deleting...");
-        $(`#item${taskId}`).fadeOut();
-        $(`#delete${taskId}`).fadeOut();
-        $(`#move${taskId}`).fadeOut();
-        $(`#rating${taskId}`).fadeOut();
-      });
-    }
-  }
-
-  moveTaskMenu = (taskId) => {
-    $(`#move-menu${taskId}`).fadeToggle();
-  }
-
-  moveTask = (taskId, newCatId) => {
-    $.get(`/api/tasks/update/${taskId}/${newCatId}`)
-    .then(() => {
-      $(`#item${taskId}`).fadeOut();
-      $(`#rating${taskId}`).fadeOut();
-      $(`#delete${taskId}`).fadeOut();
-      $(`#move${taskId}`).fadeOut();
-      loadListItems(false, newCatId);
-    });
-  }});
+});
 
 
 
