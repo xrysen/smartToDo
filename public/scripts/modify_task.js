@@ -31,8 +31,8 @@ $(() => {
           <br />
           This process cannot be reversed!
           <br /><br />
-          <button onclick = "closeDeletePrompt()">Cancel</button>
-          <button onclick = "deleteTask(${taskId}, ${oldCatId})">Delete</button>
+          <button class = "button" onclick = "closeDeletePrompt()">Cancel</button>
+          <button class = "button" onclick = "deleteTask(${taskId}, ${oldCatId})">Delete</button>
         </div>
       </div>
       `);
