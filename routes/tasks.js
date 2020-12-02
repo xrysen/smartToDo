@@ -50,7 +50,7 @@ module.exports = (db) => {
       })
       .then(data => {
         const newTask = data.rows[0];
-        res.json({ newTask });
+        res.json(newTask);
       })
       .catch(err => {
         res
@@ -74,9 +74,35 @@ module.exports = (db) => {
 
   router.get("/update/:id/:newCatId", (req, res) => {
     return dbHelper.updateTaskCategory(db, req.params.newCatId, req.params.id)
+    .then((data) => {
+      console.log("Category updated to:", req.params.newCatId);
+      movedTask = data.rows[0];
+      res.json(movedTask);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
+  router.get("/archive/:id", (req, res) => {
+    return dbHelper.setTaskComplete(db, req.params.id)
     .then(() => {
-      console.log("Updated category");
+      console.log("Task completed!");
       res.redirect("/");
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    });
+  });
+
+  router.post("/ratings/:id/:rating", (req, res) => {
+    return dbHelper.setTaskRating(db, req.params.rating, req.params.id)
+    .then(() => {
+      console.log("Setting rating");
     })
     .catch(err => {
       res

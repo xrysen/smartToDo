@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Disable Viewport Zoom-->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
-<head>
-  <!-- Disable Viewport Zoom-->
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <title>Tadoo</title>
 
-  <title>Tadoo</title>
+    <!-- Font families -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- Font families -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Local stylesheets -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
 
-  <!-- Local stylesheets -->
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+    <!-- App JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/create_list_category.js"></script>
+    <script type="text/javascript" src="/scripts/create_list_item.js"></script>
+    <script type="text/javascript" src="/scripts/list_collapse.js"></script>
+    <script type="text/javascript" src="/scripts/list_rendering.js"></script>
+    <script type="text/javascript" src="/scripts/modify_task.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/new_task_form.js"></script>
+  </head>
 
-  <!-- App JS -->
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/list_rendering.js"></script>
-  <script type="text/javascript" src="/scripts/list_collapse.js"></script>
-  <script type="text/javascript" src="/scripts/login.js"></script>
-</head>
-
-<body>
-  <!-- Top navbar (fixed) -->
+  <body>
+    <!-- Top navbar (fixed) -->
     <nav>
       <span id="left-nav" class="title">tAdoo</span>
       <div id="right-nav" class="title">
@@ -49,148 +52,56 @@
       </div>
     </nav>
 
-  <!-- Header (profile avatar and name) -->
-  <header id="main-header">
-    <% if (userId === '1') {%>
-      <h2 class="username">jim dumpling</h2>
-      <img class="username"src="/images/dumpling.png" />
-    <% } else if (userId === '2') {%>
-      <h2 class="username">bob Mango</h2>
-      <img class="username"src="/images/mango.png" />
-    <% } else {%>
-      <h2 >welcome to tAdoo!</h2>
-      <img src="/images/computer.png" />
-    <% };%>
-  </header>
 
-  <!-- Main content -->
-  <main class="container">
-    <% if (userId !== undefined) {%>
-    <!-- Compose new task -->
-    <section class="new-item">
-      <h2>enter new to-do</h2>
-      <form id="form" class="form-new-to-do">
-        <input id="todo-text" name="text" maxlength="25"></input>
-        <div class="footer">
-          <button class="button" id="submit-button">Tadoo!</button>
-        </div>
-      </form>
-    </section>
+    <!-- Header (profile avatar and name) -->
+    <header id="main-header">
+      <% if (userId === '1') {%>
+        <h2 class="username">Jim Dumpling</h2>
+        <img class="username"src="/images/dumpling.png" />
+      <% } else if (userId === '2') {%>
+        <h2 class="username">bob Mango</h2>
+        <img class="username"src="/images/mango.png" />
+      <% } else {%>
+        <h2 >welcome to tAdoo!</h2>
+        <img src="/images/computer.png" />
+      <% };%>
+    </header>
 
-    <!-- Lists section -->
-    <section id="list-section">
-      <!-- Watch -->
-      <h2 class="list-header to-watch">watch</h2>
-      <div class="list-container 1" id="to-watch">
-        <article class="list">
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
+    <!-- Main content -->
+    <main class="container">
+      <% if (userId !== undefined) {%>
+        <!-- Compose new task -->
+        <section class="new-item">
+          <h2>Enter New TAdoo</h2>
+          <form id="form" class = "form-new-to-do">
+            <input id="todo-text" name="text">
+            <div class="footer">
+              <button class="button" id="submit-button">Submit</button>
+            </div>
+          </form>
+        </section>
 
-          <div id="1-body" class="todo-body">
+        <!-- Lists section -->
+        <section id="list-section">
+          <div id="cat-1"></div>
+          <div id="cat-2"></div>
+          <div id="cat-3"></div>
+          <div id="cat-4"></div>
+        </section>
 
-            <ol id="1-items" class="todo-items"></ol>
-
-            <ul id="1-ratings"class='ratings'></ul>
-
-            <ul id="1-delete" class='delete-buttons'></ul>
-
-            <ul id="1-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-      <!-- Read -->
-      <h2 class="list-header to-read">read</h2>
-      <div class="list-container 2" id="to-read">
-        <article class="list">
-
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
-
-          <div id="2-body" class="todo-body">
-
-            <ol id="2-items" class="todo-items"></ol>
-
-            <ul id="2-ratings" class='ratings'></ul>
-
-            <ul id="2-delete" class='delete-buttons'></ul>
-
-            <ul id="2-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-      <!-- Eat -->
-      <h2 class="list-header to-eat">eat</h2>
-      <div class="list-container 3" id="to-eat">
-        <article class="list">
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
-
-          <div id="3-body" class="todo-body">
-
-            <ol id="3-items" class="todo-items"></ol>
-
-            <ul id="3-ratings" class='ratings'></ul>
-
-            <ul id="3-delete" class='delete-buttons'></ul>
-
-            <ul id="3-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-      <!-- Buy -->
-      <h2 class="list-header to-buy">buy</h2>
-      <div class="list-container 4" id="to-buy">
-        <article class="list">
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
-
-          <div id="4-body" class="todo-body">
-
-            <ol id="4-items" class="todo-items"></ol>
-
-            <ul id="4-ratings" class='ratings'></ul>
-
-            <ul id="4-delete" class='delete-buttons'></ul>
-
-            <ul id="4-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-    </section>
-
-    <% } else {%>
-      <section id="login-container">
-        <h2>please log in</h2>
-        <form id="login-form">
-          <input class="login-text-area" id="username-text" name="username" placeholder="username"></input>
-          <input type="password" class="login-text-area" id="password-text" name="password" placeholder="password"></input>
-          <button for="username" class="button" class="login-button">Log in!</button>
-        </form>
-      </section>
-    <% };%>
-
-  </main>
-
-</body>
-
+      <% } else {%>
+        <section id="login-container">
+          <h2>please log in</h2>
+          <form id="login-form">
+            <input class="login-text-area" id="username-text" name="username" placeholder="username"></input>
+            <input type="password" class="login-text-area" id="password-text" name="password" placeholder="password"></input>
+            <button for="username" class="button" class="login-button">Log in!</button>
+          </form>
+        </section>
+      <% };%>
+    </main>
+    <footer>
+      made by taking regular breaks and maintaining excellent posture<br>by TrickComplete
+    </footer>
+  </body>
 </html>

@@ -1,0 +1,17 @@
+$(() => {
+
+  $('#form').submit((event) => { // form completion handler, sends user inputs to database
+    event.preventDefault();
+    let error = false;
+    const $input = $('#todo-text');
+    if (error === false) {
+      $.ajax(`/api/tasks`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
+        .then((res) => {
+          renderListElements(res)
+          $input.val('')
+        })
+        .catch((err) => console.log(err));
+    }
+  });
+
+})
