@@ -18,6 +18,13 @@ main {
   margin-right: 5%;
 }
 
+footer {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 70px;
+  font-size: small;;
+}
+
 .small-text {
   font-family: 'Roboto', sans-serif;
 }
@@ -81,8 +88,8 @@ main {
   justify-content: left;
 }
 
-.td-urgency {
-  flex-grow: 10;
+.td-move {
+  flex-grow: 16;
 }
 /*
  * Additional CSS can be defined below or in other CSS files, as per instructions
