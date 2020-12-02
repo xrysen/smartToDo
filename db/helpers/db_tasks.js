@@ -54,7 +54,8 @@ const updateTaskCategory = (db, newCatId, taskId) => {
   return db.query(
     `UPDATE tasks
      SET category_id = $1
-     WHERE id = $2;`
+     WHERE id = $2
+     RETURNING *;`
     ,[newCatId, taskId]);
 };
 
