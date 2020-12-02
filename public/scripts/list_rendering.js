@@ -24,10 +24,12 @@ $(document).ready(function() {
             }
             // Append list item html to category
             createListItem(task, res);
+            renderRatings(task.id, task.rating);
           }
         }
       })
   };
+
 
   // Call tasks api and send tasks json response to render function
   const loadListItems = function() {

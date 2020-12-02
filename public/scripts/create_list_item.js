@@ -17,10 +17,11 @@ $(() => {
 
   // Render HTML for a list item
   const createListItem = function (task, isActive) {
-    const checkboxElement = isActive ? '<input type="checkbox">' : '';
     const $taskName = escape(task.name).toLowerCase();
     const $taskId = escape(task.id);
     const $taskCatId = escape(task.category_id);
+    const checkboxElement = isActive ? `<input type="checkbox" onclick="completeTask(${$taskId})">` : '';
+
     const listItemHtml = `
       <div class="tr taskdata-${$taskCatId} task-row" id="task-${$taskId}">
 
@@ -33,11 +34,18 @@ $(() => {
         </div>
 
         <div class="td td-urgency group-a" id="rating${$taskId}">
-          <span id="rating-${$taskId}-1" onclick="setTaskRating(${$taskId}, 1)">☆</span>
-          <span id="rating-${$taskId}-2" onclick="setTaskRating(${$taskId}, 2)">☆</span>
-          <span id="rating-${$taskId}-3" onclick="setTaskRating(${$taskId}, 3)">☆</span>
-          <span id="rating-${$taskId}-4" onclick="setTaskRating(${$taskId}, 4)">☆</span>
-          <span id="rating-${$taskId}-5" onclick="setTaskRating(${$taskId}, 5)">☆</span>
+          <div class="rating-stars">
+            <input type="radio" id="${$taskId}-star-5" name="${$taskId}rate" value="5" onclick = "setTaskRating(${$taskId},5)" />
+              <label for="${$taskId}-star-5" title="text">5 stars</label>
+              <input type="radio" id="${$taskId}-star-4" name="${$taskId}rate" value="4" onclick = "setTaskRating(${$taskId},4)" />
+              <label for="${$taskId}-star-4" title="text">4 stars</label>
+              <input type="radio" id="${$taskId}-star-3" name="${$taskId}rate" value="3" onclick = "setTaskRating(${$taskId},3)" />
+              <label for="${$taskId}-star-3" title="text">3 stars</label>
+              <input type="radio" id="${$taskId}-star-2" name="${$taskId}rate" value="2" onclick = "setTaskRating(${$taskId},2)" />
+              <label for="${$taskId}-star-2" title="text">2 stars</label>
+              <input type="radio" id="${$taskId}-star-1" name="${$taskId}rate" value="1" onclick = "setTaskRating(${$taskId},1)" />
+              <label for="${$taskId}-star-1" title="text">1 star</label>
+          </div>
         </div>
 
         <div class="td td-move group-b" id="move${$taskId}">
@@ -54,7 +62,7 @@ $(() => {
 
         <div class="td td-delete group-b" id=delete"${$taskId}">
           <form name="delete" onsubmit="return false">
-            <input type='submit' class='button delete-btn' value="delete" onclick="deleteTask(${$taskId}, ${$taskCatId})">
+            <input type='submit' class='button delete-btn' value="Delete" onclick="openDeletePrompt(${$taskId}, ${$taskCatId})">
             </input>
           </form>
         </div>
@@ -73,16 +81,5 @@ $(() => {
   window.createListItem = createListItem;
 })
 
-/*
-<div class="rating-stars">
-<input type="radio" id="${$taskId}-star-5" name="${$taskId}rate" value="5" onclick = "setTaskRating(${$taskId},5)" />
-<label for="${$taskId}-star-5" title="text">5 stars</label>
-<input type="radio" id="${$taskId}-star-4" name="${$taskId}rate" value="4" onclick = "setTaskRating(${$taskId},4)" />
-<label for="${$taskId}-star-4" title="text">4 stars</label>
-<input type="radio" id="${$taskId}-star-3" name="${$taskId}rate" value="3" onclick = "setTaskRating(${$taskId},3)" />
-<label for="${$taskId}-star-3" title="text">3 stars</label>
-<input type="radio" id="${$taskId}-star-2" name="${$taskId}rate" value="2" onclick = "setTaskRating(${$taskId},2)" />
-<label for="${$taskId}-star-2" title="text">2 stars</label>
-<input type="radio" id="${$taskId}-star-1" name="${$taskId}rate" value="1" onclick = "setTaskRating(${$taskId},1)" />
-<label for="${$taskId}-star-1" title="text">1 star</label>
-</div> */
+
+
