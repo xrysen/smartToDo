@@ -56,6 +56,10 @@
   flex-grow: 20;
 }
 
+.urgency-header {
+  padding-right: 1.1%;
+}
+
 
 
 .ratings {
@@ -209,5 +213,25 @@ span.move-buttons {
 form.move-button {
   display: inline;
   margin-right: 20px;
+}
+
+.hide-move {
+  display: none;
+}
+
+.task-row {
+  height: 45px;
+}
+
+.group-a {
+  padding-top: 1.2%;
+}
+
+.group-b {
+  padding-top: 0.6%
+}
+
+.th {
+  font-weight: bolder;
 }
 

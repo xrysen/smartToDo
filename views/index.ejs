@@ -58,11 +58,11 @@
     <!-- Header (profile avatar and name) -->
     <header id="main-header">
       <% if (userId === '1') {%>
-        <h2 class="username">Jim Dumpling</h2>
-        <img class="username"src="/images/dumpling.png" />
+        <h2 class="pointer logout">jim dumpling</h2>
+        <img class="pointer logout" src="/images/dumpling.png" />
       <% } else if (userId === '2') {%>
-        <h2 class="username">bob Mango</h2>
-        <img class="username"src="/images/mango.png" />
+        <h2 class="pointer logout">bob Mango</h2>
+        <img class="pointer logout"src="/images/mango.png" />
       <% } else {%>
         <h2 >welcome to tAdoo!</h2>
         <img src="/images/computer.png" />
@@ -74,11 +74,11 @@
       <% if (userId !== undefined) {%>
         <!-- Compose new task -->
         <section class="new-item">
-          <h2>Enter New TAdoo</h2>
+          <h2>enter new tAdoo</h2>
           <form id="form" class = "form-new-to-do">
-            <input id="todo-text" name="text">
+            <input class="text-entry" id="todo-text" name="text">
             <div class="footer">
-              <button class="button" id="submit-button">Submit</button>
+              <button class="button" id="submit-button">submit</button>
             </div>
           </form>
         </section>
@@ -95,15 +95,15 @@
         <section id="login-container">
           <h2>please log in</h2>
           <form id="login-form">
-            <input class="login-text-area" id="username-text" name="username" placeholder="username"></input>
-            <input type="password" class="login-text-area" id="password-text" name="password" placeholder="password"></input>
-            <button for="username" class="button" class="login-button">Log in!</button>
+            <input class="login-text-area text-entry" id="username-text" name="username" placeholder="username"></input>
+            <input type="password" class="login-text-area text-entry" id="password-text" name="password" placeholder="password"></input>
+            <button for="username" class="button" class="login-button">log in</button>
           </form>
         </section>
       <% };%>
     </main>
     <footer>
-      made by taking regular breaks and maintaining excellent posture<br>by TrickComplete
+      made by taking regular breaks and maintaining excellent posture<br>by trickcomplete
     </footer>
   </body>
 </html>

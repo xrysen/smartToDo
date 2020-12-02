@@ -8,7 +8,7 @@
   width: 100%
 }
 
-input {
+.text-entry {
   background-color: #f4f1ec;
   font-weight: 600;
   border-bottom: 3px solid;
@@ -17,6 +17,7 @@ input {
   border-left: transparent;
   border-right: transparent;
   margin-bottom: 15px;
+  font-family: "Righteous", sans-serif;
 }
 
 form .form-new-to-do {

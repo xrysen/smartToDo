@@ -3,13 +3,13 @@ const categories = ['(dummy)', 'watch', 'read', 'eat', 'buy'];
 
 $(document).ready(function() {
   // Check which page user is viewing: Active or Archived
-  const readCookieActiveOrArhive = function() {
+  const readCookieActiveOrArchive = function() {
     return $.ajax(`/api/users/active`)
   };
 
   // Render category and each task
   const renderListElements = function(tasks) {
-    readCookieActiveOrArhive()
+    readCookieActiveOrArchive()
       .then((res) => {
         // If 'tasks' is only one it will be an object, so wrap in array
         if (!Array.isArray(tasks)) {
@@ -41,16 +41,18 @@ $(document).ready(function() {
   loadListItems();
 
   window.renderListElements = renderListElements;
+  /* window.readCookieActiveOrArchive = readCookieActiveOrArchive; */
+
 
   // Set cookie to remember which type of view user wants: Active todo's or Archived
   $('#archived').on('click', () => {
     $.ajax(`/api/users/false`, { method: 'GET' })
-      .then(() => location.reload());
+    .then(() => location.reload());
   });
 
   $('#current').on('click', () => {
     $.ajax(`/api/users/true`, { method: 'GET' })
-      .then(() => location.reload());
+    .then(() => location.reload());
   });
 
 });
