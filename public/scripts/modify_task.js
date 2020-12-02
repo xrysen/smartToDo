@@ -38,6 +38,11 @@ $(() => {
       })
   }
 
+  completeTask = (taskId) => {
+    $.post(`/api/tasks/archive/${taskId}`)
+    .then(() => $(`#task-${taskId}`).fadeToggle());
+  }
+
   // Remove the category if that item was the last task it contained
   cleanCategoryIfEmpty = (oldCatId) => {
     if(!$(`.taskdata-${oldCatId}`).html()) {

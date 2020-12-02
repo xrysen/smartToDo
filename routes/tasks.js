@@ -86,7 +86,7 @@ module.exports = (db) => {
     });
   });
 
-  router.get("/archive/:id", (req, res) => {
+  router.post("/archive/:id", (req, res) => {
     return dbHelper.setTaskComplete(db, req.params.id)
     .then(() => {
       console.log("Task completed!");
