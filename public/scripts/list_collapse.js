@@ -1,12 +1,16 @@
 $(document).ready(function() {
 
   const isFooterVisible = function() {
-    $footer = $("#footer-bottom")
-    if ($footer[0].offsetTop <= 691) {
+    const $footer = $("#footer-bottom")
+    console.log($footer[0].offsetTop)
+    console.log(`window height::: ${$(window).height()}` )
+    const offsetTrigger = $(window).height() * 0.983;
+    console.log(offsetTrigger)
+    if ($footer[0].offsetTop <= offsetTrigger) { //691 needs to be a variable
       $("#down-toggle").hide();
       $("#up-toggle").hide();
     }
-    if ($footer[0].offsetTop > 884) {
+    if ($footer[0].offsetTop > offsetTrigger) {
       $("#down-toggle").show();
     }
   }
@@ -35,14 +39,14 @@ $(document).ready(function() {
   });
 
   $(window).scroll(function() {
-    if($(window).scrollTop() + $(window).height() === $(document).height() && $("#footer-bottom")[0].offsetTop > 691) {
+    if($(window).scrollTop() + $(window).height() === $(document).height() && $("#footer-bottom")[0].offsetTop > 930) {
       $('#down-toggle').hide();
       $("#up-toggle").show();
     }
  });
 
   $(window).on('scroll', () => {
-    if ($(window).scrollTop() === 0 && $("#footer-bottom")[0].offsetTop > 691) {
+    if ($(window).scrollTop() === 0 && $("#footer-bottom")[0].offsetTop > 930) {
       $('#down-toggle').show();
       $("#up-toggle").hide();
     }
