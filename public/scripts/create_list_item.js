@@ -82,9 +82,9 @@ $(() => {
       {
         drop: function(ev, ui) {
           const dropped = ui.draggable.attr("id");
-          let oldCat = ui.draggable.attr("class");
-
+          const oldCat = ui.draggable.attr("class");
           const taskId = dropped.substring(dropped.indexOf('-') + 1);
+
           switch($(this).attr("id")) {
             case "4-table":
               console.log("Moving to category 4");
