@@ -1,5 +1,16 @@
 $(() => {
 
+  const isFooterVisible = function() {
+    $footer = $("#footer-bottom")
+    if ($footer[0].offsetTop < 692) {
+      $("#down-toggle").hide();
+      $("#up-toggle").hide();
+    }
+    if ($footer[0].offsetTop > 691) {
+      $("#down-toggle").show();
+    }
+  }
+
   setTaskRating = (taskId, rating) => {
     $.post(`/api/tasks/ratings/${taskId}/${rating}`)
     .then(() => {
@@ -20,7 +31,8 @@ $(() => {
         console.log("Deleting...");
         $(`#task-${taskId}`).remove();
         cleanCategoryIfEmpty(oldCatId)
-      });
+      })
+      .then(() => isFooterVisible());
   }
 
   openDeletePrompt = (taskId, oldCatId) => {
@@ -57,8 +69,9 @@ $(() => {
         $(`#task-${taskId}`).remove();
         cleanCategoryIfEmpty(oldCatId)
         // Then render this item to its (now updated) category
-        renderListElements(res, true)
+        renderListElements(res, true);
       })
+      .then(() => isFooterVisible())
   }
 
   completeTask = (taskId) => {
@@ -72,4 +85,6 @@ $(() => {
       $(`#cat-${oldCatId}`).html('')
     }
   }
-})
+
+  window.isFooterVisible = isFooterVisible;
+});

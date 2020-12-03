@@ -18,7 +18,7 @@ $(() => {
     $(`#cat-${catId}`).append(listCategoryHtml);
 
     return $(`.${catId}-header`).on('click', () => {
-      $(`#${catId}-table`).slideToggle();
+      $(`#${catId}-table`).slideToggle(() => isFooterVisible());
     });
   }
 

@@ -9,6 +9,7 @@ $(() => {
         .then((res) => {
           renderListElements(res)
           $input.val('')
+          isFooterVisible();
         })
         .catch((err) => console.log(err));
     }
