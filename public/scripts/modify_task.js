@@ -93,7 +93,7 @@ $(() => {
    */
 
   moveTaskMenu = (taskId) => {
-    $(`#move-menu${taskId}`).fadeToggle();
+    $(`#move-menu${taskId}`).animate({width:'toggle'},400);
   }
 
   /**
