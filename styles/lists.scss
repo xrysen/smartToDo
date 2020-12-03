@@ -31,6 +31,7 @@
 .th {
   line-height: 2.5;
   font-size: 1.3em;
+  font-weight: bolder;
 }
 
 .tr {
@@ -78,8 +79,6 @@
 .urgency-header {
   padding-right: 1.1%;
 }
-
-
 
 .ratings {
   margin-left: 100px;
@@ -154,22 +153,6 @@ form .delete-btn {
 .drag-hover {
   filter: opacity(50%);
 }
-
-// //all css below is for the rating stars
-// .rating {
-//   unicode-bidi: bidi-override;
-//   direction: rtl;
-// }
-// .rating > span {
-//   display: inline-block;
-//   position: relative;
-//   width: 1.1em;
-// }
-// .rating > span:hover:before,
-// .rating > span:hover ~ span:before {
-//    content: "\2605";
-//    position: absolute;
-// }
 
 .rating-stars {
   position: relative;
@@ -246,10 +229,6 @@ form.move-button {
 
 .group-c {
   padding-top: 0%;
-}
-
-.th {
-  font-weight: bolder;
 }
 
 .ui-draggable {
