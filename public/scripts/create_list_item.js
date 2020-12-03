@@ -23,7 +23,7 @@ $(() => {
     const checkboxElement = isActive ? `<input type="checkbox" onclick="completeTask(${$taskId}, ${$taskCatId})">` : '';
 
     const listItemHtml = `
-      <div class="tr taskdata-${$taskCatId} task-row" id="task-${$taskId}">
+      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}">
 
         <div class="td td-checkbox group-a" id="item${$taskId}">
           ${checkboxElement}
@@ -70,6 +70,42 @@ $(() => {
       </div>
     `
     $(`#${$taskCatId}-table`).append(listItemHtml)
+
+    $(`#task-${$taskId}`).draggable(
+      {
+        axis: "y",
+        cursor: "move",
+        revert: "invalid"
+      });
+
+    $(`.table`).droppable(
+      {
+        drop: function(ev, ui) {
+          const dropped = ui.draggable.attr("id");
+          const oldCat = ui.draggable.attr("class");
+          const taskId = dropped.substring(dropped.indexOf('-') + 1);
+
+          switch($(this).attr("id")) {
+            case "4-table":
+              console.log("Moving to category 4");
+              moveTask(taskId, oldCat[12], 4);
+              break;
+            case "3-table":
+              console.log("Moving to category 3");
+              moveTask(taskId, oldCat[12], 3);
+              break;
+            case "2-table":
+              console.log("Moving to category 2");
+              moveTask(taskId, oldCat[12], 2);
+              break;
+            case "1-table":
+              console.log("Moving to category 1");
+              moveTask(taskId, oldCat[12], 1);
+              break;
+          }
+        }
+      }
+    );
 
     if (!isActive) {
       $(".td-urgency").hide()
