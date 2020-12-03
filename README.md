@@ -10,7 +10,7 @@ Add a little magic in your life with our latest app: Tadoo!
 
 Tadoo is a single page application that will take whatever task you enter and automatically sort it into a category that Tadoo sees fit.
 
-<div style = "text-align: center"><img src = "https://media.tenor.com/images/5bcb5056e6dfe7f757018ecaa8a4b868/tenor.gif"></div>
+<div style = "text-align: center"><img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/magic.gif?raw=true"></div>
 
 <br />It was built using node, SQL, jQuery, jQuery UI, HTML, SCSS and Javascript
 
@@ -25,6 +25,10 @@ Here are some things you can do with Tadoo:
 * Collapsable lists and current run count of how many things you still need ta-doo.
 * Check your task off when completed and it will send it over to the archives where you can remind yourself of all things you've accomplished!
 * Don't want a glaring reminder of your less-than-proud-of tasks? No worries, simply click delete and on confirmation it will vanish forever!
+
+## Screenshots
+<img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/ss1.png?raw=true">
+<img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/ss2.png?raw=true">
 
 ## Contributors (Taskcomplete)
 ***
