@@ -82,6 +82,9 @@ $(() => {
 
     $(`.table`).droppable(
       {
+        classes: {
+          "ui-droppable-hover": "ui-state-hover"
+        },
         drop: function(ev, ui) {
           const dropped = ui.draggable.attr("id");
           const oldCat = ui.draggable.attr("class");
