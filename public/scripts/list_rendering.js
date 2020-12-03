@@ -32,6 +32,7 @@ $(document).ready(function() {
             createListItem(task, res);
             renderRatings(task.id, task.rating);
             updateTaskCount(task.category_id)
+            $(`#${window.lastTask}`).hide().fadeIn().effect("highlight", 800);
           }
         }
       })
