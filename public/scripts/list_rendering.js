@@ -7,6 +7,12 @@ $(document).ready(function() {
     return $.ajax(`/api/users/active`)
   };
 
+  // Calculate number of tasks in a category and update task counter element
+  updateTaskCount = (catId) => {
+    const $taskCount = $(`.taskdata-${catId}`).length;
+    $(`#task-count-${catId}`).html(`(${$taskCount})`)
+  }
+
   // Render category and each task
   const renderListElements = function(tasks) {
     readCookieActiveOrArchive()
@@ -25,6 +31,7 @@ $(document).ready(function() {
             // Append list item html to category
             createListItem(task, res);
             renderRatings(task.id, task.rating);
+            updateTaskCount(task.category_id)
           }
         }
       })

@@ -2,8 +2,9 @@ $(() => {
   // Render HTML for a list category
    const fillListCategory = function(catId, catName) {
     let listCategoryHtml = `
-        <header>
-          <h2 class="list-header ${catId}-header pointer">${catName}</h2>
+        <header class="list-header">
+          <h2 class="${catId}-header pointer">${catName}</h2>
+          <span class="task-count" id="task-count-${catId}"></span>
         </header>
         <div class="table" id="${catId}-table">
           <div class="tr th">

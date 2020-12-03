@@ -20,6 +20,7 @@ $(() => {
         console.log("Deleting...");
         $(`#task-${taskId}`).remove();
         cleanCategoryIfEmpty(oldCatId)
+        updateTaskCount(oldCatId)
       })
       .then(() => isFooterVisible());
   }
@@ -57,6 +58,7 @@ $(() => {
       .then((res) => {
         $(`#task-${taskId}`).remove();
         cleanCategoryIfEmpty(oldCatId)
+        updateTaskCount(oldCatId)
         // Then render this item to its (now updated) category
         renderListElements(res, true);
       })
@@ -68,6 +70,7 @@ $(() => {
       $(`#task-${taskId}`).fadeToggle(() => {
         $(`#task-${taskId}`).remove();
         cleanCategoryIfEmpty(catId);
+        updateTaskCount(oldCatId)
       });
     });
   }

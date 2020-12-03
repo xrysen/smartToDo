@@ -1,3 +1,23 @@
+.list-header {
+  border-bottom: 1px dotted lightgrey;
+  font-size: 40px;
+  display: flex;
+  // justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.task-count {
+  font-size: 0.5em;
+  margin-left: 40px;
+}
+
+.todo-body {
+  display: flex;
+  flex-direction: row;
+}
+
 .table {
   display: flex;
   flex-flow: column nowrap;
@@ -71,17 +91,6 @@
 
 #rating-header {
   margin-left: 255px;
-}
-
-.list-header {
-  border-bottom: 1px dotted lightgrey;
-  padding-bottom: 10px;
-  font-size: 40px;
-}
-
-.todo-body {
-  display: flex;
-  flex-direction: row;
 }
 
 .button {
