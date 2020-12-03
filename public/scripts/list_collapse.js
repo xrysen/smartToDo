@@ -41,7 +41,7 @@ $(document).ready(function() {
     $("#new").show();
   });
 
-  $(window).scroll(function() {
+  $(window).on('scroll', () => {
     if($(window).scrollTop() + $(window).height() === $(document).height() && $("#footer-bottom")[0].offsetTop > 930) {
       $('#down-toggle').hide();
       $("#up-toggle").show();
