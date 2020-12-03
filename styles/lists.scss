@@ -150,6 +150,11 @@ form .delete-btn {
   margin-top: 20px;
 }
 
+/* Drag and Drop Hover */
+.drag-hover {
+  filter: opacity(50%);
+}
+
 // //all css below is for the rating stars
 // .rating {
 //   unicode-bidi: bidi-override;

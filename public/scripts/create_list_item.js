@@ -73,6 +73,8 @@ $(() => {
     `
     $(`#${$taskCatId}-table`).append(listItemHtml)
 
+    // Sets the created task to a draggable object
+
     $(`#task-${$taskId}`).draggable(
       {
         axis: "y",
@@ -80,32 +82,38 @@ $(() => {
         revert: "invalid"
       });
 
+    /**
+     * Sets all tables to accept draggable objects.
+     * Changes table style on hover to show user that the table will accept the drop
+     * Calls moveTask when the draggable object is dropped on a droppable table which updates the category and re-renders the category list
+     */
+
     $(`.table`).droppable(
       {
-        classes: {
-          "ui-droppable-hover": "ui-state-hover"
+        over: function(event, ui) {
+          $(this).addClass('drag-hover');
+        },
+        out: function() {
+          $(this).removeClass('drag-hover');
         },
         drop: function(ev, ui) {
           const dropped = ui.draggable.attr("id");
           const oldCat = ui.draggable.attr("class");
           const taskId = dropped.substring(dropped.indexOf('-') + 1);
-          window.lastTask = ui.draggable.attr("id");
+
+          $(this).removeClass('drag-hover');
 
           switch($(this).attr("id")) {
             case "4-table":
-              console.log("Moving to category 4");
               moveTask(taskId, oldCat[12], 4);
               break;
             case "3-table":
-              console.log("Moving to category 3");
               moveTask(taskId, oldCat[12], 3);
               break;
             case "2-table":
-              console.log("Moving to category 2");
               moveTask(taskId, oldCat[12], 2);
               break;
             case "1-table":
-              console.log("Moving to category 1");
               moveTask(taskId, oldCat[12], 1);
               break;
           }
