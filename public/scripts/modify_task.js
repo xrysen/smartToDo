@@ -77,20 +77,4 @@ $(() => {
     }
   }
 
-  dragMoveTask = (ev) => {
-    ev.dataTransfer.setData("text", ev.target.id);
-    console.log(ev.path[3]);
-  }
-
-  allowDrop = (ev) => {
-    ev.preventDefault();
-  }
-
-  dropMoveTask = (ev) => {
-    ev.preventDefault();
-    const data = ev.dataTransfer.getData("text");
-    console.log(data);
-    ev.target.appendChild(document.getElementById(data));
-  }
-
 })

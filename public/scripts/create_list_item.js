@@ -23,7 +23,7 @@ $(() => {
     const checkboxElement = isActive ? `<input type="checkbox" onclick="completeTask(${$taskId}, ${$taskCatId})">` : '';
 
     const listItemHtml = `
-      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}" draggable = "true" ondragstart="dragMoveTask(event)">
+      <div class="tr taskdata-${$taskCatId}" id="task-${$taskId}">
 
         <div class="td td-checkbox group-a" id="item${$taskId}">
           ${checkboxElement}
@@ -70,6 +70,20 @@ $(() => {
       </div>
     `
     $(`#${$taskCatId}-table`).append(listItemHtml)
+    $(`#task-${$taskId}`).draggable(
+      {
+        axis: "y",
+        cursor: "move",
+        revert: "invalid",
+        snap: "true"
+      });
+    $(`.table`).droppable(
+      {
+        drop: function() {
+          console.log($taskId);
+        }
+      }
+    );
 
     if (!isActive) {
       return $(".td-move").hide()/* addClass('hide-move'); */
