@@ -3,7 +3,7 @@
 
 
 ## Introduction
-***
+
 Are you tired of having to sort your own to-do list every time you need a reminder of all the things you need to do?
 
 Add a little magic in your life with our latest app: Tadoo!
@@ -15,7 +15,7 @@ Tadoo is a single page application that will take whatever task you enter and au
 <br />It was built using node, SQL, jQuery, jQuery UI, HTML, SCSS and Javascript
 
 ## Features
-***
+
 Here are some things you can do with Tadoo:
 
 * Create a new task that is sorted for you!
@@ -31,13 +31,13 @@ Here are some things you can do with Tadoo:
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/ss2.png?raw=true">
 
 ## Contributors (Taskcomplete)
-***
+
 - [Adam Tyler](https://github.com/mradamt) 
 - [Arthur Remy](https://github.com/remy29)
 - [Sean Oyler](https://github.com/xrysen)
 
 ## Build Process
-***
+
 Run npm install to install all dependancies. <br />
 Next create a database and run schema/01_users.sql, 02_categories.sql and 03_tasks.sql to setup your tables<br />
 Create a .env file and use .env.example as a guide to setting up your own <br />
