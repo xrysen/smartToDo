@@ -12,8 +12,10 @@ $(document).ready(function() {
     readCookieActiveOrArchive()
       .then((res) => {
         // If 'tasks' is only one it will be an object, so wrap in array
+        let singleTask = false;
         if (!Array.isArray(tasks)) {
           tasks = [tasks];
+          singleTask = true;
         }
         for (const task of tasks) {
           // Only render tasks that match the page the user is viewing: Active vs Archived
@@ -25,10 +27,15 @@ $(document).ready(function() {
             // Append list item html to category
             createListItem(task, res);
             renderRatings(task.id, task.rating);
+            if (singleTask) {
+              viewAdjust(task.id);
+            }
           }
         }
       })
-      .then(() => isFooterVisible())
+      .then(() => {
+        isFooterVisible();
+      });
   };
 
 
@@ -55,6 +62,7 @@ $(document).ready(function() {
     $.ajax(`/api/users/true`, { method: 'GET' })
     .then(() => location.reload());
   });
+
   isFooterVisible();
 });
 

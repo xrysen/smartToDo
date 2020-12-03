@@ -9,7 +9,7 @@ $(() => {
         .then((res) => {
           renderListElements(res)
           $input.val('')
-          isFooterVisible();
+          /* isFooterVisible(); */
         })
         .catch((err) => console.log(err));
     }

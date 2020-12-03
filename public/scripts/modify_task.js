@@ -60,7 +60,9 @@ $(() => {
         // Then render this item to its (now updated) category
         renderListElements(res, true);
       })
-      .then(() => isFooterVisible())
+      .then(() => {
+         isFooterVisible();
+        });
   }
 
   completeTask = (taskId, catId) => {
