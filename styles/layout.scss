@@ -1,8 +1,18 @@
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
 body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
-  font-family: 'Righteous', cursive
+  font-family: 'Major Mono Display', sans-serif;
+}
+
+h2 {
+  font-size: 45px;
+  margin: 10px;
 }
 
 main {
@@ -14,8 +24,20 @@ main {
   margin-right: 5%;
 }
 
+footer {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 70px;
+  font-size: small;;
+}
+
 .small-text {
   font-family: 'Roboto', sans-serif;
+}
+
+.move-div {
+  display: inline;
+  margin-bottom: 10px;
 }
 
 /*

@@ -1,206 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Disable Viewport Zoom-->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
 
-<head>
-  <title>Home Page</title>
+    <title>Tadoo</title>
 
+    <!-- Font families -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap"
-    rel="stylesheet">
+    <!-- Local stylesheets -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- App JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/create_list_category.js"></script>
+    <script type="text/javascript" src="/scripts/create_list_item.js"></script>
+    <script type="text/javascript" src="/scripts/list_collapse.js"></script>
+    <script type="text/javascript" src="/scripts/list_rendering.js"></script>
+    <script type="text/javascript" src="/scripts/modify_task.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/new_task_form.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/new_todo.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/lists.css" type="text/css" />
-
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/list_rendering.js"></script>
-  <script type="text/javascript" src="/scripts/list_collapse.js"></script>
-
-  <!-- disable viewport zoom-->
-  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-</head>
-
-<body>
-  <nav>
-    <span id="left-nav" class="title">Smart-To-Do</span>
-    <div id="right-nav" class="title">
-      <span class="nav-buttons" id="new">New</span>
-      <span class="nav-buttons" id="current">Current</span>
-      <span class="nav-buttons" id="archived">Archived</span>
-    </div>
-  </nav>
-
-  <header id="main-header">
-    <div>
-      <h2 class="shadow">Some User</h2>
-    </div>
-    <div>
-      <img class="shadow" src="/images/profile-user.png" />
-    </div>
-  </header>
-
-  <main class="container">
-
-    <section class="new-item">
-      <h2>Enter New To-Do</h2>
-      <form id="form">
-        <textarea id="todo-text" name="text"></textarea>
-        <div class="footer">
-          <button id="submit-button">Submit</button>
-        </div>
-      </form>
-    </section>
-
-
-    <section id="list-section">
-
-      <!-- Read -->
-      <h2 class="list-header to-read">To Read</h2>
-      <div class="list-container" id="to-read">
-        <article class="list">
-
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
-
-          <div id="read-body" class="todo-body">
-
-            <ol id="read-items" class="todo-items">
-              <li>
-                <input type="checkbox">
-                <label>Harry Potter</label>
-              </li>
-              <li>
-                <input type="checkbox">
-                <label>Dark Tower</label>
-              </li>
-              <li>
-                <input type="checkbox">
-                <label>Cat's Cradle</label>
-              </li>
-            </ol>
-
-            <ul id="read-ratings" class='ratings'>
-              <li>
-                <div class="rating">
-                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                </div>
-              </li>
-              <li>
-                <div class="rating">
-                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                </div>
-              </li>
-              <li>
-                <div class="rating">
-                  <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                </div>
-              </li>
-            </ul>
-
-            <ul id="read-delete" class='delete-buttons'>
-              <li><button class='button'>Delete</button></li>
-              <li><button class='button'>Delete</button></li>
-              <li><button class='button'>Delete</button></li>
-            </ul>
-
-            <ul id="read-move" class='move-buttons'>
-              <li><button class='button move'>Move</button></li>
-              <li><button class='button move'>Move</button></li>
-              <li><button class='button move'>Move</button></li>
-            </ul>
-
-          </div>
-
-        </article>
+  <body>
+    <!-- Top navbar (fixed) -->
+    <nav>
+      <span id="left-nav" class="title">tAdoo</span>
+      <div id="right-nav" class="title">
+        <% if (isActive === true && userId !== undefined) {%>
+          <button class="nav-buttons nav-button" id="new">new</button>
+          <button class="nav-buttons nav-button selected" id="current">current</button>
+          <button class="nav-buttons nav-button" id="archived">archived</button>
+        <% } else if (isActive === false && userId !== undefined) {%>
+          <button class="nav-buttons nav-button" id="current">current</button>
+          <button class="nav-buttons nav-button selected" id="archived">archived</button>
+        <% } else {%>
+            <button class="nav-buttons nav-button" id="register">register</button>
+        <% };%>
       </div>
+    </nav>
 
-      <!-- Watch -->
-      <h2 class="list-header to-watch">To Watch</h2>
-      <div class="list-container" id="to-watch">
-        <article class="list">
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
 
-          <div id="watch-body" class="todo-body">
+    <!-- Header (profile avatar and name) -->
+    <header id="main-header">
+      <% if (userId === '1') {%>
+        <h2 class="pointer logout">jim dumpling</h2>
+        <img class="pointer logout" src="/images/dumpling.png" />
+      <% } else if (userId === '2') {%>
+        <h2 class="pointer logout">bob Mango</h2>
+        <img class="pointer logout"src="/images/mango.png" />
+      <% } else {%>
+        <h2 >welcome to tAdoo!</h2>
+        <img src="/images/computer.png" />
+      <% };%>
+    </header>
 
-            <ol id="watch-items" class="todo-items"></ol>
+    <!-- Main content -->
+    <main class="container">
+      <% if (userId !== undefined) {%>
+        <!-- Compose new task -->
+        <section class="new-item">
+          <h2>enter new tAdoo</h2>
+          <form id="form" class = "form-new-to-do">
+            <input class="text-entry" id="todo-text" name="text">
+            <div class="footer">
+              <button class="button" id="submit-button">submit</button>
+            </div>
+          </form>
+        </section>
 
-            <ul id="watch-ratings"class='ratings'></ul>
+        <!-- Lists section -->
+        <section id="list-section">
+          <div id="cat-1"></div>
+          <div id="cat-2"></div>
+          <div id="cat-3"></div>
+          <div id="cat-4"></div>
+        </section>
 
-            <ul id="watch-delete" class='delete-buttons'></ul>
-
-            <ul id="watch-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-      <!-- Eat -->
-      <h2 class="list-header to-eat">To Eat</h2>
-      <div class="list-container" id="to-eat">
-        <article class="list">
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
-
-          <div id="eat-body" class="todo-body">
-
-            <ol id="eat-items" class="todo-items"></ol>
-
-            <ul id="eat-ratings" class='ratings'></ul>
-
-            <ul id="eat-delete" class='delete-buttons'></ul>
-
-            <ul id="eat-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-      <!-- Buy -->
-      <h2 class="list-header to-buy">To Buy</h2>
-      <div class="list-container" id="to-buy">
-        <article class="list">
-          <header>
-            <span>To-Do</span>
-            <span id="rating-header">Urgency</span>
-          </header>
-
-          <div id="buy-body" class="todo-body">
-
-            <ol id="buy-items" class="todo-items"></ol>
-
-            <ul id="buy-ratings" class='ratings'></ul>
-
-            <ul id="buy-delete" class='delete-buttons'></ul>
-
-            <ul id="buy-move" class='move-buttons'></ul>
-
-          </div>
-
-        </article>
-      </div>
-
-    </section>
-
-  </main>
-
-</body>
-
+      <% } else {%>
+        <section id="login-container">
+          <h2>please log in</h2>
+          <form id="login-form">
+            <input class="login-text-area text-entry" id="username-text" name="username" placeholder="username"></input>
+            <input type="password" class="login-text-area text-entry" id="password-text" name="password" placeholder="password"></input>
+            <button for="username" class="button" class="login-button">log in</button>
+          </form>
+        </section>
+      <% };%>
+    </main>
+    <% if (userId !== undefined) {%>
+      <img id="up-toggle" class="toggle-arrow" src="/images/up.png"></img>
+      <img id="down-toggle" class="toggle-arrow" src="/images/down.png"></img>
+    <% };%>
+    <footer id="footer-bottom">
+      made by taking regular breaks and maintaining excellent posture<br>by trickcomplete
+    </footer>
+  </body>
 </html>

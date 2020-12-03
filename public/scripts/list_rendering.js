@@ -1,80 +1,80 @@
-$(document).ready(function () {
+// Set global reference for category_name --> category_id
+const categories = ['(dummy)', 'watch', 'read', 'eat', 'buy'];
 
-  const createListElements = function (listItem) {
-    const $listElements = {
-      items: $(`
-      <li>
-        <input type="checkbox">
-        <label>${listItem}</label>
-      </li>
-    `),
-
-      ratings: $(`
-      <li>
-        <div class="rating">
-          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-        </div>
-      </li>
-    `),
-
-      delete: $(`
-      <li><button class='button'>Delete</button></li>
-    `),
-
-      move: $(`
-      <li><button class='button move'>Move</button></li>
-    `),
-
-    };
-    return $listElements;
+$(document).ready(function() {
+  // Check which page user is viewing: Active or Archived
+  const readCookieActiveOrArchive = function() {
+    return $.ajax(`/api/users/active`)
   };
 
-  /* const loadListItems = function (initial, category) {
-    $.ajax(`/PLACEHOLDER`, { method: "GET" })
+  // Calculate number of tasks in a category and update task counter element
+  updateTaskCount = (catId) => {
+    const $taskCount = $(`.taskdata-${catId}`).length;
+    $(`#task-count-${catId}`).html(`(${$taskCount})`)
+  }
+
+  // Render category and each task
+  const renderListElements = function(tasks) {
+    readCookieActiveOrArchive()
       .then((res) => {
-        if (initial) {
-          renderListElements(res, category);
+        // If 'tasks' is only one it will be an object, so wrap in array
+        let singleTask = false;
+        if (!Array.isArray(tasks)) {
+          tasks = [tasks];
+          singleTask = true;
         }
-        if (!initial) {
-          renderListElements([res.pop()]);
+        for (const task of tasks) {
+          // Only render tasks that match the page the user is viewing: Active vs Archived
+          if (res === task.is_active) {
+            // Only fill out category headers if they don't already have content
+            if (!$(`#cat-${task.category_id}`).html()) {
+              fillListCategory(task.category_id, categories[task.category_id]);
+            }
+            // Append list item html to category
+            createListItem(task, res);
+            renderRatings(task.id, task.rating);
+            updateTaskCount(task.category_id)
+            $(`#${window.lastTask}`).hide().fadeIn().effect("highlight", 800);
+            if (singleTask) {
+              viewAdjust(task.id);
+            }
+          }
         }
+      })
+      .then(() => {
+        isFooterVisible();
       });
-  }; */
-
-  const renderListElements = function (listItems, category) {
-      const $items = createListElements(listItems/* [listItem] */);
-      $(`#${category}-items`).append($items.items);
-      $(`#${category}-ratings`).append($items.ratings);
-      $(`#${category}-delete`).append($items.delete);
-      $(`#${category}-move`).append($items.move);
-    /* for (const listItem in listItems) {
-    } */
   };
 
-  $('#form').submit((event) => { // form completion handler, sends user inputs to database
-    event.preventDefault();
-    let error = false;
-    const $input = $('#todo-text');
-    // note somewhere here WE call filtering function
-    renderListElements($input.val(), 'read');
-    $input.val('');
-    /* if (error === false) {
-      $.ajax(`/PLACEHOLDER`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
-        .then(() => { // clears text box, resets char counter
-          $input.val('');
-        })
-        .then(() => loadListItems(false, read)) // loads new list item HERE is a good point to add JQUERY to make addition really noticable
-        .fail((err) => console.log(err));
-    } */
+
+  // Call tasks api and send tasks json response to render function
+  const loadListItems = function() {
+    $.ajax(`/api/tasks/`)
+      .then((res) => {
+        renderListElements(res.tasks);
+      });
+  };
+  loadListItems();
+
+  window.renderListElements = renderListElements;
+  /* window.readCookieActiveOrArchive = readCookieActiveOrArchive; */
+
+
+  // Set cookie to remember which type of view user wants: Active todo's or Archived
+  $('#archived').on('click', () => {
+    $.ajax(`/api/users/false`, { method: 'GET' })
+    .then(() => location.reload());
   });
 
-  /*
-  loadListItems(true, watch);
-  loadListItems(true, eat);
-  loadListItems(true, buy);
-  loadListItems(true, read);
- */
+  $('#current').on('click', () => {
+    $.ajax(`/api/users/true`, { method: 'GET' })
+    .then(() => location.reload());
+  });
+
+  isFooterVisible();
 });
+
+
 
 
 

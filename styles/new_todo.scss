@@ -8,7 +8,7 @@
   width: 100%
 }
 
-textarea {
+.text-entry {
   background-color: #f4f1ec;
   font-weight: 600;
   border-bottom: 3px solid;
@@ -17,9 +17,10 @@ textarea {
   border-left: transparent;
   border-right: transparent;
   margin-bottom: 15px;
+  font-family: "Righteous", sans-serif;
 }
 
-form {
+form .form-new-to-do {
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -42,8 +43,8 @@ form div.footer button:active {
   box-shadow: inset 10px 10px 5px #c1c1c1;
 }
 
-section > h2 {
-  font-size: 45px;
-}
+// section > h2 {
+//   font-size: 45px;
+// }
 
 

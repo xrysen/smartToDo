@@ -1,42 +1,85 @@
-main article {
-  margin-top: 25px;
-  margin-bottom: 17px;
-  height: auto;
-  width: 100%;
-  border-style: solid;
+.list-header {
+  border-bottom: 1px dotted lightgrey;
+  font-size: 40px;
   display: flex;
-  flex-direction: column;
-}
-
-main article header {
-  width: 100%;
-  height: 40px;
-  border-bottom: 2px solid black;
-  display: flex;
+  // justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 15px;
   align-items: center;
 }
 
-main article header span {
-  margin-left: 20px;
+.task-count {
+  font-size: 0.5em;
+  margin-left: 40px;
 }
 
-article:hover {
-  box-shadow: 10px 10px 7px 0px rgba(161,161,161,1);
-  font-weight: 600;
+.todo-body {
+  display: flex;
+  flex-direction: row;
 }
 
-li {
-  margin-bottom: 20px;
+.table {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0.5rem;
+  font-size: .6em;
+  line-height: 1;
+  flex: 1 1 auto;
+  font-family: 'Major Mono Display';
 }
 
-ol {
-  margin-bottom: 0px;
+.th {
+  line-height: 2.5;
+  font-size: 1.3em;
 }
 
-ul {
-  list-style-type: none;
-  margin-bottom: 0px;
+.tr {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
 }
+
+.tr:nth-of-type(even) {
+  background-color: #f2f2f2;
+}
+
+.tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.td {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 8;
+  flex-basis: 0;
+  padding: 0.2em;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0px;
+  white-space: nowrap;
+  border-bottom: 1px solid #d0d0d0;
+  justify-content: center;
+}
+
+.td-checkbox {
+  flex-grow: 1;
+}
+
+.td-task {
+  flex-grow: 25;
+  justify-content: left;
+}
+
+.td-move {
+  flex-grow: 20;
+}
+
+.urgency-header {
+  padding-right: 1.1%;
+}
+
+
 
 .ratings {
   margin-left: 100px;
@@ -50,21 +93,13 @@ ul {
   margin-left: 255px;
 }
 
-.list-header {
-  border-bottom: 1px dotted black;
-  padding-bottom: 10px;
-  font-size: 40px;
-}
-
-.todo-body {
-  display: flex;
-  flex-direction: row;
-}
-
 .button {
   color: #FFFF;
   background-color: #B82601;
-  box-shadow: 5px 5px 5px #c1c1c1;
+  box-shadow: 2px 2px 5px #c1c1c1;
+  border-radius: 3px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .move {
@@ -76,20 +111,147 @@ ul {
   box-shadow: inset 10px 10px 5px #c1c1c1;
 }
 
-//all css below is for the rating stars
-.rating {
-  unicode-bidi: bidi-override;
-  direction: rtl;
+form .delete-btn {
+  width: 100%;
 }
-.rating > span {
-  display: inline-block;
+
+// Modal Box on Delete
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Delete Content */
+.modal-delete {
   position: relative;
-  width: 1.1em;
-}
-.rating > span:hover:before,
-.rating > span:hover ~ span:before {
-   content: "\2605";
-   position: absolute;
+  background-color: #fefefe;
+  font-family: 'Righteous', sans-serif;
+  color: red;
+  text-align: center;
+  margin: auto;
+  top: 30%;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 30px;
+  width: 80%;
 }
 
+/* Modal button */
+.modal-btn {
+  margin-top: 20px;
+}
 
+/* Drag and Drop Hover */
+.drag-hover {
+  filter: opacity(50%);
+}
+
+// //all css below is for the rating stars
+// .rating {
+//   unicode-bidi: bidi-override;
+//   direction: rtl;
+// }
+// .rating > span {
+//   display: inline-block;
+//   position: relative;
+//   width: 1.1em;
+// }
+// .rating > span:hover:before,
+// .rating > span:hover ~ span:before {
+//    content: "\2605";
+//    position: absolute;
+// }
+
+.rating-stars {
+  position: relative;
+  display: inline-block;
+  height: 15px;
+}
+
+.rating-stars:not(:checked) > input {
+  position:absolute;
+  top: auto;
+  left: -9999px;
+}
+
+.rating-stars:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+
+.rating-stars:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.rating-stars > input:checked ~ label {
+  color: #ffc700;
+}
+.rating-stars:not(:checked) > label:hover,
+.rating-stars:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.rating-stars > input:checked + label:hover,
+.rating-stars > input:checked + label:hover ~ label,
+.rating-stars > input:checked ~ label:hover,
+.rating-stars > input:checked ~ label:hover ~ label,
+.rating-stars > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+//
+.strike_out {
+  text-decoration: line-through;
+  color: grey;
+}
+
+span.move-buttons {
+  position: relative;
+  left: 100px;
+  bottom: 35px;
+}
+form.move-button {
+  display: inline;
+  margin-right: 20px;
+}
+
+.hide-move {
+  display: none;
+}
+
+.task-row {
+  height: 48px;
+}
+
+.group-a {
+  padding-top: 10px;
+}
+
+.group-b {
+  padding-top: 5px;
+}
+
+.group-c {
+  padding-top: 0%;
+}
+
+.th {
+  font-weight: bolder;
+}
+
+.ui-draggable {
+  cursor: pointer;
+}

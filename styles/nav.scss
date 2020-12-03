@@ -12,32 +12,53 @@
   width: 100%;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  font-family: 'Righteous', cursive;
+  z-index: 1;
 }
 
 #right-nav {
   display: flex;
   align-items: center;
   margin-left: auto;
-
   font-size: 27px;
 }
 
 #left-nav {
-  font-size: xx-large;
+  font-size: 2em;
 }
 
-.nav-buttons {
+.nav-button {
   margin-left: 20px;
+  color: #FFFF;
+  background-color: #d34b65;
+  border-radius: 1px;
+  border: double;
+  padding: 8px;
+  cursor: pointer;
 }
 
+#new {
+  background-color: #1699d3;
+}
 
+#register {
+  background-color: #062F4F;
+}
 
+div > button.selected {
+  background-color: #fff;
+  color: #1699d3;
+  // box-shadow: inset 10px 10px 5px #551202;
+}
 
-
-/* #up-toggle {
+.toggle-arrow {
   position: fixed;
   bottom: 0;
   margin-bottom: 14px;
-  margin-left: 90%;
-} */
+  margin-left: 95%;
+  cursor: pointer;
+  opacity: 75%;
+}
+
+.toggle-arrow:hover {
+  opacity: 100%;
+}

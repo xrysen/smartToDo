@@ -1,4 +1,4 @@
-INSERT INTO categories (name) VALUES ('to_watch');
-INSERT INTO categories (name) VALUES ('to_read');
-INSERT INTO categories (name) VALUES ('to_eat');
-INSERT INTO categories (name) VALUES ('to_buy');
+INSERT INTO categories (name) VALUES ('watch');
+INSERT INTO categories (name) VALUES ('read');
+INSERT INTO categories (name) VALUES ('eat');
+INSERT INTO categories (name) VALUES ('buy');

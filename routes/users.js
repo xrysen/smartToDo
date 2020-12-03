@@ -14,9 +14,29 @@ module.exports = (db) => {
   // Login form is a single input: user_id
   // which submits to GET /users/login/[user_id]
   router.get('/login/:id', (req, res) => {
-    req.session.user_id = req.params.id;
+    req.session.userId = req.params.id;
     res.redirect('/');
   })
+
+  router.get('/logout', (req, res) => {
+    req.session.userId = undefined;
+    res.redirect('/');
+  })
+
+  router.get("/:active", (req, res) => {
+    if (req.params.active === "true") {
+      req.session.isActive = true;
+    } else if (req.params.active === "false") {
+      req.session.isActive = false;
+    }
+    const isActive = req.session.isActive;
+    res.json( isActive );
+  });
+
+  router.get("/active", (req, res) => {
+    const isActive = req.session.isActive;
+    res.json( isActive );
+  });
 
   return router;
 };
