@@ -10,7 +10,6 @@ $(() => {
           window.lastTask = `task-${res.id}`;
           renderListElements(res)
           $input.val('')
-          /* isFooterVisible(); */
         })
         .catch((err) => console.log(err));
     }
