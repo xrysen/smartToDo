@@ -3,7 +3,7 @@ $(document).ready(function() {
   const isFooterVisible = function() {
     const $footer = $("#footer-bottom")
     const offsetTrigger = $(window).height() * 0.983;
-    if ($footer[0].offsetTop <= offsetTrigger) { //691 needs to be a variable
+    if ($footer[0].offsetTop <= offsetTrigger) {
       $("#down-toggle").hide();
       $("#up-toggle").hide();
     }
