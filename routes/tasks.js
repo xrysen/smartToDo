@@ -59,6 +59,7 @@ module.exports = (db) => {
       });
   });
 
+  // deletes row in table tasks where id = :id
   router.get("/delete/:id", (req, res) => {
     return dbHelper.deleteTask(db, req.params.id)
     .then(() => {
@@ -72,6 +73,7 @@ module.exports = (db) => {
     });
   });
 
+  // Updates category_id for table tasks where the id is equal to :id
   router.get("/update/:id/:newCatId", (req, res) => {
     return dbHelper.updateTaskCategory(db, req.params.newCatId, req.params.id)
     .then((data) => {
@@ -86,6 +88,7 @@ module.exports = (db) => {
     });
   });
 
+  //Sets is_active to false and creates a timestamp when the task was completed
   router.post("/archive/:id", (req, res) => {
     return dbHelper.setTaskComplete(db, req.params.id)
     .then(() => {
@@ -99,6 +102,7 @@ module.exports = (db) => {
     });
   });
 
+  // Updates rating for the id passed in
   router.post("/ratings/:id/:rating", (req, res) => {
     return dbHelper.setTaskRating(db, req.params.rating, req.params.id)
     .then(() => {
