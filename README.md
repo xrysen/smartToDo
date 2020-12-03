@@ -12,7 +12,7 @@ Tadoo is a single page application that will take whatever task you enter and au
 
 <div style = "text-align: center"><img src = "https://media.tenor.com/images/5bcb5056e6dfe7f757018ecaa8a4b868/tenor.gif"></div>
 
-It was built using node, jQuery, jQuery UI, HTML, SCSS and Javascript
+<br />It was built using node, SQL, jQuery, jQuery UI, HTML, SCSS and Javascript
 
 ## Features
 ***
@@ -28,11 +28,12 @@ Here are some things you can do with Tadoo:
 
 ## Contributors (Taskcomplete)
 ***
-[Adam Tyler](https://github.com/mradamt) 
-[Arthur Remy](https://github.com/remy29)
-[Sean Oyler](https://github.com/xrysen)
+- [Adam Tyler](https://github.com/mradamt) 
+- [Arthur Remy](https://github.com/remy29)
+- [Sean Oyler](https://github.com/xrysen)
 
 ## Build Process
+***
 Run npm install to install all dependancies. <br />
 Next create a database and run schema/01_users.sql, 02_categories.sql and 03_tasks.sql to setup your tables<br />
 Create a .env file and use .env.example as a guide to setting up your own <br />
