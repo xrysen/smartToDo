@@ -100,8 +100,10 @@
         </section>
       <% };%>
     </main>
-    <img id="up-toggle" class="toggle-arrow" src="/images/up.png"></img>
-    <img id="down-toggle" class="toggle-arrow" src="/images/down.png"></img>
+    <% if (userId !== undefined) {%>
+      <img id="up-toggle" class="toggle-arrow" src="/images/up.png"></img>
+      <img id="down-toggle" class="toggle-arrow" src="/images/down.png"></img>
+    <% };%>
     <footer id="footer-bottom">
       made by taking regular breaks and maintaining excellent posture<br>by trickcomplete
     </footer>

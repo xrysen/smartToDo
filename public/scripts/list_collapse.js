@@ -1,5 +1,16 @@
 $(document).ready(function() {
 
+  const isFooterVisible = function() {
+    $footer = $("#footer-bottom")
+    if ($footer[0].offsetTop < 692) {
+      $("#down-toggle").hide();
+      $("#up-toggle").hide();
+    }
+    if ($footer[0].offsetTop > 691) {
+      $("#down-toggle").show();
+    }
+  }
+
   $("#up-toggle").hide();
 
   $(".new-item").hide();
@@ -9,6 +20,14 @@ $(document).ready(function() {
     $("#new").hide();
     isFooterVisible();
   });
+
+  $('#up-toggle').on('click', () => {
+    $(window).scrollTop(0);
+  })
+
+  $('#down-toggle').on('click', () => {
+    $(window).scrollTop($footer[0].offsetTop);
+  })
 
   $("#submit-button").on('click', () => {
     $(".new-item").slideUp();
@@ -27,7 +46,8 @@ $(document).ready(function() {
       $('#down-toggle').show();
       $("#up-toggle").hide();
     }
-    /* $target.animate({scrollTop: $target.height()}, 1000); */
+
   });
+  window.isFooterVisible = isFooterVisible;
 });
 

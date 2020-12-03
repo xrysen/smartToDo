@@ -72,9 +72,11 @@ $(() => {
     $(`#${$taskCatId}-table`).append(listItemHtml)
 
     if (!isActive) {
-      return $(".td-move").hide()/* addClass('hide-move'); */
+      $(".td-urgency").hide()
+      return $(".td-move").hide()
     } else {
-      return $(".td-move").show()/* removeClass('hide-move'); */
+      $(".td-urgency").show()
+      return $(".td-move").show()
     }
   }
 

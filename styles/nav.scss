@@ -55,4 +55,10 @@ div > button.selected {
   bottom: 0;
   margin-bottom: 14px;
   margin-left: 95%;
+  cursor: pointer;
+  opacity: 75%;
+}
+
+.toggle-arrow:hover {
+  opacity: 100%;
 }

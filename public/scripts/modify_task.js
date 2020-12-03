@@ -1,16 +1,5 @@
 $(() => {
 
-  const isFooterVisible = function() {
-    $footer = $("#footer-bottom")
-    if ($footer[0].offsetTop < 692) {
-      $("#down-toggle").hide();
-      $("#up-toggle").hide();
-    }
-    if ($footer[0].offsetTop > 691) {
-      $("#down-toggle").show();
-    }
-  }
-
   setTaskRating = (taskId, rating) => {
     $.post(`/api/tasks/ratings/${taskId}/${rating}`)
     .then(() => {
@@ -86,5 +75,4 @@ $(() => {
     }
   }
 
-  window.isFooterVisible = isFooterVisible;
 });
