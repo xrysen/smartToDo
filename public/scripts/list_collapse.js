@@ -12,6 +12,11 @@ $(document).ready(function() {
     }
   }
 
+  const viewAdjust = function(taskId) {
+    const $task = $(`#task-${taskId}`);
+    ($task).get(0).scrollIntoView({behavior: "smooth", block: "center"});
+  };
+
   $("#up-toggle").hide();
 
   $(".new-item").hide();
@@ -50,5 +55,6 @@ $(document).ready(function() {
 
   });
   window.isFooterVisible = isFooterVisible;
+  window.viewAdjust = viewAdjust;
 });
 
