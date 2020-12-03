@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
+  const $footer = $("#footer-bottom")
   const isFooterVisible = function() {
-    const $footer = $("#footer-bottom")
     const offsetTrigger = $(window).height() * 0.983;
     if ($footer[0].offsetTop <= offsetTrigger) {
       $("#down-toggle").hide();

@@ -110,9 +110,6 @@ $(() => {
     if (!isActive) {
       $(".td-urgency").hide()
       return $(".td-move").hide()
-    } else {
-      $(".td-urgency").show()
-      return $(".td-move").show()
     }
   }
 
