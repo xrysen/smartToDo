@@ -70,6 +70,7 @@ $(() => {
       </div>
     `
     $(`#${$taskCatId}-table`).append(listItemHtml)
+
     $(`#task-${$taskId}`).draggable(
       {
         axis: "y",
@@ -80,7 +81,24 @@ $(() => {
     $(`.table`).droppable(
       {
         drop: function() {
-          console.log($taskId);
+          switch($(this).attr("id")) {
+            case "4-table":
+              console.log("Moving to category 4");
+              moveTask($taskId, $taskCatId, 4);
+              break;
+            case "3-table":
+              console.log("Moving to category 3");
+              moveTask($taskId, $taskCatId, 3);
+              break;
+            case "2-table":
+              console.log("Moving to category 2");
+              moveTask($taskId, $taskCatId, 2);
+              break;
+            case "1-table":
+              console.log("Moving to category 1");
+              moveTask($taskId, $taskCatId, 1);
+              break;
+          }
         }
       }
     );
