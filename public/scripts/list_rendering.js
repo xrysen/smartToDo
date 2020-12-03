@@ -25,6 +25,7 @@ $(document).ready(function() {
             // Append list item html to category
             createListItem(task, res);
             renderRatings(task.id, task.rating);
+            $(`#${window.lastTask}`).hide().fadeIn().effect("highlight");
           }
         }
       })

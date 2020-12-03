@@ -1,5 +1,7 @@
 $(() => {
 
+  window['lastTask'] = null;
+
   // Escape function to prevent XSS injection
   const escape = (str) => {
     let div = document.createElement('div');
@@ -84,6 +86,7 @@ $(() => {
           const dropped = ui.draggable.attr("id");
           const oldCat = ui.draggable.attr("class");
           const taskId = dropped.substring(dropped.indexOf('-') + 1);
+          window.lastTask = ui.draggable.attr("id");
 
           switch($(this).attr("id")) {
             case "4-table":

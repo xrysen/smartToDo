@@ -7,6 +7,7 @@ $(() => {
     if (error === false) {
       $.ajax(`/api/tasks`, {method: "POST", data: $input.serialize()}) // ajax post request to database,
         .then((res) => {
+          window.lastTask = `task-${res.id}`;
           renderListElements(res)
           $input.val('')
           isFooterVisible();
