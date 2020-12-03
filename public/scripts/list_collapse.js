@@ -2,11 +2,11 @@ $(document).ready(function() {
 
   const isFooterVisible = function() {
     $footer = $("#footer-bottom")
-    if ($footer[0].offsetTop < 692) {
+    if ($footer[0].offsetTop <= 691) {
       $("#down-toggle").hide();
       $("#up-toggle").hide();
     }
-    if ($footer[0].offsetTop > 691) {
+    if ($footer[0].offsetTop > 884) {
       $("#down-toggle").show();
     }
   }

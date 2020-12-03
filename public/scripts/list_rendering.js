@@ -55,7 +55,7 @@ $(document).ready(function() {
     $.ajax(`/api/users/true`, { method: 'GET' })
     .then(() => location.reload());
   });
-
+  isFooterVisible();
 });
 
 
