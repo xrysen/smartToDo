@@ -53,6 +53,7 @@ $(() => {
   }
 
   moveTask = (taskId, oldCatId, newCatId) => {
+    window.lastTask = `task-${taskId}`;
     $.get(`/api/tasks/update/${taskId}/${newCatId}`)
       .then((res) => {
         $(`#task-${taskId}`).remove();

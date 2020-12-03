@@ -92,7 +92,7 @@ $(() => {
           const dropped = ui.draggable.attr("id");
           const oldCat = ui.draggable.attr("class");
           const taskId = dropped.substring(dropped.indexOf('-') + 1);
-          window.lastTask = ui.draggable.attr("id");
+
           $(this).removeClass('drag-hover');
 
           switch($(this).attr("id")) {
