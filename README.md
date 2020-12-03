@@ -12,8 +12,6 @@ Tadoo is a single page application that will take whatever task you enter and au
 
 <div style = "text-align: center"><img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/magic.gif?raw=true"></div>
 
-<br />It was built using node, SQL, jQuery, jQuery UI, HTML, SCSS and Javascript
-
 ## Features
 
 Here are some things you can do with Tadoo:
@@ -29,6 +27,14 @@ Here are some things you can do with Tadoo:
 ## Screenshots
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/ss1.png?raw=true">
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/readme/docs/ss2.png?raw=true">
+
+## Technologies
+- HTML 5
+- SCSS
+- Javascript
+- jQuery 3.5.1
+- jQuery UI 1.12.1
+
 
 ## Contributors (Taskcomplete)
 
