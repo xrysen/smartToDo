@@ -19,6 +19,9 @@ $(() => {
 
     return $(`.${catId}-header`).on('click', () => {
       $(`#${catId}-table`).slideToggle(() => isFooterVisible());
+      if ($(`#${catId}-table`).height() === 0) {
+        $(`#${catId}-table`).get(0).scrollIntoView({behavior: "smooth", block: "center"});
+      }
     });
   }
 
