@@ -23,6 +23,7 @@ $(document).ready(function() {
 
   $("#new").on('click', () => {
     $(".new-item").slideDown();
+    $('#todo-text').focus();
     $("#new").hide();
     $(".new-item").get(0).scrollIntoView({behavior: "smooth", block: "center"});
     isFooterVisible();
