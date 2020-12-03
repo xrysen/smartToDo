@@ -14,7 +14,7 @@ $(document).ready(function() {
 
   const viewAdjust = function(taskId) {
     const $task = $(`#task-${taskId}`);
-    ($task).get(0).scrollIntoView({behavior: "smooth", block: "center"});
+    ($task).get(0).scrollIntoView({behavior: "smooth"});
   };
 
   $("#up-toggle").hide();
