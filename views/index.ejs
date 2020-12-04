@@ -44,10 +44,10 @@
       <div id="right-nav" class="title">
         <% if (isActive === true && userId !== undefined) {%>
           <button class="nav-buttons nav-button" id="new">new tadoo</button>
-          <button class="nav-buttons nav-button selected" id="current">my tadoos</button>
+          <button class="nav-buttons nav-button selected" id="current">active</button>
           <button class="nav-buttons nav-button" id="archived">archive</button>
         <% } else if (isActive === false && userId !== undefined) {%>
-          <button class="nav-buttons nav-button" id="current">my tadoos</button>
+          <button class="nav-buttons nav-button" id="current">active</button>
           <button class="nav-buttons nav-button selected" id="archived">archive</button>
         <% } else {%>
             <button class="nav-buttons nav-button" id="register">register</button>
