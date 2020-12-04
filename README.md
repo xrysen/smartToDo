@@ -36,7 +36,7 @@ Here are some things you can do with Tadoo:
 - jQuery UI 1.12.1
 
 
-## Contributors (Taskcomplete)
+## Contributors (Trickcomplete)
 
 - [Adam Tyler](https://github.com/mradamt) 
 - [Arthur Remy](https://github.com/remy29)
