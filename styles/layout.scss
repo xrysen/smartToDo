@@ -7,6 +7,11 @@ body {
   color: #545149;
   background-color: #f4f1ec;
   font-size: 24px;
+  font-family: Raleway, sans-serif;
+  font-weight: 200;
+}
+
+nav, h2, footer, #main-header, #list-section {
   font-family: 'Major Mono Display', sans-serif;
 }
 
@@ -28,23 +33,10 @@ footer {
   text-align: center;
   margin-bottom: 30px;
   margin-top: 70px;
-  font-size: small;;
-}
-
-.small-text {
-  font-family: 'Roboto', sans-serif;
+  font-size: small;
 }
 
 .move-div {
   display: inline;
   margin-bottom: 10px;
 }
-
-/*
- * Additional CSS can be defined below or in other CSS files, as per instructions
- colorscheme:
- black: #000000
- ink: #062F4F
- posy: #813772
- embers: #B82601
- */
