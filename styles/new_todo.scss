@@ -5,19 +5,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%
+  width: 100%;
+  padding-top: 20px;
 }
 
 .text-entry {
-  background-color: #f4f1ec;
-  font-weight: 600;
-  border-bottom: 3px solid;
-  border-color: black;
-  border-top: transparent;
-  border-left: transparent;
-  border-right: transparent;
-  margin-bottom: 15px;
-  font-family: "Righteous", sans-serif;
+  font-size: 1em;
+  background-color: inherit;
+  border: none;
+  border-bottom: 3px solid black;
+  padding-top: 15px;
+  padding: 10px;
+  width: 600px;
 }
 
 form .form-new-to-do {
@@ -30,6 +29,9 @@ form .form-new-to-do {
 .footer {
   display: flex;
   justify-content: center;
+  padding-top: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 form div.footer button {
@@ -41,11 +43,6 @@ form div.footer button {
 form div.footer button:active {
   background: #e5e5e5;
 }
-
-// section > h2 {
-//   font-size: 45px;
-// }
-
 
 .text-entry:focus {
   outline: none;

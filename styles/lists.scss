@@ -2,10 +2,10 @@
   border-bottom: 1px dotted lightgrey;
   font-size: 40px;
   display: flex;
-  // justify-content: space-between;
   margin-top: 20px;
   margin-bottom: 15px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .task-count {
@@ -49,7 +49,7 @@
 .td {
   display: flex;
   flex-flow: row nowrap;
-  flex-grow: 8;
+  flex-grow: 10;
   flex-basis: 0;
   padding: 0.2em;
   word-break: break-word;
@@ -94,18 +94,25 @@
 
 .button {
   color: #FFFF;
-  background-color: #B82601;
+  background-color: #ff2e57;
+  border: 1px solid dimgrey;
   border-radius: 3px;
   padding: 5px;
+  padding-top: 4px;
+  padding-bottom: 6px;
   cursor: pointer;
 }
 
 .move {
-  background-color: #813772;
+  background-color: #806bd4;
 }
 
 .button:active {
   background: #e5e5e5;
+}
+
+.button:focus {
+  outline: none;
 }
 
 form .delete-btn {
@@ -131,14 +138,14 @@ form .delete-btn {
 .modal-delete {
   position: relative;
   background-color: #fefefe;
-  color: red;
+  color: #D3163B;
   text-align: center;
   margin: auto;
   top: 30%;
   padding: 20px;
   border: 1px solid black;
-  border-radius: 30px;
-  width: 80%;
+  border-radius: 20px;
+  width: 60%;
 }
 
 /* Modal button */
@@ -248,6 +255,7 @@ form.move-button {
 
 .group-b {
   padding-top: 5px;
+  align-items: center;
 }
 
 .group-c {
