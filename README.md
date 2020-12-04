@@ -25,8 +25,18 @@ Here are some things you can do with Tadoo:
 * Don't want a glaring reminder of your less-than-proud-of tasks? No worries, simply click delete and on confirmation it will vanish forever!
 
 ## Screenshots
-<img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/ss1.png?raw=true">
-<img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/ss2.png?raw=true">
+
+# Welcome Screen
+<img src = "">
+
+# Active View
+<img src = "">
+
+# Archive View
+<img src = "">
+
+# In Action
+<img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/tadoo.gif?raw=true">
 
 ## Technologies
 - HTML 5
