@@ -17,12 +17,12 @@ module.exports = (db) => {
     req.session.userId = req.params.id;
     res.redirect('/');
   })
-
+  // Clears userId cookie on logout
   router.get('/logout', (req, res) => {
     req.session.userId = undefined;
     res.redirect('/');
   })
-
+  //sets is cookie to inactive or active, used for archive rendering
   router.get("/:active", (req, res) => {
     if (req.params.active === "true") {
       req.session.isActive = true;
@@ -32,7 +32,7 @@ module.exports = (db) => {
     const isActive = req.session.isActive;
     res.json( isActive );
   });
-
+  //returns current isActive cookie status
   router.get("/active", (req, res) => {
     const isActive = req.session.isActive;
     res.json( isActive );

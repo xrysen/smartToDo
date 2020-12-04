@@ -25,21 +25,6 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/getByCategory/:category", (req, res) => {
-    const userId = req.session.userId;
-    const category = req.params.category;
-    dbHelper.getUserTasksByCategory(db, userId, category)
-      .then(data => {
-        const tasks = data.rows;
-        res.json({ tasks });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
   router.post("/", (req, res) => {
     const userId = req.session.userId;
     const task = req.body.text // important change tasks -> text

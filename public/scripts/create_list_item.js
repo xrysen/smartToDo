@@ -8,14 +8,6 @@ $(() => {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   };
-/*
-  const hideMoveIfInactive = function() {
-    readCookieActiveOrArchive()
-    .then((res) => {
-
-    })
-  } */
-
 
   // Render HTML for a list item
   const createListItem = function (task, isActive) {
