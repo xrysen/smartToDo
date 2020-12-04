@@ -59,8 +59,8 @@ $(() => {
       `<div class = "modal">
         <div class = "modal-delete">Are you sure you want to permanently delete this task?<br>This process cannot be reversed.
           <div class="modal-btn">
-            <button class = "button delete-btn" onclick = "deleteTask(${taskId}, ${oldCatId})">Delete</button>
-            <button class = "button cancel-btn" onclick = "closeDeletePrompt()">Cancel</button>
+            <button class = "button delete-btn" onclick = "deleteTask(${taskId}, ${oldCatId})">delete</button>
+            <button class = "button cancel-btn" onclick = "closeDeletePrompt()">cancel</button>
           </div>
         </div>
       </div>
