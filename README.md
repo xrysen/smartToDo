@@ -26,16 +26,16 @@ Here are some things you can do with Tadoo:
 
 ## Screenshots
 
-# Welcome Screen
+### Welcome Screen
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/login.png?raw=true">
 
-# Active View
+### Active View
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/active.png?raw=true">
 
-# Archive View
+### Archive View
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/archive.png?raw=true">
 
-# In Action
+### In Action
 <img src = "https://github.com/xrysen/smart-to-do-list/blob/master/docs/tadoo.gif?raw=true">
 
 ## Technologies
