@@ -95,7 +95,6 @@
 .button {
   color: #FFFF;
   background-color: #B82601;
-  box-shadow: 2px 2px 5px #c1c1c1;
   border-radius: 3px;
   padding: 5px;
   cursor: pointer;
@@ -107,7 +106,6 @@
 
 .button:active {
   background: #e5e5e5;
-  box-shadow: inset 10px 10px 5px #c1c1c1;
 }
 
 form .delete-btn {
