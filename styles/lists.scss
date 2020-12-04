@@ -104,7 +104,7 @@
 }
 
 .move {
-  background-color: #806bd4;
+  background-color: #4f16d3;
 }
 
 .button:active {
@@ -203,7 +203,7 @@ form .delete-btn {
   white-space:nowrap;
   cursor:pointer;
   font-size:30px;
-  color:#ccc;
+  color: #ccc;
 }
 
 .rating-stars:not(:checked) > label:before {
@@ -211,18 +211,18 @@ form .delete-btn {
 }
 
 .rating-stars > input:checked ~ label {
-  color: #ffc700;
+  color: #16d34f;
 }
 .rating-stars:not(:checked) > label:hover,
 .rating-stars:not(:checked) > label:hover ~ label {
-  color: #deb217;
+  color: #16d34f;
 }
 .rating-stars > input:checked + label:hover,
 .rating-stars > input:checked + label:hover ~ label,
 .rating-stars > input:checked ~ label:hover,
 .rating-stars > input:checked ~ label:hover ~ label,
 .rating-stars > label:hover ~ input:checked ~ label {
-  color: #c59b08;
+  color: #16d34f73;
 }
 
 //

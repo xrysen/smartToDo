@@ -6,38 +6,40 @@
   background-color: #000000;
   color: white;
   display: flex;
-  align-items: center;
   position: fixed;
   top: 0;
   width: 100%;
   padding-left: 1.5em;
   padding-right: 1.5em;
   z-index: 1;
-}
-
-#right-nav {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  font-size: 27px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 #left-nav {
   font-size: 2em;
+  align-self: center;
+}
+
+#right-nav {
+  display: flex;
+  font-size: 27px;
+  height: 75%;
 }
 
 .nav-button {
   margin-left: 20px;
-  color: #FFFF;
-  background-color: #d34b65;
-  border-radius: 1px;
-  border: double;
+  color: #FFF;
+  background-color: #5c0919;
   padding: 8px;
   cursor: pointer;
+  border: 2px solid white;
+  border-bottom: 1px solid #f9f9f9ad;
+  border-radius: 20px 10px 1px 1px;
 }
 
 #new {
-  background-color: #1699d3;
+  background-color: #16d3ad;
 }
 
 #register {
@@ -45,8 +47,8 @@
 }
 
 div > button.selected {
-  background-color: #fff;
-  color: #1699d3;
+  background-color: #D3163B;
+  background-image: url("https://www.transparenttextures.com/patterns/escheresque.png");
 }
 
 .toggle-arrow {
