@@ -36,6 +36,7 @@ $(document).ready(function() {
             updateTaskCount(task.category_id)
             $(`#${window.lastTask}`).hide().fadeIn().effect("highlight", 1600);
             if (singleTask) {
+              $(`#${task.category_id}-table`).slideDown();
               viewAdjust(task.id);
             }
           }
