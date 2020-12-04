@@ -43,12 +43,12 @@
       <span id="left-nav" class="title">tAdoo</span>
       <div id="right-nav" class="title">
         <% if (isActive === true && userId !== undefined) {%>
-          <button class="nav-buttons nav-button" id="new">new</button>
-          <button class="nav-buttons nav-button selected" id="current">current</button>
-          <button class="nav-buttons nav-button" id="archived">archived</button>
+          <button class="nav-buttons nav-button" id="new">new task</button>
+          <button class="nav-buttons nav-button selected" id="current">active tasks</button>
+          <button class="nav-buttons nav-button" id="archived">archive</button>
         <% } else if (isActive === false && userId !== undefined) {%>
-          <button class="nav-buttons nav-button" id="current">current</button>
-          <button class="nav-buttons nav-button selected" id="archived">archived</button>
+          <button class="nav-buttons nav-button" id="current">active tasks</button>
+          <button class="nav-buttons nav-button selected" id="archived">archive</button>
         <% } else {%>
             <button class="nav-buttons nav-button" id="register">register</button>
         <% };%>
