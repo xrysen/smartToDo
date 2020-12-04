@@ -16,24 +16,21 @@ const compareStrings = (str1, str2) => {
 
 /**
  * Input:
- *  book title or author (string)
+ *  book title (string)
  * Output:
- *  take first book title or author from Google Books API, return:
- *   2 = book title or author exists exactly matching input
- *   1 = book title or author exists partially matching input
- *   0 = no book with this title or author
+ *  take first book title from Google Books API, return:
+ *   2 = book title exists exactly matching input
+ *   1 = book title exists partially matching input
+ *   0 = no book with this title
  */
-const requestBookByTitle = (titleOrAuthor) => {
+const requestBookByTitle = (title) => {
   // return null
-  return request(`https://www.googleapis.com/books/v1/volumes?q=${titleOrAuthor}`)
+  return request(`https://www.googleapis.com/books/v1/volumes?q=${title}`)
     .then(res => {
       res = JSON.parse(res);
       if (res.items.length) {
         console.log('read:', res.items[0].volumeInfo.title);
-        return Math.max(
-          compareStrings(res.items[0].volumeInfo.title.toLowerCase(), titleOrAuthor.toLowerCase()),
-          compareStrings(res.items[0].volumeInfo.authors[0].toLowerCase(), titleOrAuthor.toLowerCase())
-        );
+        return compareStrings(res.items[0].volumeInfo.title.toLowerCase(), title.toLowerCase())
       }
       return 0;
     });
@@ -128,7 +125,10 @@ module.exports = (query) => {
       console.log('categoryName:', categoryName);
       console.log('category_id:', dbCategories[categoryName]);
       return dbCategories[categoryName];
-    });
+    })
+    .catch(err => {
+      console.log('categorizer.js error:', err);
+    })
 };
 
 
