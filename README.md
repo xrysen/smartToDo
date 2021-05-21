@@ -16,7 +16,7 @@ Tadoo is a single page application that will take whatever task you enter and au
 
 Here are some things you can do with Tadoo:
 
-* Create a new task that is sorted for you!
+* Create a new task that is sorted for you! SOME BIG WORDS
 * Don't like where Tadoo has placed your task? No prob! Simply use the move button that appears beside your task and move it to the correct category.
 * Alternatively you can also drag and drop your task onto the category of your choice!
 * Tadoo also sets a default urgency rating of 1 star to each task. You can easily edit this by clicking the star rating of your choice.
